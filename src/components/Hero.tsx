@@ -54,7 +54,7 @@ const Hero = () => {
             </a>
           </Button>
           <Button asChild variant="outline">
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <a href="https://drive.google.com/file/d/1HUYtjfjhODx6nY5aCk99P0xdFW9myDSv/view" target="_blank" rel="noopener noreferrer">
               View Resume
             </a>
           </Button>
