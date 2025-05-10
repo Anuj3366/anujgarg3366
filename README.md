@@ -1,73 +1,116 @@
-# Welcome to your Lovable project
 
-## Project info
+# Anuj Garg Portfolio
 
-**URL**: https://lovable.dev/projects/09f3c7c7-0d73-4318-a240-132573691f45
+A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- Responsive design that works on all devices
+- Progressive Web App (PWA) capabilities for offline access
+- Animated components using Framer Motion
+- Clean and modern UI with Tailwind CSS
+- Easy to update content and information
 
-**Use Lovable**
+## How to Update Content
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/09f3c7c7-0d73-4318-a240-132573691f45) and start prompting.
+### Updating Personal Information
 
-Changes made via Lovable will be committed automatically to this repo.
+Edit these files to update your personal information:
 
-**Use your preferred IDE**
+- `src/components/Hero.tsx` - Update name, title, and links
+- `src/components/About.tsx` - Update your bio and quick facts
+- `src/components/Experience.tsx` - Update work experience and education
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Updating Skills
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+To update your skills, edit the `skillCategories` array in `src/components/Skills.tsx`:
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```tsx
+const skillCategories = [
+  {
+    title: "Category Name",
+    skills: ["Skill 1", "Skill 2", "Skill 3"]
+  },
+  // Add more categories or modify existing ones
+];
 ```
 
-**Edit a file directly in GitHub**
+### Updating Projects
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+To update your projects, edit the `projects` array in `src/components/Projects.tsx`:
 
-**Use GitHub Codespaces**
+```tsx
+const projects = [
+  {
+    title: "Project Title",
+    description: "Project description",
+    technologies: ["Tech 1", "Tech 2", "Tech 3"],
+    githubUrl: "https://github.com/yourusername/project",
+    liveUrl: "https://project-demo.com",
+    imageUrl: "path/to/image.jpg",
+  },
+  // Add more projects or modify existing ones
+];
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Updating Contact Information
 
-## What technologies are used for this project?
+Edit `src/components/Contact.tsx` to update your contact information and form settings.
 
-This project is built with:
+## PWA Configuration
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The site is configured as a Progressive Web App. To update the PWA configuration:
 
-## How can I deploy this project?
+1. Edit `public/manifest.json` to change app name, colors, etc.
+2. Replace icon files in the `public/icons` directory with your own (maintaining the same filenames and dimensions).
 
-Simply open [Lovable](https://lovable.dev/projects/09f3c7c7-0d73-4318-a240-132573691f45) and click on Share -> Publish.
+## Development
 
-## Can I connect a custom domain to my Lovable project?
+### Prerequisites
 
-Yes, you can!
+- Node.js (v14 or later)
+- npm or yarn
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Installation
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/your-portfolio-repo.git
+
+# Install dependencies
+npm install
+# or
+yarn install
+
+# Start the development server
+npm run dev
+# or
+yarn dev
+```
+
+### Build for Production
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+The built files will be in the `dist` directory, ready to be deployed.
+
+## Deployment
+
+This site can be deployed to any static site hosting service like Netlify, Vercel, GitHub Pages, etc.
+
+For GitHub Pages deployment:
+
+1. Update the `base` property in `vite.config.ts` to match your repository name:
+   ```ts
+   base: '/your-repo-name/'
+   ```
+
+2. Run the build command and push the `dist` folder to the `gh-pages` branch.
+
+## License
+
+[MIT](LICENSE)
