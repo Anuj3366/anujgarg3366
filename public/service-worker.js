@@ -1,11 +1,13 @@
 
 const CACHE_NAME = 'anuj-portfolio-v1';
+const BASE_PATH = self.location.pathname.replace(/\/service-worker\.js$/, '');
+
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
+  BASE_PATH + '/',
+  BASE_PATH + '/index.html',
+  BASE_PATH + '/manifest.json',
+  BASE_PATH + '/icons/icon-192x192.png',
+  BASE_PATH + '/icons/icon-512x512.png'
 ];
 
 // Install a service worker
