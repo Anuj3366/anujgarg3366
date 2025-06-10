@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink } from "lucide-react";
+import OptimizedImage from "@/components/OptimizedImage";
 
 const projects = [
   {
@@ -59,58 +60,66 @@ const Projects = () => {
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {projects.map((project, index) => (
-              <Card
+              <motion.div
                 key={index}
-                className="group overflow-hidden bg-card/50 backdrop-blur-sm"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 * index }}
+                viewport={{ once: true }}
               >
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={project.imageUrl}
-                    alt={project.title}
-                    className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-                
-                <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
-                </CardHeader>
-                
-                <CardContent>
-                  <p className="mb-4 text-foreground/80">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="secondary">
-                        {tech}
-                      </Badge>
-                    ))}
+                <Card className="group overflow-hidden bg-card/50 backdrop-blur-sm h-full flex flex-col">
+                  <div className="relative aspect-video overflow-hidden">
+                    <OptimizedImage
+                      src={project.imageUrl}
+                      alt={`${project.title} preview`}
+                      className="h-full w-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
                   </div>
-                </CardContent>
-                
-                <CardFooter className="flex gap-4">
-                  <Button asChild variant="outline" size="sm">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
-                      <Github className="h-4 w-4" />
-                      Code
-                    </a>
-                  </Button>
-                  <Button asChild size="sm">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      Demo
-                    </a>
-                  </Button>
-                </CardFooter>
-              </Card>
+                  
+                  <CardHeader>
+                    <CardTitle>{project.title}</CardTitle>
+                  </CardHeader>
+                  
+                  <CardContent className="flex-grow">
+                    <p className="mb-4 text-foreground/80">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech) => (
+                        <Badge key={tech} variant="secondary">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                  
+                  <CardFooter className="flex gap-4">
+                    <Button asChild variant="outline" size="sm">
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                        aria-label={`View ${project.title} source code on GitHub`}
+                      >
+                        <Github className="h-4 w-4" />
+                        Code
+                      </a>
+                    </Button>
+                    <Button asChild size="sm">
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                        aria-label={`View ${project.title} live demo`}
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                        Demo
+                      </a>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>

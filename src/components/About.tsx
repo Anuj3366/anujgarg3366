@@ -1,6 +1,7 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
+import OptimizedImage from "@/components/OptimizedImage";
 
 const About = () => {
   return (
@@ -59,10 +60,11 @@ const About = () => {
             <Card className="h-full overflow-hidden bg-card/50 backdrop-blur-sm">
               <CardContent className="flex flex-col items-center justify-center p-6">
                 <div className="overflow-hidden rounded-lg">
-                  <img
+                  <OptimizedImage
                     src="https://user-images.githubusercontent.com/74038190/229223263-cf2e4b07-2615-4f87-9c38-e37600f8381a.gif"
                     alt="Coding Animation"
                     className="h-auto w-full"
+                    loading="lazy"
                   />
                 </div>
                 
