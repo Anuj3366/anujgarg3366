@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -22,44 +21,59 @@ const Achievements = () => {
         
         <Tabs defaultValue="gate" className="mx-auto max-w-4xl">
           <TabsList className="mx-auto mb-8 w-full justify-center">
-            <TabsTrigger value="gate">GATE 2025</TabsTrigger>
+            <TabsTrigger value="gate">GATE Scores</TabsTrigger>
             <TabsTrigger value="gfg">GeeksforGeeks</TabsTrigger>
             <TabsTrigger value="leetcode">LeetCode</TabsTrigger>
             <TabsTrigger value="certificates">Certifications</TabsTrigger>
           </TabsList>
           
           <TabsContent value="gate">
-            <Card className="bg-card/50 backdrop-blur-sm">
-              <CardHeader className="bg-primary/5 pb-4">
-                <CardTitle className="text-center text-2xl">
-                  GATE 2025 (CSE & IT)
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="pt-6">
-                <div className="text-center">
-                  <div className="mb-6">
-                    <h3 className="text-3xl font-bold text-primary">397/1000</h3>
-                    <p className="text-foreground/70 mt-2">Score achieved in GATE 2025</p>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div className="rounded-lg bg-primary/5 p-4">
-                      <p className="text-sm text-foreground/70">Equivalent Marks</p>
-                      <p className="text-xl font-bold text-primary">~40/100</p>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardHeader className="bg-primary/5 pb-4">
+                  <CardTitle className="text-center text-xl">
+                    GATE 2025 (CSE & IT)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <h3 className="text-2xl font-bold text-primary">397/1000</h3>
+                      <p className="text-foreground/70 mt-1">GATE Score</p>
                     </div>
                     
-                    <div className="rounded-lg bg-primary/5 p-4">
-                      <p className="text-sm text-foreground/70">Qualifying Cutoff</p>
-                      <p className="text-xl font-bold text-green-500">~27/100</p>
-                    </div>
+                    <p className="text-foreground/80">
+                      Strong performance demonstrating solid understanding of computer science fundamentals and problem-solving capabilities.
+                    </p>
                   </div>
-                  
-                  <p className="mt-6 text-foreground/80">
-                    Comfortably above typical CSE qualifying cutoff, demonstrating strong fundamentals in computer science concepts and problem-solving abilities.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-card/50 backdrop-blur-sm">
+                <CardHeader className="bg-primary/5 pb-4">
+                  <CardTitle className="text-center text-xl">
+                    GATE 2024 (CSE & IT)
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-6">
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <h3 className="text-2xl font-bold text-primary">33.79/100</h3>
+                      <p className="text-foreground/70 mt-1">GATE Score</p>
+                    </div>
+                    
+                    <div className="rounded-lg bg-primary/5 p-3 mb-4">
+                      <p className="text-sm text-foreground/70">Qualifying Cutoff</p>
+                      <p className="text-lg font-bold text-green-500">29.2/100</p>
+                    </div>
+                    
+                    <p className="text-foreground/80">
+                      Qualified above the cutoff, showcasing technical competency and analytical skills.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
           
           <TabsContent value="gfg">
