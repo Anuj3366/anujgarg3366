@@ -1,5 +1,5 @@
 
-import { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -14,13 +14,13 @@ const Contact = lazy(() => import("@/components/Contact"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 // Loading component for lazy-loaded sections
-const SectionLoader = () => (
+const SectionLoader: React.FC = () => (
   <div className="flex items-center justify-center py-20">
     <div className="h-8 w-8 animate-spin rounded-full border-t-2 border-primary border-opacity-70"></div>
   </div>
 );
 
-const Index = () => {
+const Index: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
