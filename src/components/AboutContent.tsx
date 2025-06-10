@@ -9,6 +9,9 @@ const AboutContent = () => {
         I'm on a mission to evolve beyond feature racing—towards scalable, maintainable, high-DX iOS platforms. With hands-on experience in full-stack development and a proven track record on coding platforms like LeetCode and GeeksforGeeks, I thrive on collaboration and creative problem-solving.
       </p>
       <p className="text-foreground/80">
+        Qualified GATE 2024 with a score of 33.79/100 (qualifying cutoff: 29.2), demonstrating strong technical fundamentals and problem-solving abilities.
+      </p>
+      <p className="text-foreground/80">
         Outside code? You'll find me gaming, diving into algorithm challenges (LeetCode, GfG), or grabbing pizza while deep-reading the latest in Swift concurrency or Cloud patterns.
       </p>
     </div>

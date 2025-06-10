@@ -19,7 +19,7 @@ const Hero = () => {
           Hey, I'm <span className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">Anuj Garg</span>
         </h1>
         <h2 className="mt-6 text-xl font-medium text-foreground/80 sm:text-2xl md:text-3xl">
-          Full-Stack Developer & Problem Solver
+          iOS Developer, Full-Stack Developer & Problem Solver
         </h2>
         
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
