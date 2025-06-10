@@ -1,40 +1,11 @@
 
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import SkillCategory from "./SkillCategory";
+import { skillCategories } from "../data/skillsData";
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: "iOS Development",
-      skills: ["Swift", "Objective-C", "UIKit", "SwiftUI", "Xcode", "MVVM-C"],
-    },
-    {
-      title: "Programming Languages",
-      skills: ["Swift", "JavaScript", "Python", "Java", "C++"],
-    },
-    {
-      title: "Frontend Technologies",
-      skills: ["React", "Next.js", "Tailwind CSS", "Bootstrap", "Material UI"],
-    },
-    {
-      title: "Backend Technologies",
-      skills: ["Node.js", "Express", "Django", "RESTful APIs", "JSON/XML"],
-    },
-    {
-      title: "Databases",
-      skills: ["MongoDB", "MySQL", "SQL Server", "Firebase", "PostgreSQL"],
-    },
-    {
-      title: "Cloud & DevOps",
-      skills: ["AWS (EC2, S3)", "Docker", "Kubernetes", "CI/CD", "Git"],
-    },
-  ];
-
   return (
-    <section
-      id="skills"
-      className="py-12 sm:py-16 md:py-20"
-    >
+    <section id="skills" className="py-12 sm:py-16 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -49,29 +20,12 @@ const Skills = () => {
         <div className="mx-auto max-w-4xl">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {skillCategories.map((category, index) => (
-              <motion.div
+              <SkillCategory
                 key={category.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 * index }}
-                viewport={{ once: true }}
-              >
-                <Card className="h-full bg-card/50 backdrop-blur-sm border-primary/10 hover:border-primary/20 transition-all duration-300">
-                  <CardContent className="p-4 md:p-6">
-                    <h3 className="mb-3 md:mb-4 text-base md:text-lg font-medium">{category.title}</h3>
-                    <div className="flex flex-wrap gap-2">
-                      {category.skills.map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-full bg-primary/10 px-2 py-1 text-xs md:text-sm font-medium text-primary hover:bg-primary/15 transition-colors duration-200 cursor-default"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                title={category.title}
+                skills={category.skills}
+                index={index}
+              />
             ))}
           </div>
           
