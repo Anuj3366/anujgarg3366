@@ -5,8 +5,12 @@ import { Card, CardContent } from "@/components/ui/card";
 const Skills = () => {
   const skillCategories = [
     {
+      title: "iOS Development",
+      skills: ["Swift", "Objective-C", "UIKit", "SwiftUI", "Xcode", "MVVM-C"],
+    },
+    {
       title: "Programming Languages",
-      skills: ["Java", "Python", "C++", "JavaScript", "Swift"],
+      skills: ["Swift", "JavaScript", "Python", "Java", "C++"],
     },
     {
       title: "Frontend Technologies",
@@ -24,10 +28,6 @@ const Skills = () => {
       title: "Cloud & DevOps",
       skills: ["AWS (EC2, S3)", "Docker", "Kubernetes", "CI/CD", "Git"],
     },
-    {
-      title: "Problem Solving",
-      skills: ["Data Structures", "Algorithms", "Dynamic Programming", "Graph Algorithms", "Optimization"],
-    },
   ];
 
   return (
@@ -43,7 +43,7 @@ const Skills = () => {
         className="container px-4 sm:px-6 md:px-8"
       >
         <h2 className="mb-6 text-center text-2xl font-bold sm:text-3xl md:text-4xl">
-          Skills
+          Technical Skills
         </h2>
         
         <div className="mx-auto max-w-4xl">
@@ -77,8 +77,8 @@ const Skills = () => {
           
           <div className="mt-8 text-center">
             <p className="text-muted-foreground text-xs md:text-sm">
-              <span className="font-medium">Pro tip:</span> This skills section is easily customizable. 
-              Update the skillCategories array to add, remove, or modify your skills anytime.
+              <span className="font-medium">Specialization:</span> iOS Development with Swift & SwiftUI, 
+              Full-Stack Web Development, and competitive programming across multiple platforms.
             </p>
           </div>
         </div>

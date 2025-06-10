@@ -17,15 +17,50 @@ const Achievements = () => {
         viewport={{ once: true }}
       >
         <h2 className="mb-6 text-center text-3xl font-bold sm:text-4xl">
-          Coding Achievements
+          Key Achievements
         </h2>
         
-        <Tabs defaultValue="gfg" className="mx-auto max-w-4xl">
+        <Tabs defaultValue="gate" className="mx-auto max-w-4xl">
           <TabsList className="mx-auto mb-8 w-full justify-center">
+            <TabsTrigger value="gate">GATE 2025</TabsTrigger>
             <TabsTrigger value="gfg">GeeksforGeeks</TabsTrigger>
             <TabsTrigger value="leetcode">LeetCode</TabsTrigger>
             <TabsTrigger value="certificates">Certifications</TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="gate">
+            <Card className="bg-card/50 backdrop-blur-sm">
+              <CardHeader className="bg-primary/5 pb-4">
+                <CardTitle className="text-center text-2xl">
+                  GATE 2025 (CSE & IT)
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-6">
+                <div className="text-center">
+                  <div className="mb-6">
+                    <h3 className="text-3xl font-bold text-primary">397/1000</h3>
+                    <p className="text-foreground/70 mt-2">Score achieved in GATE 2025</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div className="rounded-lg bg-primary/5 p-4">
+                      <p className="text-sm text-foreground/70">Equivalent Marks</p>
+                      <p className="text-xl font-bold text-primary">~40/100</p>
+                    </div>
+                    
+                    <div className="rounded-lg bg-primary/5 p-4">
+                      <p className="text-sm text-foreground/70">Qualifying Cutoff</p>
+                      <p className="text-xl font-bold text-green-500">~27/100</p>
+                    </div>
+                  </div>
+                  
+                  <p className="mt-6 text-foreground/80">
+                    Comfortably above typical CSE qualifying cutoff, demonstrating strong fundamentals in computer science concepts and problem-solving abilities.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
           
           <TabsContent value="gfg">
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -140,6 +175,10 @@ const Achievements = () => {
                   alt="LeetCode Stats"
                   className="w-full max-w-2xl rounded-lg"
                 />
+                
+                <p className="mt-4 text-center text-foreground/80">
+                  Consistent problem-solving on LeetCode, focusing on DS & Algorithm mastery
+                </p>
               </CardContent>
             </Card>
           </TabsContent>
@@ -151,7 +190,7 @@ const Achievements = () => {
                   <CardTitle>GATE 2025 (CSE & IT)</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground/80">Qualified with a score of 331/1000, demonstrating strong fundamentals in computer science concepts.</p>
+                  <p className="text-foreground/80">Qualified with a score of 397/1000, demonstrating strong fundamentals in computer science concepts and competitive problem-solving.</p>
                 </CardContent>
               </Card>
               
