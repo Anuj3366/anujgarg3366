@@ -12,7 +12,7 @@ const projects = [
     technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     githubUrl: "https://github.com/Anuj3366/Anuj3366.github.io",
     liveUrl: "https://anujgarg3366.me",
-    imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80", // replaced to ensure it always shows!
+    imageUrl: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80",
     featured: true,
   },
   {
