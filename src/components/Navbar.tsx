@@ -30,12 +30,7 @@ const Navbar = () => {
 
   return (
     <header
-      className={cn(
-        "fixed top-0 z-50 w-full transition-all duration-300",
-        scrollPosition > 0
-          ? "bg-background/80 backdrop-blur-lg shadow-md py-2"
-          : "bg-transparent py-4"
-      )}
+      className="fixed top-0 z-50 w-full bg-white/95 backdrop-blur-lg shadow-md py-2 transition-all duration-300"
     >
       <div className="container mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#home" className="text-2xl font-bold text-primary hover:text-primary/80">
@@ -49,7 +44,7 @@ const Navbar = () => {
               <li key={link.title}>
                 <a
                   href={link.href}
-                  className="text-foreground/80 transition-colors hover:text-primary"
+                  className="text-gray-700 transition-colors hover:text-primary"
                 >
                   {link.title}
                 </a>
@@ -60,7 +55,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="text-foreground md:hidden"
+          className="text-gray-700 md:hidden"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -70,13 +65,13 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <nav className="fixed inset-0 z-50 flex flex-col bg-background/95 backdrop-blur-lg pt-20 md:hidden">
+        <nav className="fixed inset-0 z-50 flex flex-col bg-white/95 backdrop-blur-lg pt-20 md:hidden">
           <ul className="container mx-auto flex flex-col space-y-6 px-4 text-center">
             {navLinks.map((link) => (
               <li key={link.title}>
                 <a
                   href={link.href}
-                  className="text-xl font-medium text-foreground/80 transition-colors hover:text-primary"
+                  className="text-xl font-medium text-gray-700 transition-colors hover:text-primary"
                   onClick={toggleMenu}
                 >
                   {link.title}
