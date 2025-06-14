@@ -1,5 +1,5 @@
 import React, { useState, useEffect, lazy } from "react";
-import { motion } from "framer-motion"; // Import motion
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -31,60 +31,45 @@ const Index: React.FC = () => {
   usePerformanceMonitoring();
 
   useEffect(() => {
-    const initializeApp = async () => {
-      // Simulate loading progress
-      const progressInterval = setInterval(() => {
-        setLoadingProgress((prev) => {
-          if (prev >= 90) {
-            clearInterval(progressInterval);
-            return 90;
-          }
-          return prev + 10;
-        });
-      }, 100);
+    let isMounted = true;
+    const progressSteps = [15, 30, 55, 80, 95, 100];
+    let currentStep = 0;
 
-      // Preload critical images
-      const criticalImages = [
-        'https://user-images.githubusercontent.com/74038190/229223263-cf2e4b07-2615-4f87-9c38-e37600f8381a.gif',
-        'https://user-images.githubusercontent.com/74038190/238353480-219bcc70-f5dc-466b-9a60-29653d8e8433.gif'
-      ];
-
-      try {
-        await preloadImages(criticalImages);
-        setLoadingProgress(100);
-        
-        // Reduced loading time for better UX
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 500);
-      } catch (error) {
-        console.warn('Image preloading failed:', error);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 800);
+    const fakeLoading = () => {
+      if (!isMounted) return;
+      setLoadingProgress(progressSteps[currentStep]);
+      currentStep++;
+      if (currentStep < progressSteps.length) {
+        setTimeout(fakeLoading, 180);
       }
     };
+    fakeLoading();
 
-    initializeApp();
+    const criticalImages = [
+      "https://user-images.githubusercontent.com/74038190/229223263-cf2e4b07-2615-4f87-9c38-e37600f8381a.gif",
+      "https://user-images.githubusercontent.com/74038190/238353480-219bcc70-f5dc-466b-9a60-29653d8e8433.gif"
+    ];
+
+    preloadImages(criticalImages)
+      .then(() => setTimeout(() => isMounted && setIsLoading(false), 600))
+      .catch(() => setTimeout(() => isMounted && setIsLoading(false), 900));
+
+    return () => { isMounted = false; };
   }, []);
 
   if (isLoading) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-background">
+      <div className="fixed inset-0 flex items-center justify-center bg-background/95 z-[999]">
         <div className="flex flex-col items-center gap-6 max-w-sm mx-auto px-4">
-          <EnhancedLoading 
-            size="lg" 
-            variant="pulse"
-            text="Loading Portfolio..."
-          />
+          <EnhancedLoading size="lg" variant="pulse" text="Portfolio Loading..." />
           <div className="w-full bg-muted rounded-full h-2">
-            <div 
-              className="bg-primary h-2 rounded-full transition-all duration-300 ease-out"
+            <div
+              className="bg-primary h-2 rounded-full transition-all duration-300"
               style={{ width: `${loadingProgress}%` }}
             />
           </div>
           <p className="text-xs text-muted-foreground text-center">
-            Optimizing experience for you...
+            Optimizing your experience. Please wait...
           </p>
         </div>
       </div>
@@ -93,54 +78,65 @@ const Index: React.FC = () => {
 
   return (
     <EnhancedErrorBoundary>
-      <main className="flex min-h-screen flex-col bg-gradient-to-br from-background to-background/90">
+      <main className="flex min-h-screen flex-col bg-gradient-to-br from-background via-background/80 to-background/70">
         <Navbar />
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Hero />
-          
+          {/* Section divider for visual rhythm */}
+          <div className="my-8 sm:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
+          </div>
           <motion.div {...sectionAnimationProps}>
             <LazyWrapper minHeight="300px">
               <About />
             </LazyWrapper>
           </motion.div>
-          
+          <div className="my-8 sm:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
+          </div>
           <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.1 }}>
             <LazyWrapper minHeight="400px">
               <Experience />
             </LazyWrapper>
           </motion.div>
-          
+          <div className="my-8 sm:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent" />
+          </div>
           <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.2 }}>
             <LazyWrapper minHeight="300px">
               <Skills />
             </LazyWrapper>
           </motion.div>
-          
+          <div className="my-8 sm:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
+          </div>
           <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.1 }}>
             <LazyWrapper minHeight="500px">
               <Projects />
             </LazyWrapper>
           </motion.div>
-          
+          <div className="my-8 sm:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
+          </div>
           <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.2 }}>
             <LazyWrapper minHeight="400px">
               <Achievements />
             </LazyWrapper>
           </motion.div>
-          
+          <div className="my-8 sm:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
+          </div>
           <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.1 }}>
             <LazyWrapper minHeight="300px">
               <Contact />
             </LazyWrapper>
           </motion.div>
         </div>
-        
         <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.2 }}>
           <LazyWrapper minHeight="200px">
             <Footer />
           </LazyWrapper>
         </motion.div>
-        
         <ScrollToTop />
       </main>
     </EnhancedErrorBoundary>

@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 
 interface SEOHeadProps {
@@ -18,6 +17,11 @@ const SEOHead = ({
     // Update document title
     document.title = title;
     
+    // Remove duplicate canonical & meta if present (prevent redundancy/conflicts)
+    document
+      .querySelectorAll('link[rel="canonical"]:not(:first-of-type), meta[name="description"]:not(:first-of-type)')
+      .forEach((el) => el.parentNode?.removeChild(el));
+      
     // Update meta tags
     const updateMetaTag = (name: string, content: string, property?: boolean) => {
       const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;

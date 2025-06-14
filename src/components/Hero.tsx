@@ -4,359 +4,151 @@ import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import HeroBackground from "./HeroBackground";
 
+// Add a simple round avatar URL as a visually appealing focus.
+const AVATAR_URL =
+  "https://avatars.githubusercontent.com/u/74038190?v=4"; // Replace with your desired avatar image
+
 const Hero = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.13, delayChildren: 0.1 },
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.95 },
+  const textVariants = {
+    hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 15,
-        duration: 0.8,
-      },
+      transition: { type: "spring", stiffness: 100, damping: 20 },
     },
   };
 
-  const floatingAnimation = {
-    y: [-8, 8, -8],
-    rotate: [-2, 2, -2],
-    transition: {
-      duration: 4,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
-
-  const pulseAnimation = {
-    scale: [1, 1.05, 1],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
-
-  const buttonHoverEffect = {
-    scale: 1.05,
-    y: -2,
-    boxShadow: "0px 10px 30px rgba(59, 130, 246, 0.3)",
-    transition: { 
-      duration: 0.3,
-      ease: "easeOut"
-    }
-  };
-  
-  const iconHoverEffect = {
-    scale: 1.3,
-    rotate: 12,
-    y: -3,
-    transition: { 
-      duration: 0.3,
-      type: "spring",
-      stiffness: 400,
-      damping: 10
-    }
-  };
-
-  const textRevealVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 40,
-      clipPath: "inset(0 100% 0 0)"
-    },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      clipPath: "inset(0 0% 0 0)",
-      transition: {
-        duration: 1.2,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const socialIconVariants = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: { 
-      scale: 1, 
-      rotate: 0,
-      transition: {
-        type: "spring",
-        stiffness: 260,
-        damping: 20,
-        delay: 1.5
-      }
-    }
+  // Micro-interaction on avatar
+  const avatarAnimation = {
+    rotate: [0, 10, -10, 0],
+    scale: [1, 1.08, 0.95, 1],
+    transition: { duration: 2.5, repeat: Infinity, ease: "easeInOut" },
   };
 
   return (
     <section
       id="home"
-      className="relative flex min-h-screen flex-col items-center justify-center py-20 text-center overflow-hidden"
+      className="relative flex flex-col items-center justify-center min-h-[70vh] py-24 md:py-32 text-center overflow-hidden"
       style={{ zIndex: 1 }}
     >
       <HeroBackground />
-      
-      {/* Enhanced dark overlay with animated gradients */}
-      <motion.div 
+
+      <motion.div
         className="absolute inset-0 z-[2]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: 1.8 }}
         style={{
-          background: `
-            radial-gradient(circle at 30% 70%, rgba(0,0,0,0.1) 0%, transparent 50%),
-            radial-gradient(circle at 70% 30%, rgba(0,0,0,0.15) 0%, transparent 50%),
-            linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.25) 100%)
-          `
+          background:
+            "radial-gradient(circle at 60% 90%, rgba(80,255,228,0.09) 0%, transparent 60%),radial-gradient(circle at 30% 10%, rgba(99,102,241,0.11) 0%, transparent 60%)",
         }}
       />
-      
+
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 w-full max-w-4xl px-4"
+        className="relative z-10 max-w-3xl w-full px-4 flex flex-col items-center"
       >
+        {/* Avatar with glow */}
+        <motion.div
+          className="relative mb-8"
+          variants={textVariants}
+        >
+          <motion.img
+            src={AVATAR_URL}
+            alt="Anuj Garg Avatar"
+            className="mx-auto rounded-full shadow-lg border-4 border-primary/40 w-28 h-28 sm:w-36 sm:h-36 object-cover bg-white"
+            animate={avatarAnimation}
+          />
+          <div className="absolute inset-0 rounded-full blur-2xl opacity-40 pointer-events-none"
+            style={{
+              background: "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)"
+            }}
+          />
+        </motion.div>
+
+        {/* Headline */}
         <motion.h1
-          variants={textRevealVariants}
-          className="text-5xl font-bold leading-tight sm:text-6xl md:text-7xl lg:text-8xl"
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-blue-600 via-fuchsia-600 to-cyan-400 bg-clip-text text-transparent mb-3"
+          variants={textVariants}
         >
-          <motion.span 
-            className="text-black dark:text-white"
-            animate={{
-              textShadow: [
-                "0 0 0px rgba(255,255,255,0)",
-                "0 0 20px rgba(255,255,255,0.3)",
-                "0 0 0px rgba(255,255,255,0)"
-              ]
-            }}
-            transition={{ duration: 3, repeat: Infinity }}
-          >
-            Hey, I'm{" "}
-          </motion.span>
-          <motion.span 
-            className="relative inline-block"
-            animate={pulseAnimation}
-          >
-            <motion.span 
-              className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-500 dark:from-blue-400 dark:via-purple-400 dark:to-cyan-300 bg-clip-text text-transparent font-extrabold"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{ backgroundSize: "200% 200%" }}
-            >
-              Anuj Garg
-            </motion.span>
-            {/* Enhanced glowing background effect */}
-            <motion.span 
-              className="absolute inset-0 bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-cyan-500/30 blur-lg -z-10"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-          </motion.span>
+          Anuj Garg
         </motion.h1>
-        
-        <motion.h2
-          variants={itemVariants}
-          className="mt-6 text-xl font-medium text-foreground/90 sm:text-2xl md:text-3xl lg:text-4xl"
-        >
-          <motion.span
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="bg-gradient-to-r from-foreground via-primary to-foreground bg-[length:200%_100%] bg-clip-text text-transparent"
-          >
-            iOS Developer, Full-Stack Developer & Problem Solver
-          </motion.span>
-        </motion.h2>
-        
         <motion.div
-          variants={itemVariants}
-          animate={floatingAnimation}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          className="sm:text-xl md:text-2xl font-medium text-foreground/90 mb-5"
+          variants={textVariants}
         >
-          <motion.span 
-            whileHover={{ 
-              scale: 1.08, 
-              rotate: 2,
-              boxShadow: "0 10px 25px rgba(59, 130, 246, 0.2)"
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full bg-accent/40 border border-accent/80 px-6 py-3 text-sm font-semibold text-accent-foreground shadow-lg backdrop-blur-sm hover:bg-accent/50 transition-all duration-300 hover:shadow-xl cursor-default"
-          >
-            B.E. CSE @ Chitkara University (9.38 CGPA)
-          </motion.span>
-          <motion.span 
-            whileHover={{ 
-              scale: 1.08, 
-              rotate: -2,
-              boxShadow: "0 10px 25px rgba(59, 130, 246, 0.2)"
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full bg-accent/40 border border-accent/80 px-6 py-3 text-sm font-semibold text-accent-foreground shadow-lg backdrop-blur-sm hover:bg-accent/50 transition-all duration-300 hover:shadow-xl cursor-default"
-          >
+          iOS Developer, Full-Stack Developer &amp; Problem Solver
+        </motion.div>
+
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-2 mb-8"
+          variants={textVariants}
+        >
+          <span className="rounded-full bg-accent/40 border border-accent/80 px-5 py-2 text-xs font-semibold text-accent-foreground shadow hover:bg-accent/60 transition cursor-default">
+            B.E. CSE @ Chitkara Univ. (9.38 CGPA)
+          </span>
+          <span className="rounded-full bg-accent/30 border border-accent/50 px-5 py-2 text-xs font-semibold text-accent-foreground shadow hover:bg-accent/50 transition cursor-default">
             Tech Intern @ OLX
-          </motion.span>
+          </span>
         </motion.div>
-        
+
         <motion.div
-          variants={itemVariants}
-          className="mt-12 flex items-center justify-center space-x-8"
+          className="flex items-center justify-center gap-6 mb-10"
+          variants={textVariants}
         >
-          <motion.div 
-            variants={socialIconVariants}
-            whileHover={{ y: -5, rotate: 5 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <Button variant="outline" size="icon" className="rounded-full h-14 w-14 border-foreground/30 hover:border-primary transition-all duration-300 group backdrop-blur-sm bg-background/60 shadow-lg hover:shadow-xl">
-              <motion.a 
-                href="https://github.com/Anuj3366" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="GitHub"
-                whileHover={iconHoverEffect}
-                className="flex items-center justify-center w-full h-full"
-              >
-                <Github className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
-              </motion.a>
-            </Button>
-          </motion.div>
-          <motion.div 
-            variants={socialIconVariants}
-            whileHover={{ y: -5, rotate: -5 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <Button variant="outline" size="icon" className="rounded-full h-14 w-14 border-foreground/30 hover:border-primary transition-all duration-300 group backdrop-blur-sm bg-background/60 shadow-lg hover:shadow-xl">
-              <motion.a 
-                href="https://www.linkedin.com/in/anujgarg3366/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                aria-label="LinkedIn"
-                whileHover={iconHoverEffect}
-                className="flex items-center justify-center w-full h-full"
-              >
-                <Linkedin className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
-              </motion.a>
-            </Button>
-          </motion.div>
+          <Button asChild variant="outline" size="icon" className="h-12 w-12 border-foreground/30 hover:border-primary shadow-lg group">
+            <a
+              href="https://github.com/Anuj3366"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <Github className="h-5 w-5 text-foreground/70 group-hover:text-primary transition-colors" />
+            </a>
+          </Button>
+          <Button asChild variant="outline" size="icon" className="h-12 w-12 border-foreground/30 hover:border-primary shadow-lg group">
+            <a
+              href="https://www.linkedin.com/in/anujgarg3366/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="h-5 w-5 text-foreground/70 group-hover:text-primary transition-colors" />
+            </a>
+          </Button>
         </motion.div>
-        
-        <motion.div
-          variants={itemVariants}
-          className="mt-12 flex flex-col items-center justify-center gap-5 sm:flex-row"
-        >
-          <motion.div 
-            whileHover={buttonHoverEffect}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button className="group relative px-10 py-5 text-lg shadow-xl overflow-hidden bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary">
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"
-                animate={{
-                  x: [-100, 300],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              />
-              <a href="#contact" className="flex items-center relative z-10">
-                Contact Me 
-                <motion.div
-                  animate={{ x: [0, 8, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <ArrowRight className="ml-3 h-5 w-5" />
-                </motion.div>
-              </a>
-            </Button>
-          </motion.div>
-          <motion.div 
-            whileHover={buttonHoverEffect}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button variant="outline" className="px-10 py-5 text-lg border-foreground/30 shadow-xl hover:border-primary hover:text-primary backdrop-blur-sm bg-background/60 hover:bg-background/80">
-              <a href="https://drive.google.com/file/d/1HUYtjfjhODx6nY5aCk99P0xdFW9myDSv/view" target="_blank" rel="noopener noreferrer">
-                View Resume
-              </a>
-            </Button>
-          </motion.div>
+
+        <motion.div className="flex flex-col sm:flex-row items-center gap-3" variants={textVariants}>
+          <Button asChild className="px-8 py-4 text-base font-bold shadow-md hover:shadow-xl transition duration-200 ring-1 ring-primary/30 hover:ring-2">
+            <a href="#contact">
+              Contact Me
+              <ArrowRight className="inline-block ml-2 h-5 w-5" />
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="px-8 py-4 text-base font-bold border-foreground/30 shadow-md hover:border-primary hover:text-primary">
+            <a
+              href="https://drive.google.com/file/d/1HUYtjfjhODx6nY5aCk99P0xdFW9myDSv/view"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Resume
+            </a>
+          </Button>
         </motion.div>
-      </motion.div>
-      
-      <motion.div 
-        className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 sm:block z-10"
-        animate={{ 
-          y: [0, 12, 0],
-          opacity: [0.7, 1, 0.7]
-        }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <a href="#about" aria-label="Scroll down">
-          <motion.svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="40"
-            height="40"
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            className="text-primary hover:text-primary/80 transition-colors drop-shadow-lg"
-            whileHover={{ 
-              scale: 1.2,
-              filter: "drop-shadow(0 0 10px hsl(var(--primary)))"
-            }}
-            animate={{
-              stroke: ["hsl(var(--primary))", "hsl(var(--accent))", "hsl(var(--primary))"]
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            <path d="M12 5v14" />
-            <path d="m19 12-7 7-7-7" />
-          </motion.svg>
-        </a>
       </motion.div>
     </section>
   );
 };
 
 export default Hero;
+
