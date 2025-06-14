@@ -7,20 +7,41 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useOptimizedScroll } from "@/hooks/usePerformanceOptimization";
 import ThemeToggle from "@/components/ThemeToggle";
 
-/*
-  NOTE: Improved SheetContent for mobile nav:
-    - SheetContent background now fully solid (bg-white) in light mode, solid dark in dark mode.
-    - Drop shadow added for separation.
-    - Increased foreground/text contrast in links.
-    - Link hover/active state improved.
-*/
+// --- SCROLLSPY HOOK (IN-COMPONENT for size) ---
+const useScrollSpy = (sectionIds: string[], offset = 90) => {
+  const [activeId, setActiveId] = useState(sectionIds[0]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      let found = sectionIds[0];
+      for (let i = 0; i < sectionIds.length; i++) {
+        const el = document.querySelector(sectionIds[i]);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        // Section is at least partially visible, slightly above nav bar
+        if (rect.top - offset <= 0 && rect.bottom > 60) {
+          found = sectionIds[i];
+        }
+      }
+      setActiveId(found);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // call once in case user reloads mid-scroll
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+    // eslint-disable-next-line
+  }, [sectionIds.join(",")]);
+
+  return activeId;
+};
 
 const Navbar = () => {
   const isMobile = useIsMobile();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Optimized scroll handler
   useOptimizedScroll(setScrollPosition);
 
   // Memoized navigation links
@@ -33,6 +54,10 @@ const Navbar = () => {
     { title: "Achievements", href: "#achievements" },
     { title: "Contact", href: "#contact" },
   ], []);
+
+  const sectionIds = useMemo(() => 
+    navLinks.map(link => link.href), [navLinks]);
+  const activeSection = useScrollSpy(sectionIds);
 
   const isScrolled = scrollPosition > 50;
 
@@ -124,10 +149,21 @@ const Navbar = () => {
               <li key={link.title}>
                 <button
                   onClick={() => handleNavClick(link.href)}
-                  className="relative text-gray-700 dark:text-foreground/80 hover:text-primary transition-all duration-300 font-medium group py-2 px-3 xl:px-4 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg text-sm xl:text-base hover:scale-105 active:scale-95"
+                  className={cn(
+                    "relative text-gray-700 dark:text-foreground/80 hover:text-primary transition-all duration-300 font-medium group py-2 px-3 xl:px-4 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg text-sm xl:text-base hover:scale-105 active:scale-95",
+                    activeSection === link.href &&
+                      "text-primary font-semibold bg-primary/5 shadow focus:ring-2 focus:ring-primary",
+                  )}
                 >
                   {link.title}
-                  <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 scale-x-0 group-hover:scale-x-100 rounded-full"></span>
+                  <span
+                    className={cn(
+                      "absolute bottom-0 left-3 right-3 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 rounded-full",
+                      activeSection === link.href
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100"
+                    )}
+                  ></span>
                 </button>
               </li>
             ))}
@@ -180,14 +216,12 @@ const Navbar = () => {
                   // FIX: use solid backgrounds for better visibility
                   "pt-6 px-0 w-[280px] sm:w-[320px] flex flex-col",
                   "shadow-2xl border-l border-gray-200/60 dark:border-border/30",
-                  // In light mode, use solid white. In dark, use solid dark, both with drop shadow.
                   isDark
                     ? "bg-background text-foreground"
                     : "bg-white text-gray-800",
                   "backdrop-blur-xl"
                 )}
                 style={
-                  // Optional: extra solid background for mobile menu (no transparency)
                   !isDark
                     ? { backgroundColor: "#fff", boxShadow: "0 4px 32px 0 rgba(0,0,0,0.13)" }
                     : undefined
@@ -201,7 +235,6 @@ const Navbar = () => {
                   >
                     &lt;Anuj.Garg /&gt;
                   </button>
-                  {/* ThemeToggle and close icon already present on menu button/header */}
                 </div>
                 <nav className="flex flex-col gap-1 px-4 flex-1">
                   <ul className="flex flex-col gap-1">
@@ -215,17 +248,15 @@ const Navbar = () => {
                       >
                         <button
                           onClick={() => handleNavClick(link.href)}
-                          // Stronger colors and hover states for better legibility
                           className={cn(
                             "w-full text-left rounded-xl px-4 py-3 text-base font-medium transition-all duration-300 border border-transparent backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50",
                             !isDark && "text-gray-800 hover:bg-primary/10 hover:text-primary",
                             isDark && "text-foreground/80 hover:bg-primary/10 hover:text-primary",
                             "hover:scale-[1.02] active:scale-[0.98]",
-                            link.title === "Home" && "border border-primary text-primary font-semibold bg-primary/5",
+                            activeSection === link.href && "border border-primary text-primary font-semibold bg-primary/5 shadow",
                           )}
                           style={
-                            // Give selected/active link more pop
-                            link.title === "Home"
+                            activeSection === link.href
                               ? !isDark
                                 ? { background: "rgba(37,99,235,0.08)", borderColor: "#2563eb", color: "#2563eb" }
                                 : { background: "rgba(59,130,246,0.14)", borderColor: "#38bdf8", color: "#38bdf8" }
@@ -248,4 +279,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
