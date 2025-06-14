@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -28,7 +28,10 @@ const Navbar = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full bg-white/95 dark:bg-background/95 backdrop-blur-lg shadow-md py-2 transition-all duration-300"
+        "fixed top-0 z-50 w-full transition-all duration-300",
+        // Enhanced navbar background: gradient + strong blur + border
+        "bg-gradient-to-r from-white/90 via-white/85 to-accent/10 dark:from-background/95 dark:via-background/85 dark:to-accent/10",
+        "backdrop-blur-lg border-b border-muted/60 shadow-md"
       )}
     >
       <div className="container mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
@@ -79,15 +82,7 @@ const Navbar = () => {
                 >
                   &lt;Anuj.Garg /&gt;
                 </a>
-                <button
-                  className="rounded-full p-1.5 text-gray-500 hover:bg-accent/30 transition-colors"
-                  aria-label="Close menu"
-                  onClick={() => {
-                    // The close button functionality is handled by SheetContent's Close component automatically.
-                  }}
-                >
-                  <X size={22} />
-                </button>
+                {/* Close button removed as requested */}
               </div>
               <nav className="flex flex-col gap-2 px-4">
                 <ul className="flex flex-col gap-2">
