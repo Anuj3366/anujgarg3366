@@ -139,7 +139,7 @@ const HeroBackground: React.FC = () => {
         className="absolute inset-0 opacity-20"
         style={{
           width: "100vw",
-          height: "100vh",
+          height: "110vh",
           background: 'radial-gradient(circle at 20% 80%, hsl(var(--futuristic-glow)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 50%)',
           animation: 'pulse 4s ease-in-out infinite alternate',
           zIndex: -4
