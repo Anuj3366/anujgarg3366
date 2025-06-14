@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
@@ -34,7 +33,7 @@ const Navbar = () => {
         "backdrop-blur-lg border-b border-muted/60 shadow-md"
       )}
     >
-      <div className="container mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
         <a
           href="#home"
           className="text-2xl font-bold text-primary hover:text-primary/80 whitespace-nowrap"
@@ -108,4 +107,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
