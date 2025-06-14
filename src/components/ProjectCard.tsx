@@ -37,7 +37,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       whileHover={{ y: -8 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <Card className="relative overflow-hidden bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm border-2 border-border/50 hover:border-primary/30 h-full flex flex-col transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
+      <Card className="relative overflow-hidden bg-card/95 backdrop-blur-sm border-2 border-border/50 hover:border-primary/30 h-full flex flex-col transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
         {project.featured && (
           <motion.div 
             className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10"
