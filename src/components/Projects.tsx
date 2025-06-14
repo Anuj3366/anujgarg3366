@@ -21,7 +21,7 @@ const projects = [
     technologies: ["Next.js", "MongoDB", "Express", "Node.js", "Stripe API"],
     githubUrl: "https://github.com/Anuj3366",
     liveUrl: "#",
-    imageUrl: "https://user-images.githubusercontent.com/74038190/219923809-b86dc415-a0c2-4a38-bc88-ad6cf06395a8.gif",
+    imageUrl: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
     featured: true,
   },
   {
@@ -30,7 +30,7 @@ const projects = [
     technologies: ["React", "Firebase", "Material UI", "React DnD"],
     githubUrl: "https://github.com/Anuj3366",
     liveUrl: "#",
-    imageUrl: "https://user-images.githubusercontent.com/74038190/212749447-bfb7e725-6987-49d9-ae85-2015e3e7cc41.gif",
+    imageUrl: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&q=80",
     featured: false,
   },
   {
@@ -39,7 +39,7 @@ const projects = [
     technologies: ["JavaScript", "OpenWeather API", "Chart.js", "Bootstrap"],
     githubUrl: "https://github.com/Anuj3366",
     liveUrl: "#",
-    imageUrl: "https://user-images.githubusercontent.com/74038190/242390524-0c7eb6ed-663b-4ce2-bcd4-065fe5989978.gif",
+    imageUrl: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=800&q=80",
     featured: false,
   },
 ];
