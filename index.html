@@ -32,10 +32,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Anuj Garg Portfolio">
     
-    <!-- Additional favicons for better browser support -->
+    <!-- Enhanced favicon support for all devices -->
     <link rel="icon" type="image/svg+xml" href="/icons/avatar-a.svg">
-    <link rel="icon" type="image/png" sizes="192x192" href="/icons/avatar-a.svg">
-    <link rel="icon" type="image/png" sizes="512x512" href="/icons/avatar-a.svg">
+    <link rel="alternate icon" type="image/png" sizes="32x32" href="/icons/avatar-a.svg">
+    <link rel="alternate icon" type="image/png" sizes="16x16" href="/icons/avatar-a.svg">
+    <link rel="mask-icon" href="/icons/avatar-a.svg" color="#2563eb">
     
     <!-- Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,18 +45,36 @@
     
     <!-- Prevent flash of unstyled content -->
     <style>
-      html { visibility: hidden; opacity: 0; }
-      html.loaded { visibility: visible; opacity: 1; transition: opacity 0.3s; }
+      html { 
+        visibility: hidden; 
+        opacity: 0; 
+        scroll-behavior: smooth;
+      }
+      html.loaded { 
+        visibility: visible; 
+        opacity: 1; 
+        transition: opacity 0.3s ease-in-out; 
+      }
+      
+      /* Prevent horizontal scroll on mobile */
+      body {
+        overflow-x: hidden;
+      }
     </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
-      // Prevent FOUC
+      // Enhanced FOUC prevention
       document.addEventListener('DOMContentLoaded', function() {
         document.documentElement.classList.add('loaded');
       });
+      
+      // Fallback for slow loading
+      setTimeout(function() {
+        document.documentElement.classList.add('loaded');
+      }, 1000);
     </script>
   </body>
 </html>

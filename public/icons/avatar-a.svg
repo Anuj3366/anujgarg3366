@@ -2,29 +2,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="45%" r="75%">
-      <stop stop-color="#3bf0c3" />
-      <stop offset="0.5" stop-color="#2563eb" />
-      <stop offset="1" stop-color="#1a213a" />
+    <!-- Enhanced gradient with more depth -->
+    <radialGradient id="bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#00f5ff" />
+      <stop offset="30%" stop-color="#0099ff" />
+      <stop offset="70%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#0f172a" />
     </radialGradient>
-    <linearGradient id="a-text" x1="0" y1="0" x2="192" y2="192" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#fff" stop-opacity="0.95"/>
-      <stop offset="0.5" stop-color="#9bf6e7" stop-opacity="0.7"/>
-      <stop offset="1" stop-color="#2563eb" stop-opacity="0.8"/>
+    
+    <!-- Text gradient with more vibrant colors -->
+    <linearGradient id="a-text" x1="0%" y1="0%" x2="100%" y2="100%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="25%" stop-color="#00f5ff" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#39ff14" stop-opacity="0.9"/>
+      <stop offset="75%" stop-color="#00f5ff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="1"/>
     </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Inner shadow -->
+    <filter id="inner-shadow">
+      <feOffset dx="0" dy="2"/>
+      <feGaussianBlur stdDeviation="2" result="offset-blur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.3"/>
+      <feComposite in2="offset-blur" operator="in"/>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
   </defs>
-  <circle cx="96" cy="96" r="92" fill="url(#bg)"/>
+  
+  <!-- Background circle with enhanced gradient -->
+  <circle cx="96" cy="96" r="88" fill="url(#bg)" filter="url(#inner-shadow)"/>
+  
+  <!-- Outer glow ring -->
+  <circle cx="96" cy="96" r="90" fill="none" stroke="url(#a-text)" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Letter A with enhanced styling -->
   <text
     x="50%"
-    y="57%"
+    y="58%"
     dominant-baseline="middle"
     text-anchor="middle"
-    font-size="100"
-    font-family="Fira Code, Inter, Arial, sans-serif"
-    font-weight="bold"
+    font-size="110"
+    font-family="'Fira Code', 'SF Pro Display', 'Inter', Arial, sans-serif"
+    font-weight="900"
     fill="url(#a-text)"
-    text-shadow="0 6px 24px #2563eb88"
-    letter-spacing="-0.08em"
-    style="paint-order: stroke"
+    filter="url(#glow)"
+    letter-spacing="-0.1em"
+    style="paint-order: stroke; text-shadow: 0 0 20px #00f5ff, 0 0 40px #00f5ff88, 0 0 60px #00f5ff44;"
   >A</text>
+  
+  <!-- Subtle tech pattern overlay -->
+  <defs>
+    <pattern id="tech-pattern" patternUnits="userSpaceOnUse" width="20" height="20">
+      <rect width="20" height="20" fill="none"/>
+      <circle cx="10" cy="10" r="1" fill="#00f5ff" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <circle cx="96" cy="96" r="88" fill="url(#tech-pattern)"/>
 </svg>
