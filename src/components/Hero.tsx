@@ -34,7 +34,7 @@ const Hero = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-30 max-w-3xl w-full px-4 flex flex-col items-center bg-white/80 dark:bg-black/60 backdrop-blur-glass rounded-2xl shadow-lg mt-3 mb-6 mx-auto"
+        className="relative z-30 max-w-3xl w-full px-4 flex flex-col items-center bg-white/80 dark:bg-black/60 backdrop-blur-glass rounded-2xl shadow-lg mt-8 mb-12 sm:mt-14 sm:mb-20 mx-auto"
         style={{
           boxShadow: "0 4px 32px 4px rgba(76, 110, 192, 0.11)",
         }}
