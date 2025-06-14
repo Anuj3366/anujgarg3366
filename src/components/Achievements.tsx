@@ -1,10 +1,9 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
-import { Trophy, Award, Star, Certificate } from "lucide-react";
+import { Trophy, Award, Star, FileText } from "lucide-react";
 import SectionHeader from "./SectionHeader";
 
 const Achievements = () => {
@@ -64,10 +63,11 @@ const Achievements = () => {
               value="certificates" 
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
             >
-              <Certificate className="h-4 w-4" />
+              <FileText className="h-4 w-4" />
               Certifications
             </TabsTrigger>
           </TabsList>
+          
           
           <TabsContent value="gate">
             <motion.div
@@ -301,7 +301,7 @@ const Achievements = () => {
               <Card className="bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl">
                 <CardHeader>
                   <CardTitle className="text-foreground flex items-center gap-2">
-                    <Certificate className="h-5 w-5 text-accent" />
+                    <FileText className="h-5 w-5 text-accent" />
                     AWS Academy Graduate
                   </CardTitle>
                 </CardHeader>
