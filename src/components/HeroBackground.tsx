@@ -74,18 +74,74 @@ const Particles = ({ count = 5000 }) => {
   );
 };
 
+const FloatingOrbs = () => {
+  const orbsRef = useRef<THREE.Group>(null!);
+  
+  useFrame((state) => {
+    if (orbsRef.current) {
+      orbsRef.current.rotation.y += 0.001;
+      orbsRef.current.children.forEach((orb, index) => {
+        orb.position.y = Math.sin(state.clock.elapsedTime + index) * 2;
+        orb.rotation.x += 0.01;
+        orb.rotation.z += 0.005;
+      });
+    }
+  });
+
+  return (
+    <group ref={orbsRef}>
+      {[...Array(5)].map((_, i) => (
+        <mesh
+          key={i}
+          position={[
+            (Math.random() - 0.5) * 30,
+            (Math.random() - 0.5) * 20,
+            (Math.random() - 0.5) * 15
+          ]}
+        >
+          <sphereGeometry args={[0.5, 16, 16]} />
+          <meshBasicMaterial
+            color="hsl(var(--futuristic-glow))"
+            transparent
+            opacity={0.3}
+          />
+        </mesh>
+      ))}
+    </group>
+  );
+};
+
 const HeroBackground: React.FC = () => {
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden">
       <Canvas
         camera={{ position: [0, 0, 15], fov: 75 }}
-        gl={{ antialias: false, alpha: true }} // alpha: true for transparent background if needed
+        gl={{ antialias: false, alpha: true }}
+        style={{ 
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: -10
+        }}
       >
         <ambientLight intensity={0.5} />
-        <Particles count={window.innerWidth > 768 ? 5000 : 2000} />
+        <Particles count={window.innerWidth > 1024 ? 5000 : window.innerWidth > 768 ? 3000 : 1500} />
+        <FloatingOrbs />
       </Canvas>
       <div 
-        className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--futuristic-bg-start))] to-[hsl(var(--futuristic-bg-end))] opacity-80"
+        className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--futuristic-bg-start))] via-[hsl(var(--futuristic-bg-end))] to-[hsl(var(--futuristic-bg-start))] opacity-60"
+        style={{ zIndex: -5 }}
+      />
+      {/* Animated gradient overlay */}
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          background: 'radial-gradient(circle at 20% 80%, hsl(var(--futuristic-glow)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 50%)',
+          animation: 'pulse 4s ease-in-out infinite alternate',
+          zIndex: -4
+        }}
       />
     </div>
   );
