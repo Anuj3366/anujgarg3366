@@ -5,65 +5,65 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 60% 98%; /* Softer light cool gray */
+    --foreground: 220 25% 10%; /* Dark blue-gray */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%; /* Pure white */
+    --card-foreground: 220 25% 10%; /* Matches main foreground */
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 25% 10%;
 
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 220 70% 55%; /* Softer, vibrant blue */
+    --primary-foreground: 210 40% 98%; /* High contrast white */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 215 30% 95%; /* Lighter, cleaner gray-blue */
+    --secondary-foreground: 220 25% 25%; /* Darker gray for contrast */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 35% 93%; /* Slightly darker muted */
+    --muted-foreground: 215 20% 50%; /* Adjusted for muted background */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 60% 94%; /* Slightly more noticeable accent */
+    --accent-foreground: 220 60% 30%; /* Stronger accent foreground */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 50%; /* Adjusted destructive */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 215 30% 90%; /* More defined border */
+    --input: 215 30% 90%; /* Matching input */
+    --ring: 220 70% 60%; /* Ring color related to primary */
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 220 20% 8%; /* Very dark, slightly bluish gray */
+    --foreground: 210 40% 95%; /* Light gray/off-white */
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 220 20% 12%; /* Slightly lighter card bg */
+    --card-foreground: 210 40% 95%; /* Matches main foreground */
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 210 40% 95%;
 
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 220 75% 65%; /* Brighter blue for dark mode */
+    --primary-foreground: 220 25% 10%; /* Dark for contrast */
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 15% 20%; /* Darker, subtle secondary */
+    --secondary-foreground: 210 40% 90%; /* Light for contrast */
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 15% 15%; /* Subtly darker muted */
+    --muted-foreground: 210 30% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 220 20% 25%; /* Dark accent */
+    --accent-foreground: 210 40% 90%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 60% 45%; /* Adjusted destructive for dark */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 220 15% 25%; /* Subtle border */
+    --input: 220 15% 25%; /* Matching input */
+    --ring: 220 75% 70%; /* Bright ring for dark mode */
   }
 }
 
@@ -78,7 +78,7 @@
   }
   
   html {
-    scroll-padding-top: 80px;
+    scroll-padding-top: 80px; /* Adjust if navbar height changes significantly */
   }
 }
 
