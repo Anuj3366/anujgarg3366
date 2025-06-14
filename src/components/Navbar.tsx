@@ -2,13 +2,14 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const Navbar = () => {
   const isMobile = useIsMobile();
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollPosition(window.scrollY);
@@ -27,6 +28,10 @@ const Navbar = () => {
   ];
 
   const isScrolled = scrollPosition > 50;
+
+  const handleMobileLinkClick = () => {
+    setIsOpen(false);
+  };
 
   return (
     <header
@@ -73,7 +78,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
-          <Sheet>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <button
                 className="p-2 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-300"
@@ -92,6 +97,7 @@ const Navbar = () => {
                   className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
                   tabIndex={0}
                   aria-label="Go home"
+                  onClick={handleMobileLinkClick}
                 >
                   &lt;Anuj.Garg /&gt;
                 </a>
@@ -105,6 +111,7 @@ const Navbar = () => {
                         href={link.href}
                         className="block rounded-xl px-6 py-4 text-lg font-medium text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 border border-transparent hover:border-primary/20 backdrop-blur-sm"
                         tabIndex={0}
+                        onClick={handleMobileLinkClick}
                       >
                         {link.title}
                       </a>

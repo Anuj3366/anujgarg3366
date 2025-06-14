@@ -9,14 +9,14 @@ import MissionObjectives from "./MissionObjectives";
 
 const About = () => {
   return (
-    <section id="about" className="section-spaced">
+    <section id="about" className="py-16 sm:py-24 lg:py-28">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -36,10 +36,10 @@ const About = () => {
           </p>
         </div>
         
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 lg:grid-cols-5">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-5">
           <div className="lg:col-span-3">
             <Card className="h-full overflow-hidden bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm border-2 border-border/50 hover:border-accent/30 transition-all duration-500 hover:shadow-xl">
-              <CardContent className="p-8">
+              <CardContent className="p-6 sm:p-8">
                 <AboutContent />
                 <AboutFacts />
               </CardContent>
@@ -48,8 +48,8 @@ const About = () => {
           
           <div className="lg:col-span-2">
             <Card className="h-full overflow-hidden bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm border-2 border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-xl">
-              <CardContent className="flex flex-col items-center justify-center p-8">
-                <div className="relative overflow-hidden rounded-2xl mb-8 group">
+              <CardContent className="flex flex-col items-center justify-center p-6 sm:p-8">
+                <div className="relative overflow-hidden rounded-2xl mb-6 sm:mb-8 group">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
                   <OptimizedImage
                     src="https://user-images.githubusercontent.com/74038190/229223263-cf2e4b07-2615-4f87-9c38-e37600f8381a.gif"
