@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +12,7 @@ const projects = [
     technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     githubUrl: "https://github.com/Anuj3366/Anuj3366.github.io",
     liveUrl: "https://anujgarg3366.me",
-    imageUrl: "https://user-images.githubusercontent.com/74038190/238353480-219bcc70-f5dc-466b-9a60-29653d8e8433.gif",
+    imageUrl: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80", // replaced to ensure it always shows!
     featured: true,
   },
   {

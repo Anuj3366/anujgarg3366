@@ -9,7 +9,7 @@ import MissionObjectives from "./MissionObjectives";
 
 const About = () => {
   return (
-    <section id="about" className="py-20 sm:py-24">
+    <section id="about" className="section-spaced">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ const About = () => {
             <span className="text-sm font-semibold text-accent">Get to Know Me</span>
           </motion.div>
           
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+          <h2 className="section-headline">
             About Me
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

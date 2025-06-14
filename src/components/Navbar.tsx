@@ -41,7 +41,7 @@ const Navbar = () => {
         <a
           href="#home"
           className={cn(
-            "font-bold text-primary hover:text-primary/80 whitespace-nowrap transition-all duration-300",
+            "font-bold text-primary hover:text-primary/80 whitespace-nowrap transition-all duration-300 font-headline",
             isScrolled ? "text-xl" : "text-2xl"
           )}
         >
@@ -50,17 +50,18 @@ const Navbar = () => {
           </span>
         </a>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           <ul className="flex space-x-8">
             {navLinks.map((link) => (
               <li key={link.title}>
                 <a
                   href={link.href}
-                  className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium group py-2"
+                  className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium group py-2 cta-arrow-group"
+                  tabIndex={0}
                 >
                   {link.title}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 group-hover:w-full"></span>
+                  <span className="inline-block cta-arrow transition-transform translate-x-0 ml-1 text-primary">&rarr;</span>
                 </a>
               </li>
             ))}

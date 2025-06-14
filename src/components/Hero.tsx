@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,7 +25,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative flex flex-col items-center justify-center min-h-screen py-20 sm:py-32 text-center overflow-hidden"
+      className="relative flex flex-col items-center justify-center min-h-screen section-spaced text-center overflow-hidden"
       style={{ zIndex: 1 }}
     >
       <motion.div
@@ -53,15 +52,8 @@ const Hero = () => {
 
         {/* Main Heading */}
         <motion.h1
-          className="text-4xl sm:text-6xl md:text-7xl font-black leading-tight tracking-tight mb-4 sm:mb-6"
+          className="section-headline"
           variants={textVariants}
-          style={{
-            background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--primary)) 100%)",
-            backgroundClip: "text",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            textShadow: "0 0 40px hsl(var(--primary) / 0.3)",
-          }}
         >
           Anuj Garg
         </motion.h1>
@@ -139,17 +131,17 @@ const Hero = () => {
         >
           <Button
             asChild
-            className="w-full sm:flex-1 px-8 py-4 text-base font-bold rounded-full bg-gradient-to-r from-primary via-blue-600 to-accent text-white shadow-xl hover:shadow-2xl transition-all duration-300 border-0 hover:scale-105 hover:from-primary/90 hover:to-accent/90"
+            className="w-full sm:flex-1 px-8 py-4 text-base font-bold rounded-full cta-btn-gradient shadow-xl hover:shadow-2xl hover:from-primary/90 hover:to-accent/90 cta-arrow-group"
           >
             <a href="#contact" className="flex items-center justify-center gap-2">
               Contact Me
-              <ArrowRight className="h-5 w-5" />
+              <span className="cta-arrow inline-block ml-1 transition-transform">&rarr;</span>
             </a>
           </Button>
           <Button
             asChild
             variant="outline"
-            className="w-full sm:flex-1 px-8 py-4 text-base font-bold rounded-full bg-white/10 dark:bg-black/10 backdrop-blur-sm border-2 border-white/30 hover:border-primary/70 hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 hover:scale-105"
+            className="w-full sm:flex-1 px-8 py-4 text-base font-bold rounded-full bg-white/10 dark:bg-black/10 backdrop-blur-sm border-2 border-white/30 hover:border-primary/70 hover:bg-white/20 dark:hover:bg-black/20 hover:scale-105 cta-arrow-group"
           >
             <a
               href="https://drive.google.com/file/d/1HUYtjfjhODx6nY5aCk99P0xdFW9myDSv/view"
@@ -159,6 +151,7 @@ const Hero = () => {
             >
               <Download className="h-5 w-5" />
               Resume
+              <span className="cta-arrow inline-block ml-1 transition-transform">&rarr;</span>
             </a>
           </Button>
         </motion.div>

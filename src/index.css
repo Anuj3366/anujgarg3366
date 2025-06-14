@@ -85,11 +85,12 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground antialiased font-sans;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   }
   
   html {
-    scroll-padding-top: 80px; /* Adjust if navbar height changes significantly */
+    scroll-padding-top: 96px; /* Adjust if navbar height changes significantly */
   }
 }
 
@@ -202,4 +203,43 @@ button, a, .interactive {
   text-shadow:
     0 2px 8px hsl(var(--primary) / 0.08),
     0 8px 20px hsl(var(--futuristic-glow) / 0.12);
+}
+
+/* Custom Font for Headlines */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+.font-headline {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Micro-interaction utility classes and focused a11y improvements */
+@layer utilities {
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-[1.045] active:scale-95;
+  }
+  .cta-arrow {
+    transition: transform 0.2s cubic-bezier(0.4,0,0.2,1);
+  }
+  .cta-arrow-group:hover .cta-arrow, .cta-arrow-group:focus .cta-arrow {
+    transform: translateX(0.30em) scale(1.14) rotate(10deg);
+  }
+  .cta-btn-gradient {
+    @apply bg-gradient-to-r from-primary via-blue-600 to-accent text-white;
+  }
+}
+
+/* Enhanced focus-visible for links and buttons */
+a:focus-visible, button:focus-visible {
+  outline: 2.5px solid hsl(var(--accent));
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px hsl(var(--accent)/0.15);
+}
+
+/* Section headline tweaks */
+.section-headline {
+  @apply text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent font-headline drop-shadow-glow;
+}
+
+/* Spacing and rhythm refinements for sections */
+.section-spaced {
+  @apply py-24 sm:py-28;
 }
