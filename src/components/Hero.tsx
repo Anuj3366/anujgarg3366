@@ -83,24 +83,26 @@ const Hero = () => {
           variants={itemVariants}
           className="mt-12 flex items-center justify-center space-x-6" // Increased spacing
         >
-          <Button asChild variant="outline" size="icon" className="rounded-full h-12 w-12 border-foreground/20 hover:border-primary transition-all duration-300 group">
+          <Button variant="outline" size="icon" className="rounded-full h-12 w-12 border-foreground/20 hover:border-primary transition-all duration-300 group">
             <motion.a 
               href="https://github.com/Anuj3366" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="GitHub"
               whileHover={iconHoverEffect}
+              className="flex items-center justify-center w-full h-full"
             >
               <Github className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
             </motion.a>
           </Button>
-          <Button asChild variant="outline" size="icon" className="rounded-full h-12 w-12 border-foreground/20 hover:border-primary transition-all duration-300 group">
+          <Button variant="outline" size="icon" className="rounded-full h-12 w-12 border-foreground/20 hover:border-primary transition-all duration-300 group">
             <motion.a 
               href="https://www.linkedin.com/in/anujgarg3366/" 
               target="_blank" 
               rel="noopener noreferrer" 
               aria-label="LinkedIn"
               whileHover={iconHoverEffect}
+              className="flex items-center justify-center w-full h-full"
             >
               <Linkedin className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
             </motion.a>
@@ -112,14 +114,14 @@ const Hero = () => {
           className="mt-12 flex flex-col items-center justify-center gap-5 sm:flex-row" // Increased gap
         >
           <motion.div whileHover={buttonHoverEffect}>
-            <Button asChild className="group px-8 py-4 text-lg shadow-lg"> {/* Larger button */}
-              <a href="#contact">
+            <Button className="group px-8 py-4 text-lg shadow-lg">
+              <a href="#contact" className="flex items-center">
                 Contact Me <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>
             </Button>
           </motion.div>
           <motion.div whileHover={buttonHoverEffect}>
-            <Button asChild variant="outline" className="px-8 py-4 text-lg border-foreground/20 shadow-lg hover:border-primary hover:text-primary"> {/* Larger button */}
+            <Button variant="outline" className="px-8 py-4 text-lg border-foreground/20 shadow-lg hover:border-primary hover:text-primary">
               <a href="https://drive.google.com/file/d/1HUYtjfjhODx6nY5aCk99P0xdFW9myDSv/view" target="_blank" rel="noopener noreferrer">
                 View Resume
               </a>
