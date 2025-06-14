@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,7 +26,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative flex flex-col items-center justify-center min-h-screen py-14 sm:py-24 md:py-32 text-center overflow-hidden"
+      className="relative flex flex-col items-center justify-center min-h-screen py-14 sm:py-24 md:py-32 text-center overflow-hidden bg-site-gradient"
       style={{ zIndex: 1 }}
     >
       <HeroBackground />
@@ -34,9 +35,10 @@ const Hero = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-30 max-w-3xl w-full px-8 py-8 sm:px-12 sm:py-12 flex flex-col items-center bg-white/80 dark:bg-black/60 backdrop-blur-glass rounded-2xl shadow-lg mt-8 mb-12 sm:mt-14 sm:mb-20 mx-auto"
+        className="relative z-30 max-w-3xl w-full px-8 py-8 sm:px-12 sm:py-12 flex flex-col items-center bg-white/90 dark:bg-black/65 backdrop-blur-glass rounded-3xl shadow-2xl mt-8 mb-12 sm:mt-14 sm:mb-20 mx-auto ring-2 ring-primary/15"
         style={{
-          boxShadow: "0 4px 32px 4px rgba(76, 110, 192, 0.11)",
+          boxShadow:
+            "0 8px 40px 10px rgba(80,130,220,0.16), 0 2px 8px 0 rgba(76,110,192,0.1)",
         }}
       >
         {/* MacBook image as the avatar */}
@@ -49,7 +51,7 @@ const Hero = () => {
 
         {/* Headline */}
         <motion.h1
-          className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-blue-600 via-fuchsia-600 to-cyan-400 bg-clip-text text-transparent mb-2 sm:mb-3"
+          className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-blue-600 via-fuchsia-600 to-cyan-400 bg-clip-text text-transparent mb-2 sm:mb-3 drop-shadow-glow"
           variants={textVariants}
           style={{
             WebkitTextStroke: "1px #2563eb44",
@@ -87,9 +89,9 @@ const Hero = () => {
         >
           <Button
             asChild
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="h-12 w-12 border-foreground/30 hover:border-primary shadow-lg group"
+            className="h-12 w-12 border-foreground/30 hover:border-primary shadow-xl ring-1 ring-primary/10 hover:ring-primary/40 group bg-white/80 dark:bg-black/30"
           >
             <a
               href="https://github.com/Anuj3366"
@@ -102,9 +104,9 @@ const Hero = () => {
           </Button>
           <Button
             asChild
-            variant="outline"
+            variant="ghost"
             size="icon"
-            className="h-12 w-12 border-foreground/30 hover:border-primary shadow-lg group"
+            className="h-12 w-12 border-foreground/30 hover:border-primary shadow-xl ring-1 ring-primary/10 hover:ring-primary/40 group bg-white/80 dark:bg-black/30"
           >
             <a
               href="https://www.linkedin.com/in/anujgarg3366/"
@@ -123,7 +125,7 @@ const Hero = () => {
         >
           <Button
             asChild
-            className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold shadow-md hover:shadow-xl transition duration-200 ring-1 ring-primary/30 hover:ring-2"
+            className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold shadow-lg hover:shadow-xl transition duration-200 ring-2 ring-primary/40 hover:ring-primary/80 bg-gradient-to-br from-primary via-blue-500 to-accent text-white"
           >
             <a href="#contact">
               Contact Me
@@ -133,7 +135,7 @@ const Hero = () => {
           <Button
             asChild
             variant="outline"
-            className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold border-foreground/30 shadow-md hover:border-primary hover:text-primary"
+            className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold border-foreground/30  hover:border-primary hover:text-primary bg-white/70 dark:bg-black/20 backdrop-blur ring-1 ring-muted/40"
           >
             <a
               href="https://drive.google.com/file/d/1HUYtjfjhODx6nY5aCk99P0xdFW9myDSv/view"
@@ -150,3 +152,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
