@@ -1,4 +1,3 @@
-
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -133,12 +132,14 @@ const HeroBackground: React.FC = () => {
       </Canvas>
       <div
         className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--futuristic-bg-start))] via-[hsl(var(--futuristic-bg-end))] to-[hsl(var(--futuristic-bg-start))] opacity-35"
-        style={{ zIndex: -5 }}
+        style={{ zIndex: -5, width: "100vw", height: "100vh" }}
       />
       {/* Animated gradient overlay */}
       <div
         className="absolute inset-0 opacity-20"
         style={{
+          width: "100vw",
+          height: "100vh",
           background: 'radial-gradient(circle at 20% 80%, hsl(var(--futuristic-glow)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 50%)',
           animation: 'pulse 4s ease-in-out infinite alternate',
           zIndex: -4
