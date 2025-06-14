@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
@@ -227,15 +226,6 @@ const Navbar = () => {
                     : undefined
                 }
               >
-                <div className="flex items-center justify-center px-6 mb-6">
-                  <button
-                    onClick={() => handleNavClick("#home")}
-                    className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg px-2 py-1 font-mono hover:scale-105 active:scale-95 transition-transform duration-200"
-                    aria-label="Go to home"
-                  >
-                    &lt;Anuj.Garg /&gt;
-                  </button>
-                </div>
                 <nav className="flex flex-col gap-1 px-4 flex-1">
                   <ul className="flex flex-col gap-1">
                     {navLinks.map((link, index) => (
