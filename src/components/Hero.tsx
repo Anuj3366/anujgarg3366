@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -34,8 +35,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      // Use min-h-screen for full viewport coverage
-      className="relative flex flex-col items-center justify-center min-h-screen py-24 md:py-32 text-center overflow-hidden"
+      className="relative flex flex-col items-center justify-center min-h-screen py-14 sm:py-24 md:py-32 text-center overflow-hidden"
       style={{ zIndex: 1 }}
     >
       <HeroBackground />
@@ -59,13 +59,13 @@ const Hero = () => {
       >
         {/* Avatar with glow */}
         <motion.div
-          className="relative mb-8"
+          className="relative mb-6 sm:mb-8"
           variants={textVariants}
         >
           <motion.img
             src={AVATAR_URL}
             alt="A Avatar"
-            className="mx-auto rounded-full shadow-lg border-4 border-primary/40 w-28 h-28 sm:w-36 sm:h-36 object-cover bg-white"
+            className="mx-auto rounded-full shadow-lg border-4 border-primary/40 w-24 h-24 sm:w-36 sm:h-36 object-cover bg-white"
             animate={avatarAnimation}
             style={{
               background: "#f8fafc"
@@ -80,20 +80,23 @@ const Hero = () => {
 
         {/* Headline */}
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-blue-600 via-fuchsia-600 to-cyan-400 bg-clip-text text-transparent mb-3"
+          className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-blue-600 via-fuchsia-600 to-cyan-400 bg-clip-text text-transparent mb-2 sm:mb-3"
           variants={textVariants}
         >
           Anuj Garg
         </motion.h1>
+
+        {/* Short bio */}
         <motion.div
-          className="sm:text-xl md:text-2xl font-medium text-foreground/90 mb-5"
+          className="text-sm sm:text-xl md:text-2xl font-medium text-foreground/90 mb-4 sm:mb-5"
           variants={textVariants}
         >
           iOS Developer, Full-Stack Developer &amp; Problem Solver
         </motion.div>
 
+        {/* Badges - hide on mobile */}
         <motion.div
-          className="flex flex-wrap items-center justify-center gap-2 mb-8"
+          className="hidden sm:flex flex-wrap items-center justify-center gap-2 mb-6"
           variants={textVariants}
         >
           <span className="rounded-full bg-accent/40 border border-accent/80 px-5 py-2 text-xs font-semibold text-accent-foreground shadow hover:bg-accent/60 transition cursor-default">
@@ -104,8 +107,9 @@ const Hero = () => {
           </span>
         </motion.div>
 
+        {/* Social icons - hide on mobile */}
         <motion.div
-          className="flex items-center justify-center gap-6 mb-10"
+          className="hidden sm:flex items-center justify-center gap-6 mb-8"
           variants={textVariants}
         >
           <Button asChild variant="outline" size="icon" className="h-12 w-12 border-foreground/30 hover:border-primary shadow-lg group">
@@ -130,14 +134,14 @@ const Hero = () => {
           </Button>
         </motion.div>
 
-        <motion.div className="flex flex-col sm:flex-row items-center gap-3" variants={textVariants}>
-          <Button asChild className="px-8 py-4 text-base font-bold shadow-md hover:shadow-xl transition duration-200 ring-1 ring-primary/30 hover:ring-2">
+        <motion.div className="flex flex-col sm:flex-row items-center gap-3 mt-2" variants={textVariants}>
+          <Button asChild className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold shadow-md hover:shadow-xl transition duration-200 ring-1 ring-primary/30 hover:ring-2">
             <a href="#contact">
               Contact Me
               <ArrowRight className="inline-block ml-2 h-5 w-5" />
             </a>
           </Button>
-          <Button asChild variant="outline" className="px-8 py-4 text-base font-bold border-foreground/30 shadow-md hover:border-primary hover:text-primary">
+          <Button asChild variant="outline" className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold border-foreground/30 shadow-md hover:border-primary hover:text-primary">
             <a
               href="https://drive.google.com/file/d/1HUYtjfjhODx6nY5aCk99P0xdFW9myDSv/view"
               target="_blank"
@@ -153,3 +157,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
