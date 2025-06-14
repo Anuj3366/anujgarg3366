@@ -1,3 +1,4 @@
+
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -111,17 +112,18 @@ const FloatingOrbs = () => {
 };
 
 const HeroBackground: React.FC = () => {
+  // Use w-screen h-screen everywhere for 100vw, 100vh coverage!
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden">
+    <div className="fixed inset-0 -z-10 w-screen h-screen overflow-hidden">
       <Canvas
         camera={{ position: [0, 0, 15], fov: 75 }}
         gl={{ antialias: false, alpha: true }}
         style={{
-          position: 'absolute',
+          position: 'fixed',
           top: 0,
           left: 0,
-          width: '100%',
-          height: '100%',
+          width: '100vw',
+          height: '100vh',
           zIndex: -10,
           pointerEvents: "none",
         }}
@@ -131,15 +133,13 @@ const HeroBackground: React.FC = () => {
         <FloatingOrbs />
       </Canvas>
       <div
-        className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--futuristic-bg-start))] via-[hsl(var(--futuristic-bg-end))] to-[hsl(var(--futuristic-bg-start))] opacity-35"
-        style={{ zIndex: -5, width: "100vw", height: "100vh" }}
+        className="fixed inset-0 bg-gradient-to-br from-[hsl(var(--futuristic-bg-start))] via-[hsl(var(--futuristic-bg-end))] to-[hsl(var(--futuristic-bg-start))] opacity-35 w-screen h-screen"
+        style={{ zIndex: -5 }}
       />
       {/* Animated gradient overlay */}
       <div
-        className="absolute inset-0 opacity-20"
+        className="fixed inset-0 opacity-20 w-screen h-screen"
         style={{
-          width: "100vw",
-          height: "110vh",
           background: 'radial-gradient(circle at 20% 80%, hsl(var(--futuristic-glow)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 50%)',
           animation: 'pulse 4s ease-in-out infinite alternate',
           zIndex: -4
@@ -150,3 +150,4 @@ const HeroBackground: React.FC = () => {
 };
 
 export default HeroBackground;
+
