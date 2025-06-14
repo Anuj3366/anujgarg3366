@@ -333,7 +333,7 @@ const Achievements = () => {
                   <p className="text-foreground/80 leading-relaxed">Software engineering specialization covering modern development practices, testing methodologies, agile project management, and scalable system design.</p>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
           </TabsContent>
         </Tabs>
       </motion.div>
