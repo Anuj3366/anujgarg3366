@@ -3,9 +3,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MacXcodeImage from "./MacXcodeImage";
-import HeroBackground from "./HeroBackground"; // Re-added import
+import HeroBackground from "./HeroBackground";
 
-// Use custom "A" avatar SVG for both Hero and favicon
 const AVATAR_URL = "/icons/avatar-a.svg";
 
 const Hero = () => {
@@ -26,7 +25,6 @@ const Hero = () => {
     },
   };
 
-  // Micro-interaction on avatar
   const avatarAnimation = {
     rotate: [0, 10, -10, 0],
     scale: [1, 1.08, 0.95, 1],
@@ -37,18 +35,19 @@ const Hero = () => {
     <section
       id="home"
       className="relative flex flex-col items-center justify-center min-h-screen py-14 sm:py-24 md:py-32 text-center overflow-hidden"
-      style={{ zIndex: 1 }} // Ensures Hero content is above potential global background elements if any
+      style={{ zIndex: 1 }}
     >
-      {/* Animated background component */}
       <HeroBackground />
-
-      {/* Removed the static blurred gradient div block from here */}
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 max-w-3xl w-full px-4 flex flex-col items-center" // z-10 ensures this content is above HeroBackground
+        className="relative z-30 max-w-3xl w-full px-4 flex flex-col items-center bg-white/80 dark:bg-black/60 backdrop-blur-glass rounded-2xl shadow-lg mt-3 mb-6 mx-auto"
+        // Ensures content is above everything visually, adds subtle backdrop & border
+        style={{
+          boxShadow: "0 4px 32px 4px rgba(76, 110, 192, 0.11)",
+        }}
       >
         {/* Avatar with glow */}
         <motion.div
@@ -61,12 +60,12 @@ const Hero = () => {
             className="mx-auto rounded-full shadow-lg border-4 border-primary/40 w-24 h-24 sm:w-36 sm:h-36 object-cover bg-white"
             animate={avatarAnimation}
             style={{
-              background: "#f8fafc" // Kept for avatar background consistency
+              background: "#f8fafc"
             }}
           />
           <div className="absolute inset-0 rounded-full blur-2xl opacity-40 pointer-events-none"
             style={{
-              background: "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)" // Kept for avatar glow
+              background: "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)"
             }}
           />
         </motion.div>
@@ -78,19 +77,23 @@ const Hero = () => {
         <motion.h1
           className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-blue-600 via-fuchsia-600 to-cyan-400 bg-clip-text text-transparent mb-2 sm:mb-3"
           variants={textVariants}
+          style={{
+            WebkitTextStroke: "1px #2563eb44",
+            textShadow: "0 2px 20px #fff4, 0 8px 32px #2563eb22",
+          }}
         >
           Anuj Garg
         </motion.h1>
 
         {/* Short bio */}
         <motion.div
-          className="text-sm sm:text-xl md:text-2xl font-medium text-foreground/90 mb-4 sm:mb-5"
+          className="text-base sm:text-xl md:text-2xl font-medium text-foreground mb-4 sm:mb-5"
           variants={textVariants}
         >
           iOS Developer, Full-Stack Developer &amp; Problem Solver
         </motion.div>
 
-        {/* Badges - hide on mobile */}
+        {/* Badges */}
         <motion.div
           className="hidden sm:flex flex-wrap items-center justify-center gap-2 mb-6"
           variants={textVariants}
@@ -103,7 +106,7 @@ const Hero = () => {
           </span>
         </motion.div>
 
-        {/* Social icons - hide on mobile */}
+        {/* Social icons */}
         <motion.div
           className="hidden sm:flex items-center justify-center gap-6 mb-8"
           variants={textVariants}

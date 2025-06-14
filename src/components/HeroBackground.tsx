@@ -117,26 +117,27 @@ const HeroBackground: React.FC = () => {
       <Canvas
         camera={{ position: [0, 0, 15], fov: 75 }}
         gl={{ antialias: false, alpha: true }}
-        style={{ 
+        style={{
           position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',
           height: '100%',
-          zIndex: -10
+          zIndex: -10,
+          pointerEvents: "none",
         }}
       >
-        <ambientLight intensity={0.5} />
-        <Particles count={window.innerWidth > 1024 ? 5000 : window.innerWidth > 768 ? 3000 : 1500} />
+        <ambientLight intensity={0.35} />
+        <Particles count={window.innerWidth > 1024 ? 4000 : window.innerWidth > 768 ? 2000 : 800} />
         <FloatingOrbs />
       </Canvas>
-      <div 
-        className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--futuristic-bg-start))] via-[hsl(var(--futuristic-bg-end))] to-[hsl(var(--futuristic-bg-start))] opacity-60"
+      <div
+        className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--futuristic-bg-start))] via-[hsl(var(--futuristic-bg-end))] to-[hsl(var(--futuristic-bg-start))] opacity-35"
         style={{ zIndex: -5 }}
       />
       {/* Animated gradient overlay */}
-      <div 
-        className="absolute inset-0 opacity-30"
+      <div
+        className="absolute inset-0 opacity-20"
         style={{
           background: 'radial-gradient(circle at 20% 80%, hsl(var(--futuristic-glow)) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(var(--primary)) 0%, transparent 50%)',
           animation: 'pulse 4s ease-in-out infinite alternate',
