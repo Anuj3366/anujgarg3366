@@ -1,8 +1,7 @@
 
-import React from "react";
+import React, { memo, useMemo } from "react";
 import OptimizedImage from "./OptimizedImage";
 
-// Replace with a real working image (Unsplash placeholder for now)
 const MACBOOK_IMAGE = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80";
 
 interface MacXcodeImageProps {
@@ -10,21 +9,23 @@ interface MacXcodeImageProps {
   size?: number;
 }
 
-const MacXcodeImage: React.FC<MacXcodeImageProps> = ({ className = "", size = 120 }) => {
+const MacXcodeImage = memo<MacXcodeImageProps>(({ className = "", size = 120 }) => {
+  const glowStyle = useMemo(() => ({
+    background: "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)",
+    zIndex: -1,
+    width: size * 1.2,
+    height: size * 1.2,
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+  }), [size]);
+
   return (
     <div className={`flex justify-center items-center relative ${className}`}>
-      {/* Glow effect behind - positioned absolutely to prevent layout shifts */}
+      {/* Optimized glow effect */}
       <div
         className="absolute inset-0 rounded-full blur-2xl opacity-30 pointer-events-none animate-pulse"
-        style={{
-          background: "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)",
-          zIndex: -1,
-          width: size * 1.2,
-          height: size * 1.2,
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
+        style={glowStyle}
       />
       
       {/* Main avatar image */}
@@ -35,9 +36,13 @@ const MacXcodeImage: React.FC<MacXcodeImageProps> = ({ className = "", size = 12
         width={size}
         height={size}
         priority={true}
+        loading="eager"
+        fetchPriority="high"
       />
     </div>
   );
-};
+});
+
+MacXcodeImage.displayName = "MacXcodeImage";
 
 export default MacXcodeImage;

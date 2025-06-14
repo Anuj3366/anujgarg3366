@@ -3,26 +3,27 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MacXcodeImage from "./MacXcodeImage";
+import { memo, useMemo } from "react";
 
-const Hero = () => {
-  const containerVariants = {
+const Hero = memo(() => {
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: { staggerChildren: 0.15, delayChildren: 0.2 },
     },
-  };
+  }), []);
 
-  const textVariants = {
+  const textVariants = useMemo(() => ({
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: { type: "spring", stiffness: 120, damping: 25 },
     },
-  };
+  }), []);
 
-  const floatVariants = {
+  const floatVariants = useMemo(() => ({
     animate: {
       y: [0, -10, 0],
       transition: {
@@ -31,7 +32,13 @@ const Hero = () => {
         ease: "easeInOut"
       }
     }
-  };
+  }), []);
+
+  const backgroundStyle = useMemo(() => ({
+    background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)",
+    backdropFilter: "blur(20px)",
+    boxShadow: "0 25px 60px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+  }), []);
 
   return (
     <section
@@ -44,11 +51,7 @@ const Hero = () => {
         initial="hidden"
         animate="visible"
         className="relative z-30 max-w-4xl w-full mx-auto px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12 flex flex-col items-center backdrop-blur-xl bg-white/10 dark:bg-black/20 rounded-2xl sm:rounded-3xl shadow-2xl border border-white/20 dark:border-white/10"
-        style={{
-          background: "linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%)",
-          backdropFilter: "blur(20px)",
-          boxShadow: "0 25px 60px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
-        }}
+        style={backgroundStyle}
       >
         {/* Profile Avatar - Made responsive and larger */}
         <motion.div
@@ -189,6 +192,8 @@ const Hero = () => {
       </motion.div>
     </section>
   );
-};
+});
+
+Hero.displayName = "Hero";
 
 export default Hero;

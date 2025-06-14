@@ -1,9 +1,9 @@
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, memo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
-const Particles = ({ count = 5000 }) => {
+const Particles = memo(({ count = 5000 }) => {
   const mesh = useRef<THREE.Points>(null!);
   
   const particles = useMemo(() => {
@@ -31,11 +31,26 @@ const Particles = ({ count = 5000 }) => {
     return posArray;
   }, [count, particles]);
 
+  const geometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    return geo;
+  }, [positions]);
+
+  const material = useMemo(() => new THREE.PointsMaterial({
+    size: 0.03,
+    color: new THREE.Color("hsl(var(--futuristic-glow))"),
+    sizeAttenuation: true,
+    transparent: true,
+    opacity: 0.7,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  }), []);
+
   useFrame((state) => {
     if (!mesh.current) return;
-    const { clock } = state;
     particles.forEach((particle, i) => {
-      let { factor, speed, x, y, z } = particle;
+      let { speed, x, y, z } = particle;
       const t = (particle.time += speed);
       dummy.position.set(
         x + Math.cos(t) + Math.sin(t * 1) / 10,
@@ -51,31 +66,19 @@ const Particles = ({ count = 5000 }) => {
   });
 
   return (
-    <points ref={mesh}>
-      <bufferGeometry attach="geometry">
-        <bufferAttribute
-          attach="attributes-position"
-          count={positions.length / 3}
-          array={positions}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        attach="material"
-        size={0.03}
-        color="hsl(var(--futuristic-glow))"
-        sizeAttenuation
-        transparent
-        opacity={0.7}
-        depthWrite={false}
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
+    <points ref={mesh} geometry={geometry} material={material} />
   );
-};
+});
 
-const FloatingOrbs = () => {
+const FloatingOrbs = memo(() => {
   const orbsRef = useRef<THREE.Group>(null!);
+  
+  const orbGeometry = useMemo(() => new THREE.SphereGeometry(0.5, 16, 16), []);
+  const orbMaterial = useMemo(() => new THREE.MeshBasicMaterial({
+    color: new THREE.Color("hsl(var(--futuristic-glow))"),
+    transparent: true,
+    opacity: 0.3,
+  }), []);
   
   useFrame((state) => {
     if (orbsRef.current) {
@@ -88,36 +91,46 @@ const FloatingOrbs = () => {
     }
   });
 
+  const orbPositions = useMemo(() => 
+    [...Array(5)].map(() => [
+      (Math.random() - 0.5) * 30,
+      (Math.random() - 0.5) * 20,
+      (Math.random() - 0.5) * 15
+    ]), []
+  );
+
   return (
     <group ref={orbsRef}>
-      {[...Array(5)].map((_, i) => (
+      {orbPositions.map((position, i) => (
         <mesh
           key={i}
-          position={[
-            (Math.random() - 0.5) * 30,
-            (Math.random() - 0.5) * 20,
-            (Math.random() - 0.5) * 15
-          ]}
-        >
-          <sphereGeometry args={[0.5, 16, 16]} />
-          <meshBasicMaterial
-            color="hsl(var(--futuristic-glow))"
-            transparent
-            opacity={0.3}
-          />
-        </mesh>
+          position={position as [number, number, number]}
+          geometry={orbGeometry}
+          material={orbMaterial}
+        />
       ))}
     </group>
   );
-};
+});
 
-const HeroBackground: React.FC = () => {
-  // Use w-screen h-screen everywhere for 100vw, 100vh coverage!
+const HeroBackground: React.FC = memo(() => {
+  const particleCount = useMemo(() => {
+    if (window.innerWidth > 1024) return 3000; // Reduced from 4000
+    if (window.innerWidth > 768) return 1500; // Reduced from 2000
+    return 600; // Reduced from 800
+  }, []);
+
   return (
     <div className="fixed inset-0 -z-10 w-screen h-screen overflow-hidden">
       <Canvas
         camera={{ position: [0, 0, 15], fov: 75 }}
-        gl={{ antialias: false, alpha: true }}
+        gl={{ 
+          antialias: false, 
+          alpha: true,
+          powerPreference: "high-performance",
+          stencil: false,
+          depth: false
+        }}
         style={{
           position: 'fixed',
           top: 0,
@@ -127,16 +140,17 @@ const HeroBackground: React.FC = () => {
           zIndex: -10,
           pointerEvents: "none",
         }}
+        performance={{ min: 0.5 }}
+        dpr={[1, 1.5]}
       >
         <ambientLight intensity={0.35} />
-        <Particles count={window.innerWidth > 1024 ? 4000 : window.innerWidth > 768 ? 2000 : 800} />
+        <Particles count={particleCount} />
         <FloatingOrbs />
       </Canvas>
       <div
         className="fixed inset-0 bg-gradient-to-br from-[hsl(var(--futuristic-bg-start))] via-[hsl(var(--futuristic-bg-end))] to-[hsl(var(--futuristic-bg-start))] opacity-35 w-screen h-screen"
         style={{ zIndex: -5 }}
       />
-      {/* Animated gradient overlay */}
       <div
         className="fixed inset-0 opacity-20 w-screen h-screen"
         style={{
@@ -147,7 +161,10 @@ const HeroBackground: React.FC = () => {
       />
     </div>
   );
-};
+});
+
+Particles.displayName = "Particles";
+FloatingOrbs.displayName = "FloatingOrbs";
+HeroBackground.displayName = "HeroBackground";
 
 export default HeroBackground;
-

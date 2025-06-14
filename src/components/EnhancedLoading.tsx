@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import { motion } from 'framer-motion';
 
 interface EnhancedLoadingProps {
@@ -9,29 +9,29 @@ interface EnhancedLoadingProps {
   className?: string;
 }
 
-const EnhancedLoading: React.FC<EnhancedLoadingProps> = ({
+const EnhancedLoading = memo<EnhancedLoadingProps>(({
   size = 'md',
   text,
   variant = 'spinner',
   className = ''
 }) => {
-  const sizeClasses = {
+  const sizeClasses = useMemo(() => ({
     sm: 'h-4 w-4',
     md: 'h-8 w-8',
     lg: 'h-16 w-16'
-  };
+  }), []);
 
-  const textSizeClasses = {
+  const textSizeClasses = useMemo(() => ({
     sm: 'text-xs',
     md: 'text-sm',
     lg: 'text-lg'
-  };
+  }), []);
 
-  const renderSpinner = () => (
+  const spinnerElement = useMemo(() => (
     <div className={`animate-spin rounded-full border-t-2 border-primary border-opacity-70 ${sizeClasses[size]}`} />
-  );
+  ), [size, sizeClasses]);
 
-  const renderDots = () => (
+  const dotsElement = useMemo(() => (
     <div className="flex space-x-1">
       {[0, 1, 2].map((i) => (
         <motion.div
@@ -49,9 +49,9 @@ const EnhancedLoading: React.FC<EnhancedLoadingProps> = ({
         />
       ))}
     </div>
-  );
+  ), []);
 
-  const renderPulse = () => (
+  const pulseElement = useMemo(() => (
     <motion.div
       className={`bg-primary rounded-full ${sizeClasses[size]}`}
       animate={{
@@ -63,22 +63,22 @@ const EnhancedLoading: React.FC<EnhancedLoadingProps> = ({
         repeat: Infinity
       }}
     />
-  );
+  ), [size, sizeClasses]);
 
-  const renderVariant = () => {
+  const renderVariant = useMemo(() => {
     switch (variant) {
       case 'dots':
-        return renderDots();
+        return dotsElement;
       case 'pulse':
-        return renderPulse();
+        return pulseElement;
       default:
-        return renderSpinner();
+        return spinnerElement;
     }
-  };
+  }, [variant, dotsElement, pulseElement, spinnerElement]);
 
   return (
     <div className={`flex flex-col items-center justify-center gap-3 ${className}`}>
-      {renderVariant()}
+      {renderVariant}
       {text && (
         <p className={`text-muted-foreground font-medium ${textSizeClasses[size]}`}>
           {text}
@@ -86,6 +86,8 @@ const EnhancedLoading: React.FC<EnhancedLoadingProps> = ({
       )}
     </div>
   );
-};
+});
+
+EnhancedLoading.displayName = "EnhancedLoading";
 
 export default EnhancedLoading;

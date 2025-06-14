@@ -1,11 +1,12 @@
 
+import { memo } from "react";
 import EnhancedLoading from "@/components/EnhancedLoading";
 
 interface LoadingScreenProps {
   loadingProgress: number;
 }
 
-const LoadingScreen = ({ loadingProgress }: LoadingScreenProps) => {
+const LoadingScreen = memo<LoadingScreenProps>(({ loadingProgress }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-background/95 z-[999]">
       <div className="flex flex-col items-center gap-4 sm:gap-6 max-w-sm mx-auto px-4">
@@ -22,6 +23,8 @@ const LoadingScreen = ({ loadingProgress }: LoadingScreenProps) => {
       </div>
     </div>
   );
-};
+});
+
+LoadingScreen.displayName = "LoadingScreen";
 
 export default LoadingScreen;
