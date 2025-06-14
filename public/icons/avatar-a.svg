@@ -1,0 +1,30 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%">
+      <stop stop-color="#3bf0c3" />
+      <stop offset="0.5" stop-color="#2563eb" />
+      <stop offset="1" stop-color="#1a213a" />
+    </radialGradient>
+    <linearGradient id="a-text" x1="0" y1="0" x2="192" y2="192" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#9bf6e7" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#2563eb" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+  <circle cx="96" cy="96" r="92" fill="url(#bg)"/>
+  <text
+    x="50%"
+    y="57%"
+    dominant-baseline="middle"
+    text-anchor="middle"
+    font-size="100"
+    font-family="Fira Code, Inter, Arial, sans-serif"
+    font-weight="bold"
+    fill="url(#a-text)"
+    text-shadow="0 6px 24px #2563eb88"
+    letter-spacing="-0.08em"
+    style="paint-order: stroke"
+  >A</text>
+</svg>

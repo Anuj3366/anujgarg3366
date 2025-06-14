@@ -1,12 +1,10 @@
-
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import HeroBackground from "./HeroBackground";
 
-// Add a simple round avatar URL as a visually appealing focus.
-const AVATAR_URL =
-  "https://avatars.githubusercontent.com/u/74038190?v=4"; // Replace with your desired avatar image
+// Use custom "A" avatar SVG for both Hero and favicon
+const AVATAR_URL = "/icons/avatar-a.svg";
 
 const Hero = () => {
   const containerVariants = {
@@ -36,7 +34,8 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative flex flex-col items-center justify-center min-h-[70vh] py-24 md:py-32 text-center overflow-hidden"
+      // Use min-h-screen for full viewport coverage
+      className="relative flex flex-col items-center justify-center min-h-screen py-24 md:py-32 text-center overflow-hidden"
       style={{ zIndex: 1 }}
     >
       <HeroBackground />
@@ -65,9 +64,12 @@ const Hero = () => {
         >
           <motion.img
             src={AVATAR_URL}
-            alt="Anuj Garg Avatar"
+            alt="A Avatar"
             className="mx-auto rounded-full shadow-lg border-4 border-primary/40 w-28 h-28 sm:w-36 sm:h-36 object-cover bg-white"
             animate={avatarAnimation}
+            style={{
+              background: "#f8fafc"
+            }}
           />
           <div className="absolute inset-0 rounded-full blur-2xl opacity-40 pointer-events-none"
             style={{
@@ -151,4 +153,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
