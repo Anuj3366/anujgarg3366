@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -58,7 +57,8 @@ const Hero = () => {
           variants={itemVariants}
           className="text-5xl font-bold leading-tight sm:text-6xl md:text-7xl lg:text-8xl" // Slightly larger
         >
-          Hey, I'm <span className="bg-gradient-to-r from-[hsl(var(--primary))] via-[hsl(var(--futuristic-glow))] to-[hsl(var(--accent))] bg-clip-text text-transparent">Anuj Garg</span>
+          <span className="text-black dark:text-white">Hey, I'm </span>
+          <span className="bg-gradient-to-r from-[hsl(var(--primary))] via-[hsl(var(--futuristic-glow))] to-[hsl(var(--accent))] bg-clip-text text-transparent">Anuj Garg</span>
         </motion.h1>
         <motion.h2
           variants={itemVariants}
