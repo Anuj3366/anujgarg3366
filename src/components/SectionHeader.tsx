@@ -16,11 +16,7 @@ const SectionHeader = ({ badge, title, description }: SectionHeaderProps) => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
         viewport={{ once: true, margin: "-50px" }}
-        className="sticky top-16 sm:top-20 bg-background/95 dark:bg-background/95 backdrop-blur-md py-4 px-4 rounded-xl border border-border/30 shadow-lg z-20 mb-6"
-        style={{
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-        }}
+        className="mb-6"
       >
         {badge}
       </motion.div>
