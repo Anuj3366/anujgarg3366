@@ -7,6 +7,14 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useOptimizedScroll } from "@/hooks/usePerformanceOptimization";
 import ThemeToggle from "@/components/ThemeToggle";
 
+/*
+  NOTE: Improved SheetContent for mobile nav:
+    - SheetContent background now fully solid (bg-white) in light mode, solid dark in dark mode.
+    - Drop shadow added for separation.
+    - Increased foreground/text contrast in links.
+    - Link hover/active state improved.
+*/
+
 const Navbar = () => {
   const isMobile = useIsMobile();
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -35,8 +43,6 @@ const Navbar = () => {
       const navbarHeight = 80;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - navbarHeight;
-      
-      // Use native smooth scrolling with proper behavior
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
@@ -52,20 +58,32 @@ const Navbar = () => {
         setIsOpen(false);
       }
     };
-
     if (isOpen) {
       document.addEventListener('keydown', handleEscape);
-      // Prevent body scroll when menu is open
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
-
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = '';
     };
   }, [isOpen]);
+
+  // Detect current theme (for conditional styling in SheetContent)
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const check = () =>
+      setIsDark(document.documentElement.classList.contains("dark"));
+    check();
+    window.addEventListener("storage", check);
+    const mo = new MutationObserver(check);
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => {
+      window.removeEventListener("storage", check);
+      mo.disconnect();
+    };
+  }, []);
 
   return (
     <header
@@ -121,7 +139,6 @@ const Navbar = () => {
           <div className="hidden sm:block">
             <ThemeToggle />
           </div>
-          
           {/* Mobile/Tablet Menu */}
           <div className="lg:hidden flex items-center gap-2">
             <div className="sm:hidden">
@@ -159,7 +176,22 @@ const Navbar = () => {
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="pt-6 px-0 w-[280px] sm:w-[320px] flex flex-col bg-white/98 dark:bg-background/98 backdrop-blur-xl shadow-2xl border-l border-gray-200/60 dark:border-border/30"
+                className={cn(
+                  // FIX: use solid backgrounds for better visibility
+                  "pt-6 px-0 w-[280px] sm:w-[320px] flex flex-col",
+                  "shadow-2xl border-l border-gray-200/60 dark:border-border/30",
+                  // In light mode, use solid white. In dark, use solid dark, both with drop shadow.
+                  isDark
+                    ? "bg-background text-foreground"
+                    : "bg-white text-gray-800",
+                  "backdrop-blur-xl"
+                )}
+                style={
+                  // Optional: extra solid background for mobile menu (no transparency)
+                  !isDark
+                    ? { backgroundColor: "#fff", boxShadow: "0 4px 32px 0 rgba(0,0,0,0.13)" }
+                    : undefined
+                }
               >
                 <div className="flex items-center justify-center px-6 mb-6">
                   <button
@@ -169,21 +201,36 @@ const Navbar = () => {
                   >
                     &lt;Anuj.Garg /&gt;
                   </button>
+                  {/* ThemeToggle and close icon already present on menu button/header */}
                 </div>
-                
                 <nav className="flex flex-col gap-1 px-4 flex-1">
                   <ul className="flex flex-col gap-1">
                     {navLinks.map((link, index) => (
-                      <li 
+                      <li
                         key={link.title}
-                        style={{ 
+                        style={{
                           animationDelay: `${index * 50}ms`,
                           animation: isOpen ? 'slideInRight 0.3s ease-out forwards' : 'none'
                         }}
                       >
                         <button
                           onClick={() => handleNavClick(link.href)}
-                          className="w-full text-left rounded-xl px-4 py-3 text-base font-medium text-gray-700 dark:text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 border border-transparent hover:border-primary/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50 hover:scale-[1.02] active:scale-[0.98]"
+                          // Stronger colors and hover states for better legibility
+                          className={cn(
+                            "w-full text-left rounded-xl px-4 py-3 text-base font-medium transition-all duration-300 border border-transparent backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50",
+                            !isDark && "text-gray-800 hover:bg-primary/10 hover:text-primary",
+                            isDark && "text-foreground/80 hover:bg-primary/10 hover:text-primary",
+                            "hover:scale-[1.02] active:scale-[0.98]",
+                            link.title === "Home" && "border border-primary text-primary font-semibold bg-primary/5",
+                          )}
+                          style={
+                            // Give selected/active link more pop
+                            link.title === "Home"
+                              ? !isDark
+                                ? { background: "rgba(37,99,235,0.08)", borderColor: "#2563eb", color: "#2563eb" }
+                                : { background: "rgba(59,130,246,0.14)", borderColor: "#38bdf8", color: "#38bdf8" }
+                              : undefined
+                          }
                         >
                           {link.title}
                         </button>
@@ -201,3 +248,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
