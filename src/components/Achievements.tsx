@@ -1,9 +1,20 @@
+
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
+import { useEffect, useState } from "react";
 
 const Achievements = () => {
+  const [leetcodeImageLoaded, setLeetcodeImageLoaded] = useState(false);
+
+  // Preload LeetCode image for faster loading
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setLeetcodeImageLoaded(true);
+    img.src = "https://leetcard.jacoblin.cool/anuj3366?theme=dark&font=ABeeZee";
+  }, []);
+
   return (
     <section
       id="achievements"
@@ -21,55 +32,53 @@ const Achievements = () => {
         
         <Tabs defaultValue="gate" className="mx-auto max-w-4xl">
           <TabsList className="mx-auto mb-8 w-full justify-center">
-            <TabsTrigger value="gate">GATE Scores</TabsTrigger>
+            <TabsTrigger value="gate">GATE 2025</TabsTrigger>
             <TabsTrigger value="gfg">GeeksforGeeks</TabsTrigger>
             <TabsTrigger value="leetcode">LeetCode</TabsTrigger>
             <TabsTrigger value="certificates">Certifications</TabsTrigger>
           </TabsList>
           
           <TabsContent value="gate">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6">
               <Card className="bg-card/50 backdrop-blur-sm">
                 <CardHeader className="bg-primary/5 pb-4">
-                  <CardTitle className="text-center text-xl">
-                    GATE 2025 (CSE & IT)
+                  <CardTitle className="text-center text-2xl">
+                    GATE 2025 (Computer Science & IT)
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-6">
                   <div className="text-center">
-                    <div className="mb-4">
-                      <h3 className="text-2xl font-bold text-primary">397/1000</h3>
-                      <p className="text-foreground/70 mt-1">GATE Score</p>
+                    <div className="mb-6">
+                      <h3 className="text-4xl font-bold text-primary mb-2">397/1000</h3>
+                      <p className="text-lg text-foreground/70">GATE Score 2025</p>
                     </div>
                     
-                    <p className="text-foreground/80">
-                      Strong performance demonstrating solid understanding of computer science fundamentals and problem-solving capabilities.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="bg-card/50 backdrop-blur-sm">
-                <CardHeader className="bg-primary/5 pb-4">
-                  <CardTitle className="text-center text-xl">
-                    GATE 2024 (CSE & IT)
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-6">
-                  <div className="text-center">
-                    <div className="mb-4">
-                      <h3 className="text-2xl font-bold text-primary">33.79/100</h3>
-                      <p className="text-foreground/70 mt-1">GATE Score</p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                      <div className="rounded-lg bg-green-50 dark:bg-green-900/20 p-4 border border-green-200 dark:border-green-800">
+                        <p className="text-sm text-green-700 dark:text-green-300">Marks Obtained</p>
+                        <p className="text-2xl font-bold text-green-600 dark:text-green-400">33.79/100</p>
+                      </div>
+                      
+                      <div className="rounded-lg bg-blue-50 dark:bg-blue-900/20 p-4 border border-blue-200 dark:border-blue-800">
+                        <p className="text-sm text-blue-700 dark:text-blue-300">All India Rank</p>
+                        <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">15205</p>
+                      </div>
+                      
+                      <div className="rounded-lg bg-purple-50 dark:bg-purple-900/20 p-4 border border-purple-200 dark:border-purple-800">
+                        <p className="text-sm text-purple-700 dark:text-purple-300">Qualifying Marks</p>
+                        <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">29.2/100</p>
+                      </div>
                     </div>
                     
-                    <div className="rounded-lg bg-primary/5 p-3 mb-4">
-                      <p className="text-sm text-foreground/70">Qualifying Cutoff</p>
-                      <p className="text-lg font-bold text-green-500">29.2/100</p>
+                    <div className="rounded-lg bg-primary/5 p-6">
+                      <h4 className="text-lg font-semibold mb-2 text-primary">Achievement Highlights</h4>
+                      <ul className="text-left text-foreground/80 space-y-2">
+                        <li>• Successfully qualified GATE 2025 in Computer Science & Information Technology</li>
+                        <li>• Scored above the qualifying cutoff, demonstrating strong CS fundamentals</li>
+                        <li>• Comprehensive knowledge in Data Structures, Algorithms, and System Design</li>
+                        <li>• Strong performance in competitive examination with national-level ranking</li>
+                      </ul>
                     </div>
-                    
-                    <p className="text-foreground/80">
-                      Qualified above the cutoff, showcasing technical competency and analytical skills.
-                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -90,6 +99,7 @@ const Achievements = () => {
                       src="https://media.geeksforgeeks.org/wp-content/uploads/20210915115837/gfg3.png"
                       alt="GeeksforGeeks Logo"
                       className="mx-auto mb-4 w-32"
+                      loading="lazy"
                     />
                     <a
                       href="https://auth.geeksforgeeks.org/user/anujgarg3366"
@@ -173,6 +183,7 @@ const Achievements = () => {
                   src="https://leetcode.com/static/images/LeetCode_logo_rvs.png"
                   alt="LeetCode Logo"
                   className="mb-6 w-40"
+                  loading="lazy"
                 />
                 
                 <a
@@ -184,14 +195,23 @@ const Achievements = () => {
                   @anuj3366
                 </a>
                 
-                <img
-                  src="https://leetcard.jacoblin.cool/anuj3366?theme=dark&font=ABeeZee"
-                  alt="LeetCode Stats"
-                  className="w-full max-w-2xl rounded-lg"
-                />
+                <div className="w-full max-w-2xl">
+                  {leetcodeImageLoaded ? (
+                    <img
+                      src="https://leetcard.jacoblin.cool/anuj3366?theme=dark&font=ABeeZee"
+                      alt="Anuj Garg LeetCode Statistics showing problem-solving progress and achievements"
+                      className="w-full rounded-lg shadow-lg"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-64 bg-primary/5 rounded-lg flex items-center justify-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                    </div>
+                  )}
+                </div>
                 
                 <p className="mt-4 text-center text-foreground/80">
-                  Consistent problem-solving on LeetCode, focusing on DS & Algorithm mastery
+                  Consistent problem-solving journey on LeetCode by <strong>Anuj Garg</strong>, focusing on mastering Data Structures & Algorithms
                 </p>
               </CardContent>
             </Card>
@@ -201,10 +221,10 @@ const Achievements = () => {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <Card className="bg-card/50 backdrop-blur-sm">
                 <CardHeader>
-                  <CardTitle>GATE 2025 (CSE & IT)</CardTitle>
+                  <CardTitle>GATE 2025 Qualification</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground/80">Qualified with a score of 397/1000, demonstrating strong fundamentals in computer science concepts and competitive problem-solving.</p>
+                  <p className="text-foreground/80">Qualified GATE 2025 with a score of 397/1000 in Computer Science & Information Technology, demonstrating strong fundamentals and competitive problem-solving skills.</p>
                 </CardContent>
               </Card>
               
@@ -213,7 +233,7 @@ const Achievements = () => {
                   <CardTitle>AWS Academy Graduate</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground/80">AWS Academy Cloud Foundations certification, covering essential AWS services and cloud computing concepts.</p>
+                  <p className="text-foreground/80">AWS Academy Cloud Foundations certification, covering essential AWS services, cloud computing concepts, and modern cloud architecture patterns.</p>
                 </CardContent>
               </Card>
               
@@ -222,7 +242,7 @@ const Achievements = () => {
                   <CardTitle>DSA Specialization</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground/80">Comprehensive data structures and algorithms specialization covering advanced topics in algorithmic design and analysis.</p>
+                  <p className="text-foreground/80">Comprehensive specialization in Data Structures and Algorithms, covering advanced algorithmic design, complexity analysis, and competitive programming techniques.</p>
                 </CardContent>
               </Card>
               
@@ -231,7 +251,7 @@ const Achievements = () => {
                   <CardTitle>Software Engineering</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground/80">Software engineering specialization covering software design principles, testing methodologies, and project management.</p>
+                  <p className="text-foreground/80">Software engineering specialization covering modern development practices, testing methodologies, agile project management, and scalable system design.</p>
                 </CardContent>
               </Card>
             </div>
