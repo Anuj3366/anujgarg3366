@@ -10,7 +10,7 @@ interface SectionHeaderProps {
 
 const SectionHeader = ({ badge, title, description }: SectionHeaderProps) => {
   return (
-    <div className="text-center mb-8 sm:mb-12 lg:mb-16 relative z-20">
+    <div className="text-center mb-8 sm:mb-12 lg:mb-16 relative z-20 bg-background/80 backdrop-blur-sm rounded-lg p-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
