@@ -48,9 +48,10 @@ const Navbar = () => {
     <header
       className={cn(
         "fixed top-0 z-[100] w-full transition-all duration-300 ease-in-out",
-        "bg-white/95 dark:bg-background/95 backdrop-blur-xl",
-        "border-b border-border/50 shadow-lg",
-        isScrolled ? "py-2 shadow-xl" : "py-3 lg:py-4"
+        "bg-white/98 dark:bg-background/98 backdrop-blur-xl",
+        "border-b border-gray-200/80 dark:border-border/50",
+        "shadow-sm dark:shadow-lg",
+        isScrolled ? "py-2 shadow-md dark:shadow-xl" : "py-3 lg:py-4"
       )}
     >
       <div className="container mx-auto flex max-w-7xl items-center justify-between px-3 sm:px-4 lg:px-6">
@@ -76,7 +77,7 @@ const Navbar = () => {
               <li key={link.title}>
                 <button
                   onClick={() => handleNavClick(link.href)}
-                  className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium group py-2 px-3 xl:px-4 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg text-sm xl:text-base"
+                  className="relative text-gray-700 dark:text-foreground/80 hover:text-primary transition-all duration-300 font-medium group py-2 px-3 xl:px-4 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg text-sm xl:text-base"
                 >
                   {link.title}
                   <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 scale-x-0 group-hover:scale-x-100"></span>
@@ -100,19 +101,25 @@ const Navbar = () => {
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <button
-                  className="p-2 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className={cn(
+                    "p-2 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary/50",
+                    "bg-white/90 dark:bg-background/50 backdrop-blur-sm",
+                    "border border-gray-300/60 dark:border-border/50",
+                    "hover:border-primary/50 hover:bg-white dark:hover:bg-background/70",
+                    "shadow-sm dark:shadow-none"
+                  )}
                   aria-label={isOpen ? "Close menu" : "Open menu"}
                 >
                   {isOpen ? (
-                    <X size={20} className="text-foreground/80" />
+                    <X size={20} className="text-gray-700 dark:text-foreground/80" />
                   ) : (
-                    <Menu size={20} className="text-foreground/80" />
+                    <Menu size={20} className="text-gray-700 dark:text-foreground/80" />
                   )}
                 </button>
               </SheetTrigger>
               <SheetContent
                 side="right"
-                className="pt-6 px-0 w-[280px] sm:w-[320px] flex flex-col bg-white/98 dark:bg-background/98 backdrop-blur-xl shadow-2xl border-l border-border/30"
+                className="pt-6 px-0 w-[280px] sm:w-[320px] flex flex-col bg-white/99 dark:bg-background/98 backdrop-blur-xl shadow-2xl border-l border-gray-200/60 dark:border-border/30"
               >
                 <div className="flex items-center justify-center px-6 mb-6">
                   <button
@@ -130,7 +137,7 @@ const Navbar = () => {
                       <li key={link.title}>
                         <button
                           onClick={() => handleNavClick(link.href)}
-                          className="w-full text-left rounded-xl px-4 py-3 text-base font-medium text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 border border-transparent hover:border-primary/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                          className="w-full text-left rounded-xl px-4 py-3 text-base font-medium text-gray-700 dark:text-foreground/80 hover:bg-primary/10 hover:text-primary transition-all duration-300 border border-transparent hover:border-primary/20 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
                         >
                           {link.title}
                         </button>
