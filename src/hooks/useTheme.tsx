@@ -111,7 +111,7 @@ export const useTheme = () => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
     const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-      const newSystemTheme = e.matches ? 'dark' : 'light';
+      const newSystemTheme: ResolvedTheme = e.matches ? 'dark' : 'light';
       
       setThemeState(prev => {
         const newState = {
