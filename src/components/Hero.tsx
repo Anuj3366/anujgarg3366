@@ -1,8 +1,8 @@
-
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import HeroBackground from "./HeroBackground";
+import MacXcodeImage from "./MacXcodeImage";
 
 // Use custom "A" avatar SVG for both Hero and favicon
 const AVATAR_URL = "/icons/avatar-a.svg";
@@ -77,6 +77,9 @@ const Hero = () => {
             }}
           />
         </motion.div>
+
+        {/* MacBook with Xcode image */}
+        <MacXcodeImage />
 
         {/* Headline */}
         <motion.h1
@@ -157,4 +160,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
