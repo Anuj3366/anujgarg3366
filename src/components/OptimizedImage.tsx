@@ -1,68 +1,76 @@
 
-import React, { memo, useCallback, useState, useMemo } from 'react';
+import { memo, useState, useCallback } from 'react';
+import { cn } from '@/lib/utils';
 
 interface OptimizedImageProps {
   src: string;
   alt: string;
   className?: string;
-  loading?: 'lazy' | 'eager';
-  fetchPriority?: 'high' | 'low' | 'auto';
-  onLoad?: () => void;
-  onError?: () => void;
   width?: number;
   height?: number;
   priority?: boolean;
-  placeholder?: string;
+  sizes?: string;
+  onLoad?: () => void;
+  onError?: () => void;
 }
 
 const OptimizedImage = memo<OptimizedImageProps>(({
   src,
   alt,
-  className = '',
-  loading = 'lazy',
-  fetchPriority = 'auto',
-  onLoad,
-  onError,
+  className,
   width,
   height,
-  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PC9zdmc+'
+  priority = false,
+  sizes = "100vw",
+  onLoad,
+  onError
 }) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   const handleLoad = useCallback(() => {
-    setImageLoaded(true);
+    setIsLoaded(true);
     onLoad?.();
   }, [onLoad]);
 
   const handleError = useCallback(() => {
-    setImageError(true);
+    setHasError(true);
     onError?.();
   }, [onError]);
 
-  const imageProps = useMemo(() => ({
-    src: imageError ? placeholder : src,
-    alt,
-    className: `${className} ${imageLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`,
-    loading,
-    fetchPriority,
-    onLoad: handleLoad,
-    onError: handleError,
-    ...(width && { width }),
-    ...(height && { height }),
-    decoding: 'async' as const,
-    'data-loaded': imageLoaded
-  }), [src, alt, className, loading, fetchPriority, handleLoad, handleError, width, height, imageLoaded, imageError, placeholder]);
+  if (hasError) {
+    return (
+      <div className={cn("bg-muted flex items-center justify-center", className)}>
+        <span className="text-muted-foreground text-sm">Failed to load image</span>
+      </div>
+    );
+  }
 
   return (
-    <div className="relative">
-      {!imageLoaded && !imageError && (
-        <div 
-          className={`absolute inset-0 bg-muted animate-pulse ${className}`}
-          style={{ width, height }}
-        />
+    <div className={cn("relative overflow-hidden", className)}>
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-muted animate-pulse" />
       )}
-      <img {...imageProps} />
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        sizes={sizes}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        onLoad={handleLoad}
+        onError={handleError}
+        className={cn(
+          "transition-opacity duration-300",
+          isLoaded ? "opacity-100" : "opacity-0",
+          className
+        )}
+        style={{
+          maxWidth: "100%",
+          height: "auto"
+        }}
+      />
     </div>
   );
 });
