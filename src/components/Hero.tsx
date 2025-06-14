@@ -44,28 +44,37 @@ const Hero = () => {
         initial="hidden"
         animate="visible"
         className="relative z-30 max-w-3xl w-full px-4 flex flex-col items-center bg-white/80 dark:bg-black/60 backdrop-blur-glass rounded-2xl shadow-lg mt-3 mb-6 mx-auto"
-        // Ensures content is above everything visually, adds subtle backdrop & border
         style={{
           boxShadow: "0 4px 32px 4px rgba(76, 110, 192, 0.11)",
         }}
       >
         {/* Avatar with glow */}
         <motion.div
-          className="relative mb-6 sm:mb-8"
+          className="relative mb-6 sm:mb-8 flex flex-col items-center"
           variants={textVariants}
         >
           <motion.img
             src={AVATAR_URL}
             alt="A Avatar"
-            className="mx-auto rounded-full shadow-lg border-4 border-primary/40 w-24 h-24 sm:w-36 sm:h-36 object-cover bg-white"
+            className="mx-auto rounded-full shadow-lg border-4 border-primary/40 w-24 h-24 sm:w-36 sm:h-36 object-cover bg-white animate-fade-in"
             animate={avatarAnimation}
             style={{
-              background: "#f8fafc"
+              background: "#f8fafc",
+            }}
+            loading="eager"
+            width={144}
+            height={144}
+            // Ensures only one avatar displayed; handles broken SVG gracefully
+            onError={(e) => {
+              e.currentTarget.src =
+                "https://ui-avatars.com/api/?name=A&background=DDDDDD&color=222222&size=144";
             }}
           />
-          <div className="absolute inset-0 rounded-full blur-2xl opacity-40 pointer-events-none"
+          <div
+            className="absolute inset-0 rounded-full blur-2xl opacity-40 pointer-events-none"
             style={{
-              background: "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)"
+              background:
+                "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)",
             }}
           />
         </motion.div>
@@ -111,7 +120,12 @@ const Hero = () => {
           className="hidden sm:flex items-center justify-center gap-6 mb-8"
           variants={textVariants}
         >
-          <Button asChild variant="outline" size="icon" className="h-12 w-12 border-foreground/30 hover:border-primary shadow-lg group">
+          <Button
+            asChild
+            variant="outline"
+            size="icon"
+            className="h-12 w-12 border-foreground/30 hover:border-primary shadow-lg group"
+          >
             <a
               href="https://github.com/Anuj3366"
               target="_blank"
@@ -121,7 +135,12 @@ const Hero = () => {
               <Github className="h-5 w-5 text-foreground/70 group-hover:text-primary transition-colors" />
             </a>
           </Button>
-          <Button asChild variant="outline" size="icon" className="h-12 w-12 border-foreground/30 hover:border-primary shadow-lg group">
+          <Button
+            asChild
+            variant="outline"
+            size="icon"
+            className="h-12 w-12 border-foreground/30 hover:border-primary shadow-lg group"
+          >
             <a
               href="https://www.linkedin.com/in/anujgarg3366/"
               target="_blank"
@@ -133,14 +152,24 @@ const Hero = () => {
           </Button>
         </motion.div>
 
-        <motion.div className="flex flex-col sm:flex-row items-center gap-3 mt-2" variants={textVariants}>
-          <Button asChild className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold shadow-md hover:shadow-xl transition duration-200 ring-1 ring-primary/30 hover:ring-2">
+        <motion.div
+          className="flex flex-col sm:flex-row items-center gap-3 mt-2"
+          variants={textVariants}
+        >
+          <Button
+            asChild
+            className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold shadow-md hover:shadow-xl transition duration-200 ring-1 ring-primary/30 hover:ring-2"
+          >
             <a href="#contact">
               Contact Me
               <ArrowRight className="inline-block ml-2 h-5 w-5" />
             </a>
           </Button>
-          <Button asChild variant="outline" className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold border-foreground/30 shadow-md hover:border-primary hover:text-primary">
+          <Button
+            asChild
+            variant="outline"
+            className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold border-foreground/30 shadow-md hover:border-primary hover:text-primary"
+          >
             <a
               href="https://drive.google.com/file/d/1HUYtjfjhODx6nY5aCk99P0xdFW9myDSv/view"
               target="_blank"

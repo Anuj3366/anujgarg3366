@@ -2,7 +2,8 @@
 import React from "react";
 import OptimizedImage from "./OptimizedImage";
 
-const MACBOOK_IMAGE = "/icons/mac-xcode.png";
+// Replace with a real working image (Unsplash placeholder for now)
+const MACBOOK_IMAGE = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80";
 
 interface MacXcodeImageProps {
   className?: string;
@@ -18,12 +19,7 @@ const MacXcodeImage: React.FC<MacXcodeImageProps> = ({ className = "" }) => {
         width={400}
         height={250}
         priority={false}
-        // Fallback render for error
-        onError={() => {
-          // fallback is handled by OptimizedImage, no-op handler for suppressing browser error
-        }}
       />
-      {/* In case the image fails, OptimizedImage will display its own fallback UI */}
     </div>
   );
 };
