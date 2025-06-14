@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect, lazy } from "react";
+import { motion } from "framer-motion"; // Import motion
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -17,6 +17,13 @@ const Projects = lazy(() => import("@/components/Projects"));
 const Achievements = lazy(() => import("@/components/Achievements"));
 const Contact = lazy(() => import("@/components/Contact"));
 const Footer = lazy(() => import("@/components/Footer"));
+
+const sectionAnimationProps = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut" },
+  viewport: { once: true, amount: 0.2 }, // Trigger when 20% of the element is in view
+};
 
 const Index: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -91,34 +98,48 @@ const Index: React.FC = () => {
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Hero />
           
-          <LazyWrapper minHeight="300px">
-            <About />
-          </LazyWrapper>
+          <motion.div {...sectionAnimationProps}>
+            <LazyWrapper minHeight="300px">
+              <About />
+            </LazyWrapper>
+          </motion.div>
           
-          <LazyWrapper minHeight="400px">
-            <Experience />
-          </LazyWrapper>
+          <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.1 }}>
+            <LazyWrapper minHeight="400px">
+              <Experience />
+            </LazyWrapper>
+          </motion.div>
           
-          <LazyWrapper minHeight="300px">
-            <Skills />
-          </LazyWrapper>
+          <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.2 }}>
+            <LazyWrapper minHeight="300px">
+              <Skills />
+            </LazyWrapper>
+          </motion.div>
           
-          <LazyWrapper minHeight="500px">
-            <Projects />
-          </LazyWrapper>
+          <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.1 }}>
+            <LazyWrapper minHeight="500px">
+              <Projects />
+            </LazyWrapper>
+          </motion.div>
           
-          <LazyWrapper minHeight="400px">
-            <Achievements />
-          </LazyWrapper>
+          <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.2 }}>
+            <LazyWrapper minHeight="400px">
+              <Achievements />
+            </LazyWrapper>
+          </motion.div>
           
-          <LazyWrapper minHeight="300px">
-            <Contact />
-          </LazyWrapper>
+          <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.1 }}>
+            <LazyWrapper minHeight="300px">
+              <Contact />
+            </LazyWrapper>
+          </motion.div>
         </div>
         
-        <LazyWrapper minHeight="200px">
-          <Footer />
-        </LazyWrapper>
+        <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.2 }}>
+          <LazyWrapper minHeight="200px">
+            <Footer />
+          </LazyWrapper>
+        </motion.div>
         
         <ScrollToTop />
       </main>
