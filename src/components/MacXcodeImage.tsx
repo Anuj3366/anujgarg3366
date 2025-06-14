@@ -36,8 +36,6 @@ const MacXcodeImage = memo<MacXcodeImageProps>(({ className = "", size = 120 }) 
         width={size}
         height={size}
         priority={true}
-        loading="eager"
-        fetchPriority="high"
       />
     </div>
   );
