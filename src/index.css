@@ -311,6 +311,9 @@ a:focus-visible, button:focus-visible {
 
 /* Micro-interaction utility classes and focused a11y improvements */
 @layer utilities {
+  .drop-shadow-glow {
+    filter: drop-shadow(0 0 7px hsl(var(--primary) / 0.5));
+  }
   .hover-scale {
     @apply transition-transform duration-200 hover:scale-[1.045] active:scale-95;
   }
