@@ -1,5 +1,6 @@
+
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Linkedin } from "lucide-react";
+import { ArrowRight, Github, Linkedin, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MacXcodeImage from "./MacXcodeImage";
 import HeroBackground from "./HeroBackground";
@@ -9,86 +10,101 @@ const Hero = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.13, delayChildren: 0.1 },
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
     },
   };
 
   const textVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring", stiffness: 100, damping: 20 },
+      transition: { type: "spring", stiffness: 120, damping: 25 },
     },
   };
 
   return (
     <section
       id="home"
-      className="relative flex flex-col items-center justify-center min-h-screen py-14 sm:py-24 md:py-32 text-center overflow-hidden bg-site-gradient"
+      className="relative flex flex-col items-center justify-center min-h-screen py-20 sm:py-32 text-center overflow-hidden"
       style={{ zIndex: 1 }}
     >
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-30 max-w-3xl w-full px-8 py-8 sm:px-12 sm:py-12 flex flex-col items-center bg-white/90 dark:bg-black/65 backdrop-blur-glass rounded-3xl shadow-2xl mt-8 mb-12 sm:mt-14 sm:mb-20 mx-auto ring-2 ring-primary/15"
+        className="relative z-30 max-w-4xl w-full px-6 py-12 sm:px-16 sm:py-16 flex flex-col items-center backdrop-blur-xl bg-white/15 dark:bg-black/25 rounded-3xl shadow-2xl border border-white/20 dark:border-white/10 mx-auto"
         style={{
-          boxShadow:
-            "0 8px 40px 10px rgba(80,130,220,0.16), 0 2px 8px 0 rgba(76,110,192,0.1)",
+          background: "linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 100%)",
+          backdropFilter: "blur(20px)",
+          boxShadow: "0 25px 60px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
         }}
       >
-        {/* MacBook image as the avatar */}
+        {/* Profile Avatar */}
         <motion.div
-          className="relative mb-6 sm:mb-8 flex flex-col items-center"
+          className="relative mb-8 sm:mb-10 flex flex-col items-center"
           variants={textVariants}
         >
-          <MacXcodeImage />
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/30 to-accent/30 rounded-2xl blur-lg animate-pulse"></div>
+            <MacXcodeImage />
+          </div>
         </motion.div>
 
-        {/* Headline */}
+        {/* Main Heading */}
         <motion.h1
-          className="text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-blue-600 via-fuchsia-600 to-cyan-400 bg-clip-text text-transparent mb-2 sm:mb-3 drop-shadow-glow"
+          className="text-4xl sm:text-6xl md:text-7xl font-black leading-tight tracking-tight mb-4 sm:mb-6"
           variants={textVariants}
           style={{
-            WebkitTextStroke: "1px #2563eb44",
-            textShadow: "0 2px 20px #fff4, 0 8px 32px #2563eb22",
+            background: "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 50%, hsl(var(--primary)) 100%)",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            textShadow: "0 0 40px hsl(var(--primary) / 0.3)",
           }}
         >
           Anuj Garg
         </motion.h1>
 
-        {/* Short bio */}
+        {/* Subtitle */}
         <motion.div
-          className="text-base sm:text-xl md:text-2xl font-medium text-foreground mb-4 sm:mb-5"
+          className="text-lg sm:text-2xl md:text-3xl font-semibold text-foreground/90 mb-6 sm:mb-8 leading-relaxed"
           variants={textVariants}
         >
-          iOS Developer, Full-Stack Developer &amp; Problem Solver
-        </motion.div>
-
-        {/* Badges */}
-        <motion.div
-          className="hidden sm:flex flex-wrap items-center justify-center gap-2 mb-6"
-          variants={textVariants}
-        >
-          <span className="rounded-full bg-accent/40 border border-accent/80 px-5 py-2 text-xs font-semibold text-accent-foreground shadow hover:bg-accent/60 transition cursor-default">
-            B.E. CSE @ Chitkara Univ. (9.38 CGPA)
-          </span>
-          <span className="rounded-full bg-accent/30 border border-accent/50 px-5 py-2 text-xs font-semibold text-accent-foreground shadow hover:bg-accent/50 transition cursor-default">
-            Tech Intern @ OLX
+          <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+            iOS Developer • Full-Stack Engineer • Problem Solver
           </span>
         </motion.div>
 
-        {/* Social icons */}
+        {/* Enhanced Status Badges */}
         <motion.div
-          className="hidden sm:flex items-center justify-center gap-6 mb-8"
+          className="flex flex-wrap items-center justify-center gap-3 mb-8 sm:mb-10"
+          variants={textVariants}
+        >
+          <div className="group relative overflow-hidden rounded-full bg-gradient-to-r from-emerald-500/20 to-blue-500/20 border border-emerald-500/30 px-6 py-3 backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <span className="relative text-sm font-bold text-emerald-700 dark:text-emerald-300">
+              🎓 B.E. CSE @ Chitkara Univ. (9.38 CGPA)
+            </span>
+          </div>
+          <div className="group relative overflow-hidden rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30 px-6 py-3 backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <span className="relative text-sm font-bold text-purple-700 dark:text-purple-300">
+              💼 Tech Intern @ OLX
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Social Links */}
+        <motion.div
+          className="flex items-center justify-center gap-4 mb-8 sm:mb-10"
           variants={textVariants}
         >
           <Button
             asChild
             variant="ghost"
             size="icon"
-            className="h-12 w-12 border-foreground/30 hover:border-primary shadow-xl ring-1 ring-primary/10 hover:ring-primary/40 group bg-white/80 dark:bg-black/30"
+            className="h-14 w-14 rounded-full bg-white/20 dark:bg-black/20 backdrop-blur-sm border border-white/30 hover:border-primary/50 shadow-lg hover:shadow-xl transition-all duration-300 group hover:scale-105"
           >
             <a
               href="https://github.com/Anuj3366"
@@ -96,14 +112,14 @@ const Hero = () => {
               rel="noopener noreferrer"
               aria-label="GitHub"
             >
-              <Github className="h-5 w-5 text-foreground/70 group-hover:text-primary transition-colors" />
+              <Github className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
             </a>
           </Button>
           <Button
             asChild
             variant="ghost"
             size="icon"
-            className="h-12 w-12 border-foreground/30 hover:border-primary shadow-xl ring-1 ring-primary/10 hover:ring-primary/40 group bg-white/80 dark:bg-black/30"
+            className="h-14 w-14 rounded-full bg-white/20 dark:bg-black/20 backdrop-blur-sm border border-white/30 hover:border-primary/50 shadow-lg hover:shadow-xl transition-all duration-300 group hover:scale-105"
           >
             <a
               href="https://www.linkedin.com/in/anujgarg3366/"
@@ -111,35 +127,38 @@ const Hero = () => {
               rel="noopener noreferrer"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5 text-foreground/70 group-hover:text-primary transition-colors" />
+              <Linkedin className="h-6 w-6 text-foreground/70 group-hover:text-primary transition-colors" />
             </a>
           </Button>
         </motion.div>
 
+        {/* Enhanced CTA Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center gap-3 mt-2"
+          className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-md"
           variants={textVariants}
         >
           <Button
             asChild
-            className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold shadow-lg hover:shadow-xl transition duration-200 ring-2 ring-primary/40 hover:ring-primary/80 bg-gradient-to-br from-primary via-blue-500 to-accent text-white"
+            className="w-full sm:flex-1 px-8 py-4 text-base font-bold rounded-full bg-gradient-to-r from-primary via-blue-600 to-accent text-white shadow-xl hover:shadow-2xl transition-all duration-300 border-0 hover:scale-105 hover:from-primary/90 hover:to-accent/90"
           >
-            <a href="#contact">
+            <a href="#contact" className="flex items-center justify-center gap-2">
               Contact Me
-              <ArrowRight className="inline-block ml-2 h-5 w-5" />
+              <ArrowRight className="h-5 w-5" />
             </a>
           </Button>
           <Button
             asChild
             variant="outline"
-            className="px-7 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-bold border-foreground/30  hover:border-primary hover:text-primary bg-white/70 dark:bg-black/20 backdrop-blur ring-1 ring-muted/40"
+            className="w-full sm:flex-1 px-8 py-4 text-base font-bold rounded-full bg-white/10 dark:bg-black/10 backdrop-blur-sm border-2 border-white/30 hover:border-primary/70 hover:bg-white/20 dark:hover:bg-black/20 transition-all duration-300 hover:scale-105"
           >
             <a
               href="https://drive.google.com/file/d/1HUYtjfjhODx6nY5aCk99P0xdFW9myDSv/view"
               target="_blank"
               rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2"
             >
-              View Resume
+              <Download className="h-5 w-5" />
+              Resume
             </a>
           </Button>
         </motion.div>
