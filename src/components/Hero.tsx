@@ -1,7 +1,7 @@
+
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import HeroBackground from "./HeroBackground";
 import MacXcodeImage from "./MacXcodeImage";
 
 // Use custom "A" avatar SVG for both Hero and favicon
@@ -38,18 +38,31 @@ const Hero = () => {
       className="relative flex flex-col items-center justify-center min-h-screen py-14 sm:py-24 md:py-32 text-center overflow-hidden"
       style={{ zIndex: 1 }}
     >
-      <HeroBackground />
-
-      <motion.div
-        className="absolute inset-0 z-[2]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.8 }}
-        style={{
-          background:
-            "radial-gradient(circle at 60% 90%, rgba(80,255,228,0.09) 0%, transparent 60%),radial-gradient(circle at 30% 10%, rgba(99,102,241,0.11) 0%, transparent 60%)",
-        }}
-      />
+      {/* Modern soft blurred gradient background */}
+      <div
+        className="absolute inset-0 -z-10 pointer-events-none"
+        aria-hidden="true"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-fuchsia-100 to-cyan-100 dark:from-blue-900 dark:via-fuchsia-900 dark:to-cyan-900 opacity-90" />
+        <div
+          className="absolute left-1/2 top-0 -translate-x-1/2 blur-2xl opacity-80"
+          style={{
+            width: "80vw",
+            height: "60vh",
+            background:
+              "radial-gradient(ellipse at top, #80eaff88 0%, #b5f3fc11 80%)"
+          }}
+        ></div>
+        <div
+          className="absolute right-[12%] bottom-0 blur-2xl opacity-70"
+          style={{
+            width: "32vw",
+            height: "30vh",
+            background:
+              "radial-gradient(circle, #a78bfa66 0%, #818cf888 70%, transparent 100%)"
+          }}
+        ></div>
+      </div>
 
       <motion.div
         variants={containerVariants}
@@ -160,3 +173,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
