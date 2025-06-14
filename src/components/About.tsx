@@ -20,9 +20,9 @@ const About = () => {
       >
         <SectionHeader
           badge={
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/10 border border-accent/30 mb-4 sm:mb-6">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/20 border border-accent/40 mb-4 sm:mb-6">
               <User className="h-3 w-3 sm:h-4 sm:w-4 text-accent" />
-              <span className="text-xs sm:text-sm font-semibold text-accent">Get to Know Me</span>
+              <span className="text-xs sm:text-sm font-bold text-accent">Get to Know Me</span>
             </div>
           }
           title="About Me"
@@ -74,14 +74,14 @@ const About = () => {
                 
                 <div className="text-center w-full">
                   <motion.div
-                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 mb-3 sm:mb-4"
+                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/40 mb-3 sm:mb-4"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
                     viewport={{ once: true }}
                   >
                     <Target className="h-3 w-3 text-primary" />
-                    <span className="text-xs font-semibold text-primary">Mission & Goals</span>
+                    <span className="text-xs font-bold text-primary">Mission & Goals</span>
                   </motion.div>
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}

@@ -80,14 +80,16 @@ const Hero = memo(() => {
           Anuj Garg
         </motion.h1>
 
-        {/* Subtitle */}
+        {/* Enhanced Subtitle with Better Contrast */}
         <motion.div
-          className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground/90 mb-4 sm:mb-6 lg:mb-8 leading-relaxed px-2 max-w-3xl"
+          className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold mb-4 sm:mb-6 lg:mb-8 leading-relaxed px-2 max-w-3xl"
           variants={textVariants}
         >
-          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-            iOS Developer • Full-Stack Engineer • Problem Solver
+          <span className="text-foreground/95">iOS Developer • </span>
+          <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent font-bold">
+            Full-Stack Engineer
           </span>
+          <span className="text-foreground/95"> • Problem Solver</span>
         </motion.div>
 
         {/* Enhanced Status Badges */}

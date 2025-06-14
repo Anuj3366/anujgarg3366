@@ -96,7 +96,7 @@ const MobileMenu = ({ navLinks, activeSection, onNavClick }: MobileMenuProps) =>
         <SheetContent
           side="right"
           className={cn(
-            "pt-6 px-0 w-[280px] sm:w-[320px] flex flex-col",
+            "pt-20 px-0 w-[280px] sm:w-[320px] flex flex-col",
             "shadow-2xl border-l border-gray-200/60 dark:border-border/30",
             isDark
               ? "bg-background text-foreground"

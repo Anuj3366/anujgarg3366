@@ -10,13 +10,17 @@ interface SectionHeaderProps {
 
 const SectionHeader = ({ badge, title, description }: SectionHeaderProps) => {
   return (
-    <div className="text-center mb-8 sm:mb-12 lg:mb-16 relative z-10">
+    <div className="text-center mb-8 sm:mb-12 lg:mb-16 relative z-20">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1 }}
         viewport={{ once: true, margin: "-50px" }}
-        className="sticky top-20 bg-background/80 backdrop-blur-sm py-4 rounded-lg border border-border/20"
+        className="sticky top-16 sm:top-20 bg-background/95 dark:bg-background/95 backdrop-blur-md py-4 px-4 rounded-xl border border-border/30 shadow-lg z-20 mb-6"
+        style={{
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+        }}
       >
         {badge}
       </motion.div>
@@ -32,7 +36,7 @@ const SectionHeader = ({ badge, title, description }: SectionHeaderProps) => {
       </motion.h2>
       
       <motion.p 
-        className="text-responsive-base text-foreground/80 max-w-2xl mx-auto leading-relaxed"
+        className="text-responsive-base text-foreground/90 max-w-2xl mx-auto leading-relaxed"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
