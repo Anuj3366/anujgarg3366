@@ -1,8 +1,10 @@
+
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useIsMobile } from "@/hooks/use-mobile";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Navbar = () => {
   const isMobile = useIsMobile();
@@ -42,7 +44,7 @@ const Navbar = () => {
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:block">
+        <nav className="hidden md:flex items-center gap-4">
           <ul className="flex space-x-8">
             {navLinks.map((link) => (
               <li key={link.title}>
@@ -55,10 +57,17 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+          <div className="ml-6">
+            <ThemeToggle />
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center">
+          {/* Theme toggle visible in navbar (mobile) */}
+          <div className="mr-2">
+            <ThemeToggle />
+          </div>
           <Sheet>
             <SheetTrigger asChild>
               <button
@@ -96,6 +105,9 @@ const Navbar = () => {
                       </a>
                     </li>
                   ))}
+                  <li className="mt-3 flex md:hidden">
+                    <ThemeToggle />
+                  </li>
                 </ul>
               </nav>
             </SheetContent>
