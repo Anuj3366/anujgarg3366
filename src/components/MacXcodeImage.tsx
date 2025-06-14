@@ -7,21 +7,32 @@ const MACBOOK_IMAGE = "https://images.unsplash.com/photo-1498050108023-c5249f4df
 
 interface MacXcodeImageProps {
   className?: string;
+  size?: number; // allow overriding size if needed in future
 }
 
-const MacXcodeImage: React.FC<MacXcodeImageProps> = ({ className = "" }) => {
+const MacXcodeImage: React.FC<MacXcodeImageProps> = ({ className = "", size = 144 }) => {
   return (
-    <div className={`w-full flex justify-center mt-6 sm:mt-10 ${className}`}>
+    <div className={`flex justify-center items-center ${className}`}>
       <OptimizedImage
         src={MACBOOK_IMAGE}
         alt="MacBook showing Xcode with code"
-        className="rounded-xl shadow-2xl border border-black/10 max-w-xs sm:max-w-sm md:max-w-md w-full h-auto object-cover animate-fade-in"
-        width={400}
-        height={250}
-        priority={false}
+        className="rounded-full shadow-lg border-4 border-primary/40 bg-white object-cover"
+        width={size}
+        height={size}
+        priority={true}
+      />
+      {/* Subtle animated glow behind avatar */}
+      <div
+        className="absolute inset-0 rounded-full blur-2xl opacity-40 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)",
+          zIndex: -1,
+        }}
       />
     </div>
   );
 };
 
 export default MacXcodeImage;
+

@@ -1,11 +1,8 @@
-
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MacXcodeImage from "./MacXcodeImage";
 import HeroBackground from "./HeroBackground";
-
-const AVATAR_URL = "/icons/avatar-a.svg";
 
 const Hero = () => {
   const containerVariants = {
@@ -25,12 +22,6 @@ const Hero = () => {
     },
   };
 
-  const avatarAnimation = {
-    rotate: [0, 10, -10, 0],
-    scale: [1, 1.08, 0.95, 1],
-    transition: { duration: 2.5, repeat: Infinity, ease: "easeInOut" },
-  };
-
   return (
     <section
       id="home"
@@ -48,39 +39,13 @@ const Hero = () => {
           boxShadow: "0 4px 32px 4px rgba(76, 110, 192, 0.11)",
         }}
       >
-        {/* Avatar with glow */}
+        {/* MacBook image as the avatar */}
         <motion.div
           className="relative mb-6 sm:mb-8 flex flex-col items-center"
           variants={textVariants}
         >
-          <motion.img
-            src={AVATAR_URL}
-            alt="A Avatar"
-            className="mx-auto rounded-full shadow-lg border-4 border-primary/40 w-24 h-24 sm:w-36 sm:h-36 object-cover bg-white animate-fade-in"
-            animate={avatarAnimation}
-            style={{
-              background: "#f8fafc",
-            }}
-            loading="eager"
-            width={144}
-            height={144}
-            // Ensures only one avatar displayed; handles broken SVG gracefully
-            onError={(e) => {
-              e.currentTarget.src =
-                "https://ui-avatars.com/api/?name=A&background=DDDDDD&color=222222&size=144";
-            }}
-          />
-          <div
-            className="absolute inset-0 rounded-full blur-2xl opacity-40 pointer-events-none"
-            style={{
-              background:
-                "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)",
-            }}
-          />
+          <MacXcodeImage />
         </motion.div>
-
-        {/* MacBook with Xcode image */}
-        <MacXcodeImage />
 
         {/* Headline */}
         <motion.h1
