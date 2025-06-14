@@ -5,65 +5,77 @@
 
 @layer base {
   :root {
-    --background: 210 60% 98%; /* Softer light cool gray */
-    --foreground: 220 25% 10%; /* Dark blue-gray */
+    /* Nature-Futuristic Light Theme */
+    --background: 220 30% 96%; /* Lighter, cool off-white */
+    --foreground: 220 25% 15%; /* Darker, desaturated blue-gray */
 
-    --card: 0 0% 100%; /* Pure white */
-    --card-foreground: 220 25% 10%; /* Matches main foreground */
+    --card: 220 20% 100%; /* Clean white for cards */
+    --card-foreground: 220 25% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 10%;
+    --popover: 220 20% 100%;
+    --popover-foreground: 220 25% 15%;
 
-    --primary: 220 70% 55%; /* Softer, vibrant blue */
-    --primary-foreground: 210 40% 98%; /* High contrast white */
+    --primary: 200 80% 55%; /* Vibrant, slightly cyan-ish blue */
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 215 30% 95%; /* Lighter, cleaner gray-blue */
-    --secondary-foreground: 220 25% 25%; /* Darker gray for contrast */
+    --secondary: 180 30% 92%; /* Muted teal/mint */
+    --secondary-foreground: 180 25% 25%;
 
-    --muted: 215 35% 93%; /* Slightly darker muted */
-    --muted-foreground: 215 20% 50%; /* Adjusted for muted background */
+    --muted: 220 20% 90%; 
+    --muted-foreground: 220 15% 55%;
 
-    --accent: 210 60% 94%; /* Slightly more noticeable accent */
-    --accent-foreground: 220 60% 30%; /* Stronger accent foreground */
+    --accent: 160 70% 85%; /* Soft bioluminescent green accent */
+    --accent-foreground: 160 50% 25%; /* Darker green for text on accent */
 
-    --destructive: 0 70% 50%; /* Adjusted destructive */
+    --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 30% 90%; /* More defined border */
-    --input: 215 30% 90%; /* Matching input */
-    --ring: 220 70% 60%; /* Ring color related to primary */
+    --border: 220 20% 85%;
+    --input: 220 20% 88%;
+    --ring: 200 80% 60%; /* Ring color related to primary */
 
     --radius: 0.5rem;
+
+    /* Specific theme colors */
+    --futuristic-bg-start: 220 40% 10%; /* Deep space blue */
+    --futuristic-bg-end: 180 50% 15%; /* Dark teal/forest */
+    --futuristic-glow: 170 100% 70%; /* Bright cyan/green glow */
   }
 
   .dark {
-    --background: 220 20% 8%; /* Very dark, slightly bluish gray */
-    --foreground: 210 40% 95%; /* Light gray/off-white */
+    /* Nature-Futuristic Dark Theme */
+    --background: 230 25% 8%; /* Very dark, slightly desaturated midnight blue */
+    --foreground: 210 50% 92%; /* Soft, glowing off-white */
 
-    --card: 220 20% 12%; /* Slightly lighter card bg */
-    --card-foreground: 210 40% 95%; /* Matches main foreground */
+    --card: 230 20% 12%; /* Darker card, slightly bluer */
+    --card-foreground: 210 50% 92%;
 
-    --popover: 220 20% 12%;
-    --popover-foreground: 210 40% 95%;
+    --popover: 230 20% 12%;
+    --popover-foreground: 210 50% 92%;
 
-    --primary: 220 75% 65%; /* Brighter blue for dark mode */
-    --primary-foreground: 220 25% 10%; /* Dark for contrast */
+    --primary: 190 90% 60%; /* Electric, ethereal blue */
+    --primary-foreground: 230 20% 10%; 
 
-    --secondary: 220 15% 20%; /* Darker, subtle secondary */
-    --secondary-foreground: 210 40% 90%; /* Light for contrast */
+    --secondary: 210 20% 18%; /* Deep, cool gray-blue */
+    --secondary-foreground: 200 40% 85%;
 
-    --muted: 220 15% 15%; /* Subtly darker muted */
-    --muted-foreground: 210 30% 65%;
+    --muted: 230 15% 14%;
+    --muted-foreground: 220 20% 60%; /* Muted cool gray */
 
-    --accent: 220 20% 25%; /* Dark accent */
-    --accent-foreground: 210 40% 90%;
+    --accent: 170 80% 55%; /* Bioluminescent green/cyan */
+    --accent-foreground: 170 30% 95%; /* High contrast for accent */
 
-    --destructive: 0 60% 45%; /* Adjusted destructive for dark */
+    --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 25%; /* Subtle border */
-    --input: 220 15% 25%; /* Matching input */
-    --ring: 220 75% 70%; /* Bright ring for dark mode */
+    --border: 220 15% 22%; /* Subtle, cool border */
+    --input: 220 15% 25%;
+    --ring: 190 90% 65%; /* Ring color related to primary */
+    
+    /* Specific theme colors */
+    --futuristic-bg-start: 230 30% 5%; /* Even deeper space blue */
+    --futuristic-bg-end: 190 40% 10%; /* Dark, mystical teal */
+    --futuristic-glow: 170 100% 65%; /* Brighter glow for dark mode */
   }
 }
 
