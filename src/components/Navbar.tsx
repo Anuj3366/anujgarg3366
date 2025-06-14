@@ -64,10 +64,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center">
-          {/* Theme toggle visible in navbar (mobile) */}
-          <div className="mr-2">
-            <ThemeToggle />
-          </div>
+          {/* Removed duplicate ThemeToggle here */}
           <Sheet>
             <SheetTrigger asChild>
               <button
@@ -119,3 +116,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
