@@ -9,6 +9,9 @@ interface OptimizedImageProps {
   fetchPriority?: 'high' | 'low' | 'auto';
   onLoad?: () => void;
   onError?: () => void;
+  width?: number;
+  height?: number;
+  priority?: boolean;
 }
 
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
@@ -19,6 +22,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   fetchPriority = 'auto',
   onLoad,
   onError,
+  width,
+  height,
 }) => {
   return (
     <img
@@ -26,9 +31,11 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       alt={alt}
       className={className}
       loading={loading}
-      fetchpriority={fetchPriority}
+      fetchPriority={fetchPriority}
       onLoad={onLoad}
       onError={onError}
+      width={width}
+      height={height}
     />
   );
 };

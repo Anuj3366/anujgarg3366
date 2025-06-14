@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, lazy } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -6,6 +7,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import LazyWrapper from "@/components/LazyWrapper";
 import EnhancedErrorBoundary from "@/components/EnhancedErrorBoundary";
 import EnhancedLoading from "@/components/EnhancedLoading";
+import SEOHead from "@/components/SEOHead";
 import { usePerformanceMonitoring } from "@/hooks/usePerformanceMonitoring";
 import { preloadImages } from "@/utils/performance";
 import HeroBackground from "@/components/HeroBackground";
@@ -23,7 +25,7 @@ const sectionAnimationProps = {
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: "easeOut" },
-  viewport: { once: true, amount: 0.2 }, // Trigger when 20% of the element is in view
+  viewport: { once: true, amount: 0.1 },
 };
 
 const Index: React.FC = () => {
@@ -41,7 +43,7 @@ const Index: React.FC = () => {
       setLoadingProgress(progressSteps[currentStep]);
       currentStep++;
       if (currentStep < progressSteps.length) {
-        setTimeout(fakeLoading, 180);
+        setTimeout(fakeLoading, 160);
       }
     };
     fakeLoading();
@@ -52,8 +54,8 @@ const Index: React.FC = () => {
     ];
 
     preloadImages(criticalImages)
-      .then(() => setTimeout(() => isMounted && setIsLoading(false), 600))
-      .catch(() => setTimeout(() => isMounted && setIsLoading(false), 900));
+      .then(() => setTimeout(() => isMounted && setIsLoading(false), 500))
+      .catch(() => setTimeout(() => isMounted && setIsLoading(false), 800));
 
     return () => { isMounted = false; };
   }, []);
@@ -61,11 +63,11 @@ const Index: React.FC = () => {
   if (isLoading) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-background/95 z-[999]">
-        <div className="flex flex-col items-center gap-6 max-w-sm mx-auto px-4">
+        <div className="flex flex-col items-center gap-4 sm:gap-6 max-w-sm mx-auto px-4">
           <EnhancedLoading size="lg" variant="pulse" text="Portfolio Loading..." />
-          <div className="w-full bg-muted rounded-full h-2">
+          <div className="w-full bg-muted rounded-full h-1.5 sm:h-2">
             <div
-              className="bg-primary h-2 rounded-full transition-all duration-300"
+              className="bg-primary h-1.5 sm:h-2 rounded-full transition-all duration-300"
               style={{ width: `${loadingProgress}%` }}
             />
           </div>
@@ -79,62 +81,75 @@ const Index: React.FC = () => {
 
   return (
     <EnhancedErrorBoundary>
-      {/* Ensure the Hero Background is ALWAYS behind everything */}
+      <SEOHead />
       <HeroBackground />
-      <main className="flex min-h-screen flex-col bg-gradient-to-br from-background via-background/80 to-background/70">
+      <main className="flex min-h-screen flex-col bg-gradient-to-br from-background via-background/90 to-background/80">
         <Navbar />
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-7xl">
           <Hero />
-          {/* Section divider for visual rhythm */}
-          <div className="my-8 sm:my-12">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
+          
+          {/* Elegant section dividers */}
+          <div className="my-6 sm:my-8 lg:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
           </div>
+          
           <motion.div {...sectionAnimationProps}>
             <LazyWrapper minHeight="300px">
               <About />
             </LazyWrapper>
           </motion.div>
-          <div className="my-8 sm:my-12">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
+          
+          <div className="my-6 sm:my-8 lg:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
           </div>
+          
           <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.1 }}>
             <LazyWrapper minHeight="400px">
               <Experience />
             </LazyWrapper>
           </motion.div>
-          <div className="my-8 sm:my-12">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent" />
+          
+          <div className="my-6 sm:my-8 lg:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
           </div>
+          
           <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.2 }}>
             <LazyWrapper minHeight="300px">
               <Skills />
             </LazyWrapper>
           </motion.div>
-          <div className="my-8 sm:my-12">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent" />
+          
+          <div className="my-6 sm:my-8 lg:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-accent/25 to-transparent" />
           </div>
+          
           <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.1 }}>
             <LazyWrapper minHeight="500px">
               <Projects />
             </LazyWrapper>
           </motion.div>
-          <div className="my-8 sm:my-12">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/10 to-transparent" />
+          
+          <div className="my-6 sm:my-8 lg:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
           </div>
+          
           <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.2 }}>
             <LazyWrapper minHeight="400px">
               <Achievements />
             </LazyWrapper>
           </motion.div>
-          <div className="my-8 sm:my-12">
-            <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent" />
+          
+          <div className="my-6 sm:my-8 lg:my-12">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-accent/15 to-transparent" />
           </div>
+          
           <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.1 }}>
             <LazyWrapper minHeight="300px">
               <Contact />
             </LazyWrapper>
           </motion.div>
         </div>
+        
         <motion.div {...sectionAnimationProps} transition={{ ...sectionAnimationProps.transition, delay: 0.2 }}>
           <LazyWrapper minHeight="200px">
             <Footer />

@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -45,53 +46,90 @@ const projects = [
 ];
 
 const Projects = () => {
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50,
+      scale: 0.9 
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: { 
+        type: "spring", 
+        stiffness: 100, 
+        damping: 15 
+      } 
+    }
+  };
+
   return (
-    <section id="projects" className="py-20 sm:py-24">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
-          >
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-sm font-semibold text-primary">Featured Work</span>
-          </motion.div>
+    <section id="projects" className="section-spacing">
+      <div className="container mx-auto container-spacing">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <div className="text-center mb-12 sm:mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6"
+            >
+              <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
+              <span className="text-xs sm:text-sm font-semibold text-primary">Featured Work</span>
+            </motion.div>
+            
+            <h2 className="section-headline">
+              Projects & Portfolio
+            </h2>
+            <p className="text-responsive-base text-muted-foreground max-w-2xl mx-auto">
+              A showcase of my latest work and creative solutions to real-world problems
+            </p>
+          </div>
           
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-            Projects & Portfolio
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A showcase of my latest work and creative solutions to real-world problems
-          </p>
-        </div>
-        
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <motion.div 
+            className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {projects.map((project, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-                viewport={{ once: true }}
+                variants={cardVariants}
                 className="group"
+                whileHover={{ y: -8 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
-                <Card className="relative overflow-hidden bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm border-2 border-border/50 hover:border-primary/30 h-full flex flex-col transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
+                <Card className="relative overflow-hidden bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm border-2 border-border/50 hover:border-primary/30 h-full flex flex-col transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
                   {project.featured && (
-                    <div className="absolute top-4 right-4 z-10">
-                      <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 backdrop-blur-sm">
-                        <Sparkles className="h-3 w-3 text-yellow-600" />
+                    <motion.div 
+                      className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10"
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
+                    >
+                      <div className="flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/30 backdrop-blur-sm">
+                        <Sparkles className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-yellow-600" />
                         <span className="text-xs font-bold text-yellow-700 dark:text-yellow-300">Featured</span>
                       </div>
-                    </div>
+                    </motion.div>
                   )}
                   
                   <div className="relative aspect-video overflow-hidden">
@@ -104,20 +142,20 @@ const Projects = () => {
                     />
                   </div>
                   
-                  <CardHeader className="pb-4">
-                    <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
+                  <CardHeader className="pb-3 sm:pb-4">
+                    <CardTitle className="text-lg sm:text-xl font-bold group-hover:text-primary transition-colors">
                       {project.title}
                     </CardTitle>
                   </CardHeader>
                   
-                  <CardContent className="flex-grow pb-4">
-                    <p className="text-foreground/80 mb-6 leading-relaxed">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
+                  <CardContent className="flex-grow pb-3 sm:pb-4">
+                    <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 leading-relaxed">{project.description}</p>
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {project.technologies.map((tech) => (
                         <Badge 
                           key={tech} 
                           variant="secondary"
-                          className="bg-secondary/50 hover:bg-secondary/80 transition-colors border border-border/50"
+                          className="text-xs bg-secondary/50 hover:bg-secondary/80 transition-colors border border-border/50"
                         >
                           {tech}
                         </Badge>
@@ -125,7 +163,7 @@ const Projects = () => {
                     </div>
                   </CardContent>
                   
-                  <CardFooter className="flex gap-3 pt-4">
+                  <CardFooter className="flex gap-2 sm:gap-3 pt-3 sm:pt-4">
                     <Button 
                       asChild 
                       variant="outline" 
@@ -136,10 +174,10 @@ const Projects = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2"
+                        className="flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
                         aria-label={`View ${project.title} source code on GitHub`}
                       >
-                        <Github className="h-4 w-4 transition-transform group-hover/btn:scale-110" />
+                        <Github className="h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover/btn:scale-110" />
                         Code
                       </a>
                     </Button>
@@ -152,10 +190,10 @@ const Projects = () => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-2"
+                        className="flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm"
                         aria-label={`View ${project.title} live demo`}
                       >
-                        <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:scale-110" />
+                        <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover/btn:scale-110" />
                         Demo
                       </a>
                     </Button>
@@ -163,9 +201,9 @@ const Projects = () => {
                 </Card>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </motion.div>
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };
