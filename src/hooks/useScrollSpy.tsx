@@ -6,26 +6,44 @@ export const useScrollSpy = (sectionIds: string[], offset = 90) => {
 
   useEffect(() => {
     const handleScroll = () => {
+      const scrollPosition = window.scrollY + offset;
       let found = sectionIds[0];
-      for (let i = 0; i < sectionIds.length; i++) {
-        const el = document.querySelector(sectionIds[i]);
-        if (!el) continue;
-        const rect = el.getBoundingClientRect();
-        // Section is at least partially visible, slightly above nav bar
-        if (rect.top - offset <= 0 && rect.bottom > 60) {
+      
+      // Find the section that is currently most visible
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const element = document.querySelector(sectionIds[i]);
+        if (!element) continue;
+        
+        const rect = element.getBoundingClientRect();
+        const elementTop = rect.top + window.scrollY;
+        
+        // Check if we've scrolled past this section's start
+        if (scrollPosition >= elementTop - 100) {
           found = sectionIds[i];
+          break;
         }
       }
-      setActiveId(found);
+      
+      // Special handling for areas between sections
+      const currentElement = document.querySelector(found);
+      if (currentElement) {
+        const rect = currentElement.getBoundingClientRect();
+        const isInViewport = rect.top <= offset && rect.bottom >= offset;
+        
+        // Only update if we're actually near a section
+        if (isInViewport || rect.top <= offset + 200) {
+          setActiveId(found);
+        }
+      }
     };
 
+    // Add passive listener for better performance
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // call once in case user reloads mid-scroll
+    // Initial call to set correct active section
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-    // eslint-disable-next-line
-  }, [sectionIds.join(",")]);
+  }, [sectionIds, offset]);
 
   return activeId;
 };

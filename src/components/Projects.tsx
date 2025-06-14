@@ -26,7 +26,7 @@ const Projects = () => {
         >
           <SectionHeader
             badge={
-              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-4 sm:mb-6">
                 <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                 <span className="text-xs sm:text-sm font-semibold text-primary">Featured Work</span>
               </div>

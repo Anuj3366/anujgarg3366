@@ -1,3 +1,4 @@
+
 const missionObjectives = [
   { text: "Master SwiftUI & Combine", status: "positive" },
   { text: "Level up MVVM-C architecture", status: "positive" },
@@ -10,13 +11,13 @@ const missionObjectives = [
 const getStatusClass = (status: string) => {
   switch (status) {
     case "positive":
-      return "text-green-700 dark:text-green-500";
+      return "text-green-600 dark:text-green-400 font-medium";
     case "negative":
-      return "text-red-600 dark:text-red-500";
+      return "text-red-600 dark:text-red-400 font-medium";
     case "warning":
-      return "text-yellow-700 dark:text-yellow-500";
+      return "text-yellow-600 dark:text-yellow-400 font-medium";
     default:
-      return "text-foreground/80";
+      return "text-foreground font-medium";
   }
 };
 
@@ -36,11 +37,17 @@ const getStatusPrefix = (status: string) => {
 const MissionObjectives = () => {
   return (
     <div className="mt-6 w-full">
-      <h3 className="text-lg font-medium">Current Mission Objectives</h3>
-      <ul className="mt-2 space-y-2 text-foreground/80">
+      <h3 className="text-lg font-semibold text-foreground mb-3">Current Mission Objectives</h3>
+      <ul className="mt-2 space-y-3">
         {missionObjectives.map((objective, index) => (
-          <li key={index} className={getStatusClass(objective.status)}>
-            {getStatusPrefix(objective.status)} {objective.text}
+          <li 
+            key={index} 
+            className={`${getStatusClass(objective.status)} text-sm leading-relaxed transition-colors duration-200`}
+          >
+            <span className="inline-block w-4 text-center font-bold">
+              {getStatusPrefix(objective.status)}
+            </span>
+            <span className="ml-1">{objective.text}</span>
           </li>
         ))}
       </ul>
