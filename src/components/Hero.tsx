@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MacXcodeImage from "./MacXcodeImage";
+import HeroBackground from "./HeroBackground"; // Re-added import
 
 // Use custom "A" avatar SVG for both Hero and favicon
 const AVATAR_URL = "/icons/avatar-a.svg";
@@ -36,39 +37,18 @@ const Hero = () => {
     <section
       id="home"
       className="relative flex flex-col items-center justify-center min-h-screen py-14 sm:py-24 md:py-32 text-center overflow-hidden"
-      style={{ zIndex: 1 }}
+      style={{ zIndex: 1 }} // Ensures Hero content is above potential global background elements if any
     >
-      {/* Modern soft blurred gradient background */}
-      <div
-        className="absolute inset-0 -z-10 pointer-events-none"
-        aria-hidden="true"
-      >
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-fuchsia-100 to-cyan-100 dark:from-blue-900 dark:via-fuchsia-900 dark:to-cyan-900 opacity-90" />
-        <div
-          className="absolute left-1/2 top-0 -translate-x-1/2 blur-2xl opacity-80"
-          style={{
-            width: "80vw",
-            height: "60vh",
-            background:
-              "radial-gradient(ellipse at top, #80eaff88 0%, #b5f3fc11 80%)"
-          }}
-        ></div>
-        <div
-          className="absolute right-[12%] bottom-0 blur-2xl opacity-70"
-          style={{
-            width: "32vw",
-            height: "30vh",
-            background:
-              "radial-gradient(circle, #a78bfa66 0%, #818cf888 70%, transparent 100%)"
-          }}
-        ></div>
-      </div>
+      {/* Animated background component */}
+      <HeroBackground />
+
+      {/* Removed the static blurred gradient div block from here */}
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 max-w-3xl w-full px-4 flex flex-col items-center"
+        className="relative z-10 max-w-3xl w-full px-4 flex flex-col items-center" // z-10 ensures this content is above HeroBackground
       >
         {/* Avatar with glow */}
         <motion.div
@@ -81,12 +61,12 @@ const Hero = () => {
             className="mx-auto rounded-full shadow-lg border-4 border-primary/40 w-24 h-24 sm:w-36 sm:h-36 object-cover bg-white"
             animate={avatarAnimation}
             style={{
-              background: "#f8fafc"
+              background: "#f8fafc" // Kept for avatar background consistency
             }}
           />
           <div className="absolute inset-0 rounded-full blur-2xl opacity-40 pointer-events-none"
             style={{
-              background: "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)"
+              background: "radial-gradient(circle, #5eead4 0%, #2563eb22 70%, transparent 100%)" // Kept for avatar glow
             }}
           />
         </motion.div>
@@ -173,4 +153,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
