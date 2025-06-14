@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -29,8 +28,6 @@ const Hero = () => {
       className="relative flex flex-col items-center justify-center min-h-screen py-14 sm:py-24 md:py-32 text-center overflow-hidden bg-site-gradient"
       style={{ zIndex: 1 }}
     >
-      <HeroBackground />
-
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -152,4 +149,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

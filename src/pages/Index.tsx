@@ -8,6 +8,7 @@ import EnhancedErrorBoundary from "@/components/EnhancedErrorBoundary";
 import EnhancedLoading from "@/components/EnhancedLoading";
 import { usePerformanceMonitoring } from "@/hooks/usePerformanceMonitoring";
 import { preloadImages } from "@/utils/performance";
+import HeroBackground from "@/components/HeroBackground";
 
 // Lazy load components for better performance
 const About = lazy(() => import("@/components/About"));
@@ -78,6 +79,8 @@ const Index: React.FC = () => {
 
   return (
     <EnhancedErrorBoundary>
+      {/* Ensure the Hero Background is ALWAYS behind everything */}
+      <HeroBackground />
       <main className="flex min-h-screen flex-col bg-gradient-to-br from-background via-background/80 to-background/70">
         <Navbar />
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
