@@ -92,14 +92,16 @@ const HeroBackground: React.FC = () => {
         ))}
       </div>
 
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          25% { transform: translateY(-20px) rotate(5deg); }
-          50% { transform: translateY(-10px) rotate(10deg); }
-          75% { transform: translateY(-15px) rotate(5deg); }
-        }
-      `}</style>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-10px) rotate(10deg); }
+            75% { transform: translateY(-15px) rotate(5deg); }
+          }
+        `
+      }} />
     </div>
   );
 };

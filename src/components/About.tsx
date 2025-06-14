@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { User, Target } from "lucide-react";
@@ -77,7 +76,6 @@ const About = () => {
                     src="https://user-images.githubusercontent.com/74038190/229223263-cf2e4b07-2615-4f87-9c38-e37600f8381a.gif"
                     alt="Coding Animation"
                     className="h-auto w-full transform transition-transform duration-500 group-hover/image:scale-110 rounded-2xl"
-                    loading="lazy"
                   />
                 </motion.div>
                 

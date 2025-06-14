@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -138,7 +137,6 @@ const Projects = () => {
                       src={project.imageUrl}
                       alt={`${project.title} preview`}
                       className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
-                      loading="lazy"
                     />
                   </div>
                   
