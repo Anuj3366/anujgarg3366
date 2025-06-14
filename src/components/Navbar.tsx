@@ -61,12 +61,12 @@ const Navbar = () => {
               <li key={link.title}>
                 <a
                   href={link.href}
-                  className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium group py-2 cta-arrow-group"
+                  className="relative text-foreground/80 hover:text-primary transition-all duration-300 font-medium group py-2"
                   tabIndex={0}
                 >
                   {link.title}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 group-hover:w-full"></span>
-                  <span className="inline-block cta-arrow transition-transform translate-x-0 ml-1 text-primary">&rarr;</span>
+                  <span className="hidden md:inline-block ml-1 text-primary opacity-0 transform translate-x-0 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-1 group-focus:opacity-100 group-focus:translate-x-1">&rarr;</span>
                 </a>
               </li>
             ))}
