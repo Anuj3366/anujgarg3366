@@ -1,4 +1,3 @@
-
 const missionObjectives = [
   { text: "Master SwiftUI & Combine", status: "positive" },
   { text: "Level up MVVM-C architecture", status: "positive" },
@@ -11,11 +10,11 @@ const missionObjectives = [
 const getStatusClass = (status: string) => {
   switch (status) {
     case "positive":
-      return "text-green-500";
+      return "text-green-700 dark:text-green-500";
     case "negative":
-      return "text-red-500";
+      return "text-red-600 dark:text-red-500";
     case "warning":
-      return "text-yellow-500";
+      return "text-yellow-700 dark:text-yellow-500";
     default:
       return "text-foreground/80";
   }

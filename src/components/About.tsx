@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { User, Target } from "lucide-react";
@@ -5,6 +6,7 @@ import OptimizedImage from "@/components/OptimizedImage";
 import AboutContent from "./AboutContent";
 import AboutFacts from "./AboutFacts";
 import MissionObjectives from "./MissionObjectives";
+import SectionHeader from "./SectionHeader";
 
 const About = () => {
   return (
@@ -16,25 +18,16 @@ const About = () => {
         viewport={{ once: true }}
         className="container mx-auto container-spacing"
       >
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 sm:mb-6"
-          >
-            <User className="h-3 w-3 sm:h-4 sm:w-4 text-accent" />
-            <span className="text-xs sm:text-sm font-semibold text-accent">Get to Know Me</span>
-          </motion.div>
-          
-          <h2 className="section-headline">
-            About Me
-          </h2>
-          <p className="text-responsive-base text-muted-foreground max-w-2xl mx-auto">
-            Passionate developer with a love for creating innovative solutions and beautiful user experiences
-          </p>
-        </div>
+        <SectionHeader
+          badge={
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 sm:mb-6">
+              <User className="h-3 w-3 sm:h-4 sm:w-4 text-accent" />
+              <span className="text-xs sm:text-sm font-semibold text-accent">Get to Know Me</span>
+            </div>
+          }
+          title="About Me"
+          description="Passionate developer with a love for creating innovative solutions and beautiful user experiences"
+        />
         
         <div className="grid grid-cols-1 gap-6 lg:gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 order-2 lg:order-1">
