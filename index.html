@@ -4,10 +4,11 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/icons/avatar-a.svg" type="image/svg+xml">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" href="/icons/avatar-a.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0" />
     <title>Anuj Garg - Full-Stack Developer & Problem Solver</title>
-    <meta name="description" content="Full-Stack Developer & Problem Solver specializing in modern web technologies" />
-    <meta name="keywords" content="full-stack developer, web developer, React, TypeScript, JavaScript" />
+    <meta name="description" content="Full-Stack Developer & Problem Solver specializing in modern web technologies. Expert in React, TypeScript, and Node.js." />
+    <meta name="keywords" content="full-stack developer, web developer, React, TypeScript, JavaScript, Node.js, portfolio" />
     <meta name="author" content="Anuj Garg" />
     
     <!-- Open Graph / Facebook -->
@@ -27,12 +28,34 @@
     <!-- PWA -->
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Anuj Garg Portfolio">
     
-    <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" href="/icons/avatar-a.svg">
+    <!-- Additional favicons for better browser support -->
+    <link rel="icon" type="image/svg+xml" href="/icons/avatar-a.svg">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/avatar-a.svg">
+    <link rel="icon" type="image/png" sizes="512x512" href="/icons/avatar-a.svg">
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    
+    <!-- Prevent flash of unstyled content -->
+    <style>
+      html { visibility: hidden; opacity: 0; }
+      html.loaded { visibility: visible; opacity: 1; transition: opacity 0.3s; }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Prevent FOUC
+      document.addEventListener('DOMContentLoaded', function() {
+        document.documentElement.classList.add('loaded');
+      });
+    </script>
   </body>
 </html>

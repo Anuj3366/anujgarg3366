@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -82,15 +83,62 @@
   * {
     @apply border-border;
     scroll-behavior: smooth;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-padding-top: 100px; /* Account for fixed navbar */
+    font-size: 16px;
   }
 
   body {
     @apply bg-background text-foreground antialiased font-sans;
     font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
   }
-  
-  html {
-    scroll-padding-top: 96px; /* Adjust if navbar height changes significantly */
+
+  /* Responsive container improvements */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
   }
 }
 
@@ -102,6 +150,35 @@
   
   .code-container pre {
     @apply p-4;
+  }
+
+  /* Responsive text utilities */
+  .text-responsive-xs {
+    @apply text-xs sm:text-sm;
+  }
+
+  .text-responsive-sm {
+    @apply text-sm sm:text-base;
+  }
+
+  .text-responsive-base {
+    @apply text-base sm:text-lg;
+  }
+
+  .text-responsive-lg {
+    @apply text-lg sm:text-xl lg:text-2xl;
+  }
+
+  .text-responsive-xl {
+    @apply text-xl sm:text-2xl lg:text-3xl;
+  }
+
+  .text-responsive-2xl {
+    @apply text-2xl sm:text-3xl lg:text-4xl;
+  }
+
+  .text-responsive-3xl {
+    @apply text-3xl sm:text-4xl lg:text-5xl;
   }
 
   /* Modern animation utilities */
@@ -135,6 +212,40 @@
     backdrop-filter: blur(12px);
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Responsive spacing utilities */
+  .section-spacing {
+    @apply py-12 sm:py-16 md:py-20 lg:py-24;
+  }
+
+  .container-spacing {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Mobile-first responsive grid */
+  .responsive-grid {
+    @apply grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:gap-8 xl:grid-cols-3;
+  }
+}
+
+/* Responsive improvements for small screens */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
   }
 }
 
@@ -180,29 +291,16 @@ button, a, .interactive {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Add a modern animated site-wide subtle gradient bg */
-.bg-site-gradient {
-  background: linear-gradient(120deg, hsl(var(--futuristic-bg-end)) 0%, hsl(var(--background)) 50%, hsl(var(--accent)/0.10) 100%);
-  background-blend-mode: lighten;
-  animation: gradientMove 12s ease-in-out infinite alternate;
-}
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 70%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+/* Enhanced focus-visible for links and buttons */
+a:focus-visible, button:focus-visible {
+  outline: 2.5px solid hsl(var(--accent));
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px hsl(var(--accent)/0.15);
 }
 
-/* Subtle glowing text shadow for strong headlines */
-.drop-shadow-glow {
-  text-shadow:
-    0 2px 8px hsl(var(--primary) / 0.08),
-    0 8px 20px hsl(var(--futuristic-glow) / 0.12);
+/* Section headline tweaks */
+.section-headline {
+  @apply text-responsive-3xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent font-headline drop-shadow-glow;
 }
 
 /* Custom Font for Headlines */
@@ -227,19 +325,21 @@ button, a, .interactive {
   }
 }
 
-/* Enhanced focus-visible for links and buttons */
-a:focus-visible, button:focus-visible {
-  outline: 2.5px solid hsl(var(--accent));
-  outline-offset: 3px;
-  box-shadow: 0 0 0 3px hsl(var(--accent)/0.15);
+/* Responsive image improvements */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
-/* Section headline tweaks */
-.section-headline {
-  @apply text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent font-headline drop-shadow-glow;
+/* Prevent horizontal scroll on small screens */
+.overflow-x-hidden {
+  overflow-x: hidden;
 }
 
-/* Spacing and rhythm refinements for sections */
-.section-spaced {
-  @apply py-24 sm:py-28;
+/* Better mobile touch targets */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
