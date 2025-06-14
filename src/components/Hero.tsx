@@ -50,18 +50,22 @@ const Hero = () => {
           boxShadow: "0 25px 60px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
         }}
       >
-        {/* Profile Avatar */}
+        {/* Profile Avatar - Made responsive and larger */}
         <motion.div
           className="relative mb-4 sm:mb-6 lg:mb-8 flex flex-col items-center"
           variants={textVariants}
           animate="animate"
         >
           <motion.div 
-            className="relative"
+            className="relative z-10"
             variants={floatVariants}
             animate="animate"
           >
-            <MacXcodeImage size={100} />
+            <MacXcodeImage size={120} className="sm:hidden" />
+            <MacXcodeImage size={140} className="hidden sm:block md:hidden" />
+            <MacXcodeImage size={160} className="hidden md:block lg:hidden" />
+            <MacXcodeImage size={180} className="hidden lg:block xl:hidden" />
+            <MacXcodeImage size={200} className="hidden xl:block" />
           </motion.div>
         </motion.div>
 
