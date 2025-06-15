@@ -5,7 +5,6 @@ import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
 import { Trophy, Award, Star, FileText } from "lucide-react";
 import SectionHeader from "./SectionHeader";
-
 const Achievements = () => {
   const [leetcodeImageLoaded, setLeetcodeImageLoaded] = useState(false);
 
@@ -15,93 +14,68 @@ const Achievements = () => {
     img.onload = () => setLeetcodeImageLoaded(true);
     img.src = "https://leetcard.jacoblin.cool/anuj3366?theme=dark&font=ABeeZee";
   }, []);
-
-  return (
-    <section id="achievements" className="section-spacing">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="container mx-auto container-spacing"
-      >
-        <SectionHeader
-          badge={
-            <div className="w-full flex justify-center items-center overflow-x-auto">
+  return <section id="achievements" className="section-spacing">
+      <motion.div initial={{
+      opacity: 0,
+      y: 20
+    }} whileInView={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      duration: 0.6
+    }} viewport={{
+      once: true
+    }} className="container mx-auto container-spacing">
+        <SectionHeader badge={<div className="w-full flex justify-center items-center overflow-x-auto">
               <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/20 border border-accent/40 mb-4 max-w-full overflow-hidden">
                 <Trophy className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                 <span className="text-xs sm:text-sm font-bold text-primary">My Achievements</span>
               </div>
-            </div>
-          }
-          title="Key Achievements"
-          description="Showcasing my journey through competitive programming, certifications, and technical milestones"
-        />
+            </div>} title="Key Achievements" description="Showcasing my journey through competitive programming, certifications, and technical milestones" />
         
         <Tabs defaultValue="gate" className="mx-auto max-w-6xl">
-          <TabsList
-            className="
-              grid grid-cols-2 gap-2
-              sm:flex sm:grid-cols-0 sm:gap-x-2
-              justify-center w-full mb-12 sm:mb-8
-              bg-white/90 dark:bg-gray-900/90
-              backdrop-blur-sm border-2 border-border/60 p-1
-              max-w-md mx-auto
-            "
-          >
-            <TabsTrigger
-              value="gate"
-              className="
+          <TabsList className="grid grid-cols-2 gap-2 sm:flex sm:grid-cols-0 sm:gap-x-2 justify-center w-full mb-12 sm:mb-8 backdrop-blur-sm border-2 border-border/60 p-1 max-w-md mx-auto bg-transparent">
+            <TabsTrigger value="gate" className="
                 flex items-center justify-center gap-2 px-4 py-3
                 text-sm font-medium text-black/80 dark:text-white/80
                 data-[state=active]:text-primary data-[state=active]:bg-primary/10
                 data-[state=active]:border data-[state=active]:border-primary/20
                 rounded-md transition-all duration-200
                 w-full
-              "
-            >
+              ">
               <Award className="h-4 w-4" />
               GATE 2025
             </TabsTrigger>
-            <TabsTrigger
-              value="gfg"
-              className="
+            <TabsTrigger value="gfg" className="
                 flex items-center justify-center gap-2 px-4 py-3
                 text-sm font-medium text-black/80 dark:text-white/80
                 data-[state=active]:text-primary data-[state=active]:bg-primary/10
                 data-[state=active]:border data-[state=active]:border-primary/20
                 rounded-md transition-all duration-200
                 w-full
-              "
-            >
+              ">
               <Star className="h-4 w-4" />
               GeeksforGeeks
             </TabsTrigger>
-            <TabsTrigger
-              value="leetcode"
-              className="
+            <TabsTrigger value="leetcode" className="
                 flex items-center justify-center gap-2 px-4 py-3
                 text-sm font-medium text-black/80 dark:text-white/80
                 data-[state=active]:text-primary data-[state=active]:bg-primary/10
                 data-[state=active]:border data-[state=active]:border-primary/20
                 rounded-md transition-all duration-200
                 w-full
-              "
-            >
+              ">
               <Trophy className="h-4 w-4" />
               LeetCode
             </TabsTrigger>
-            <TabsTrigger
-              value="certificates"
-              className="
+            <TabsTrigger value="certificates" className="
                 flex items-center justify-center gap-2 px-4 py-3
                 text-sm font-medium text-black/80 dark:text-white/80
                 data-[state=active]:text-primary data-[state=active]:bg-primary/10
                 data-[state=active]:border data-[state=active]:border-primary/20
                 rounded-md transition-all duration-200
                 w-full
-              "
-            >
+              ">
               <FileText className="h-4 w-4" />
               Certifications
             </TabsTrigger>
@@ -109,12 +83,15 @@ const Achievements = () => {
           
           
           <TabsContent value="gate">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 gap-6"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5
+          }} className="grid grid-cols-1 gap-6">
               <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
                 <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5 pb-4 border-b border-border/30">
                   <CardTitle className="text-center text-2xl sm:text-3xl text-black dark:text-white">
@@ -176,12 +153,15 @@ const Achievements = () => {
           </TabsContent>
           
           <TabsContent value="gfg">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 gap-6 lg:grid-cols-3"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5
+          }} className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               <div className="lg:col-span-1">
                 <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl h-full">
                   <CardHeader className="pb-4">
@@ -190,18 +170,8 @@ const Achievements = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="text-center">
-                    <img
-                      src="https://media.geeksforgeeks.org/wp-content/uploads/20210915115837/gfg3.png"
-                      alt="GeeksforGeeks Logo"
-                      className="mx-auto mb-4 w-32 h-auto"
-                      loading="lazy"
-                    />
-                    <a
-                      href="https://auth.geeksforgeeks.org/user/anujgarg3366"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:text-primary/80 hover:underline font-medium transition-colors duration-200"
-                    >
+                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20210915115837/gfg3.png" alt="GeeksforGeeks Logo" className="mx-auto mb-4 w-32 h-auto" loading="lazy" />
+                    <a href="https://auth.geeksforgeeks.org/user/anujgarg3366" target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary/80 hover:underline font-medium transition-colors duration-200">
                       @anujgarg3366
                     </a>
                   </CardContent>
@@ -266,11 +236,15 @@ const Achievements = () => {
           </TabsContent>
           
           <TabsContent value="leetcode">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5
+          }}>
               <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
                 <CardHeader className="pb-4">
                   <CardTitle className="text-center text-xl text-black dark:text-white">
@@ -279,35 +253,16 @@ const Achievements = () => {
                 </CardHeader>
                 
                 <CardContent className="flex flex-col items-center">
-                  <img
-                    src="https://leetcode.com/static/images/LeetCode_logo_rvs.png"
-                    alt="LeetCode Logo"
-                    className="mb-6 w-40 h-auto"
-                    loading="lazy"
-                  />
+                  <img src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" alt="LeetCode Logo" className="mb-6 w-40 h-auto" loading="lazy" />
                   
-                  <a
-                    href="https://leetcode.com/anuj3366/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mb-6 text-primary hover:text-primary/80 hover:underline font-medium transition-colors duration-200"
-                  >
+                  <a href="https://leetcode.com/anuj3366/" target="_blank" rel="noopener noreferrer" className="mb-6 text-primary hover:text-primary/80 hover:underline font-medium transition-colors duration-200">
                     @anuj3366
                   </a>
                   
                   <div className="w-full max-w-2xl">
-                    {leetcodeImageLoaded ? (
-                      <img
-                        src="https://leetcard.jacoblin.cool/anuj3366?theme=dark&font=ABeeZee"
-                        alt="Anuj Garg LeetCode Statistics showing problem-solving progress and achievements"
-                        className="w-full rounded-lg shadow-lg border border-border/40"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="w-full h-64 bg-primary/5 border border-primary/20 rounded-lg flex items-center justify-center">
+                    {leetcodeImageLoaded ? <img src="https://leetcard.jacoblin.cool/anuj3366?theme=dark&font=ABeeZee" alt="Anuj Garg LeetCode Statistics showing problem-solving progress and achievements" className="w-full rounded-lg shadow-lg border border-border/40" loading="lazy" /> : <div className="w-full h-64 bg-primary/5 border border-primary/20 rounded-lg flex items-center justify-center">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-                      </div>
-                    )}
+                      </div>}
                   </div>
                   
                   <p className="mt-6 text-center text-black/80 dark:text-white/80 max-w-xl">
@@ -319,12 +274,15 @@ const Achievements = () => {
           </TabsContent>
           
           <TabsContent value="certificates">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 gap-6 sm:grid-cols-2"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            duration: 0.5
+          }} className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
                 <CardHeader>
                   <CardTitle className="text-black dark:text-white flex items-center gap-2">
@@ -376,8 +334,6 @@ const Achievements = () => {
           </TabsContent>
         </Tabs>
       </motion.div>
-    </section>
-  );
+    </section>;
 };
-
 export default Achievements;
