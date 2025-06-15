@@ -20,9 +20,9 @@ const About = () => {
       >
         <SectionHeader
           badge={
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/20 border border-accent/40 mb-4 sm:mb-6">
-              <User className="h-3 w-3 sm:h-4 sm:w-4 text-accent" />
-              <span className="text-xs sm:text-sm font-bold text-accent">Get to Know Me</span>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/20 border border-primary/40 mb-4 sm:mb-6">
+              <User className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
+              <span className="text-xs sm:text-sm font-bold text-primary">Get to Know Me</span>
             </div>
           }
           title="About Me"
