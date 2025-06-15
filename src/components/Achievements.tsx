@@ -26,15 +26,24 @@ const Achievements = () => {
     }} viewport={{
       once: true
     }} className="container mx-auto container-spacing">
-        <SectionHeader badge={<div className="w-full flex justify-center items-center overflow-x-auto">
-              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/20 border border-accent/40 mb-4 max-w-full overflow-hidden">
-                <Trophy className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
-                <span className="text-xs sm:text-sm font-bold text-primary">My Achievements</span>
-              </div>
-            </div>} title="Key Achievements" description="Showcasing my journey through competitive programming, certifications, and technical milestones" />
+        {/* Badge: add extra margin to ensure fully visible on mobile */}
+        <SectionHeader badge={
+          <div className="w-full flex justify-center items-center overflow-x-auto">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/20 border border-accent/40 mb-6 sm:mb-4 max-w-full overflow-hidden">
+              <Trophy className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
+              <span className="text-xs sm:text-sm font-bold text-primary">My Achievements</span>
+            </div>
+          </div>
+        } title="Key Achievements" description="Showcasing my journey through competitive programming, certifications, and technical milestones" />
         
+        {/* TabsList: transparency, spacing, visible badge below, responsive margin bottom */}
         <Tabs defaultValue="gate" className="mx-auto max-w-6xl">
-          <TabsList className="grid grid-cols-2 gap-2 sm:flex sm:grid-cols-0 sm:gap-x-2 justify-center w-full mb-12 sm:mb-8 backdrop-blur-sm border-2 border-border/60 p-1 max-w-md mx-auto bg-transparent">
+          <TabsList className="
+                grid grid-cols-2 gap-2 sm:flex sm:grid-cols-0 sm:gap-x-2 justify-center w-full
+                mb-16 sm:mb-12 md:mb-8
+                bg-transparent border-0 backdrop-blur-none shadow-none
+                p-1 max-w-md mx-auto
+              ">
             <TabsTrigger value="gate" className="
                 flex items-center justify-center gap-2 px-4 py-3
                 text-sm font-medium text-black/80 dark:text-white/80
@@ -80,7 +89,6 @@ const Achievements = () => {
               Certifications
             </TabsTrigger>
           </TabsList>
-          
           
           <TabsContent value="gate">
             <motion.div initial={{
