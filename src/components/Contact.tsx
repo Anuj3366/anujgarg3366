@@ -38,7 +38,7 @@ const Contact = () => {
       setIsSubmitting(false);
     }, 1500);
   };
-  return <section id="contact" className="py-16 sm:py-20 md:py-24 relative">
+  return <section id="contact" className="">
       {/* Layer for background gradient for optimal visibility */}
       <div className="absolute inset-0 pointer-events-none select-none bg-gradient-to-br from-white/90 via-background/70 to-card/70 blur-none z-0" aria-hidden="true"></div>
       <motion.div initial={{
