@@ -16,16 +16,16 @@ const AboutFacts = () => {
   return (
     <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div>
-        <h3 className="text-lg font-medium">Quick Facts</h3>
-        <ul className="mt-2 space-y-2 text-foreground/80">
+        <h3 className="text-lg font-semibold text-black dark:text-white">Quick Facts</h3>
+        <ul className="mt-2 space-y-2 text-black/80 dark:text-white/80">
           {quickFacts.map((fact, index) => (
             <li key={index}>{fact}</li>
           ))}
         </ul>
       </div>
       <div>
-        <h3 className="text-lg font-medium">Education</h3>
-        <ul className="mt-2 space-y-2 text-foreground/80">
+        <h3 className="text-lg font-semibold text-black dark:text-white">Education</h3>
+        <ul className="mt-2 space-y-2 text-black/80 dark:text-white/80">
           {educationDetails.map((education, index) => (
             <li key={index}>{education}</li>
           ))}

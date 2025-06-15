@@ -17,7 +17,7 @@ const getStatusClass = (status: string) => {
     case "warning":
       return "text-yellow-600 dark:text-yellow-400 font-medium";
     default:
-      return "text-foreground font-medium";
+      return "text-black dark:text-white font-medium";
   }
 };
 
@@ -37,7 +37,7 @@ const getStatusPrefix = (status: string) => {
 const MissionObjectives = () => {
   return (
     <div className="mt-6 w-full">
-      <h3 className="text-lg font-semibold text-foreground mb-3">Current Mission Objectives</h3>
+      <h3 className="text-lg font-semibold text-black dark:text-white mb-3">Current Mission Objectives</h3>
       <ul className="mt-2 space-y-3">
         {missionObjectives.map((objective, index) => (
           <li 

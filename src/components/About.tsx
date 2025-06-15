@@ -31,7 +31,7 @@ const About = () => {
         
         <div className="grid grid-cols-1 gap-6 lg:gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2 order-2 lg:order-1">
-            <Card className="h-full overflow-hidden bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl group">
+            <Card className="h-full overflow-hidden bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl group">
               <CardContent className="p-4 sm:p-6 lg:p-8">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
@@ -54,7 +54,7 @@ const About = () => {
           </div>
           
           <div className="lg:col-span-1 order-1 lg:order-2">
-            <Card className="h-full overflow-hidden bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl group">
+            <Card className="h-full overflow-hidden bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl group">
               <CardContent className="flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
                 <motion.div 
                   className="relative overflow-hidden rounded-2xl mb-4 sm:mb-6 lg:mb-8 group/image w-full max-w-xs"

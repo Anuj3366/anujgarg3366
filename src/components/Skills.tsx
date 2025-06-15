@@ -1,34 +1,23 @@
 
-// Removed motion and useScrollAnimation imports as animation is handled by parent
 import SkillCategory from "./SkillCategory";
 import { skillCategories } from "../data/skillsData";
-// import { useScrollAnimation } from "@/hooks/useScrollAnimation"; // No longer needed here
-// import { motion } from "framer-motion"; // No longer needed here
+import SectionHeader from "./SectionHeader";
+import { Code } from "lucide-react";
 
 const Skills = () => {
-  // const skillsRef = useScrollAnimation({ // Removed hook usage
-  //   threshold: 0.2,
-  //   onIntersect: (isVisible) => {
-  //     if (isVisible) {
-  //       console.log('Skills section is now visible');
-  //     }
-  //   }
-  // });
-
-  // Removed ref={skillsRef} from section and outer motion.div
   return (
-    <section id="skills" className="py-12 sm:py-16 md:py-20">
-      {/* <motion.div // Removed motion.div, animation handled by parent
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-        className="container px-4 sm:px-6 md:px-8" 
-      > */}
-      <div className="container px-4 sm:px-6 md:px-8"> {/* Replaced motion.div with regular div */}
-        <h2 className="mb-6 text-center text-2xl font-bold sm:text-3xl md:text-4xl">
-          Technical Skills
-        </h2>
+    <section id="skills" className="section-spacing">
+      <div className="container mx-auto container-spacing">
+        <SectionHeader
+          badge={
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/20 border border-primary/40 mb-4 sm:mb-6">
+              <Code className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
+              <span className="text-xs sm:text-sm font-bold text-primary">Technical Expertise</span>
+            </div>
+          }
+          title="Skills & Technologies"
+          description="A comprehensive overview of my technical skills and expertise across different domains"
+        />
         
         <div className="mx-auto max-w-4xl">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -37,20 +26,19 @@ const Skills = () => {
                 key={`${category.title}-${index}`}
                 title={category.title}
                 skills={category.skills}
-                index={index} // index prop might be used by SkillCategory for staggered animations, if any
+                index={index}
               />
             ))}
           </div>
           
           <div className="mt-8 text-center">
-            <p className="text-muted-foreground text-xs md:text-sm">
-              <span className="font-medium">Specialization:</span> iOS Development with Swift & SwiftUI, 
+            <p className="text-black/70 dark:text-white/70 text-xs md:text-sm">
+              <span className="font-semibold text-black dark:text-white">Specialization:</span> iOS Development with Swift & SwiftUI, 
               Full-Stack Web Development, and competitive programming across multiple platforms.
             </p>
           </div>
         </div>
       </div>
-      {/* </motion.div> */}
     </section>
   );
 };

@@ -37,7 +37,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       whileHover={{ y: -8 }}
       transition={{ type: "spring", stiffness: 300 }}
     >
-      <Card className="relative overflow-hidden bg-card/95 backdrop-blur-sm border-2 border-border/50 hover:border-primary/30 h-full flex flex-col transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
+      <Card className="relative overflow-hidden bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 h-full flex flex-col transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
         {project.featured && (
           <motion.div 
             className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10"
@@ -62,19 +62,19 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
         </div>
         
         <CardHeader className="pb-3 sm:pb-4">
-          <CardTitle className="text-lg sm:text-xl font-bold group-hover:text-primary transition-colors">
+          <CardTitle className="text-lg sm:text-xl font-bold text-black dark:text-white group-hover:text-primary transition-colors">
             {project.title}
           </CardTitle>
         </CardHeader>
         
         <CardContent className="flex-grow pb-3 sm:pb-4">
-          <p className="text-sm sm:text-base text-foreground/80 mb-4 sm:mb-6 leading-relaxed">{project.description}</p>
+          <p className="text-sm sm:text-base text-black/80 dark:text-white/80 mb-4 sm:mb-6 leading-relaxed">{project.description}</p>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {project.technologies.map((tech) => (
               <Badge 
                 key={tech} 
                 variant="secondary"
-                className="text-xs bg-secondary/50 hover:bg-secondary/80 transition-colors border border-border/50"
+                className="text-xs bg-primary/20 border border-primary/40 text-black dark:text-white hover:bg-primary/30 transition-colors"
               >
                 {tech}
               </Badge>
@@ -115,7 +115,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
               <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 transition-transform group-hover/btn:scale-110" />
               Demo
             </a>
-          </Button>
+            </Button>
         </CardFooter>
       </Card>
     </motion.div>

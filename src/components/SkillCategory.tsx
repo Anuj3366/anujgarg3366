@@ -17,9 +17,9 @@ const SkillCategory = ({ title, skills, index }: SkillCategoryProps) => {
       transition={{ duration: 0.4, delay: 0.1 * index }}
       viewport={{ once: true }}
     >
-      <Card className="h-full bg-card/50 backdrop-blur-sm border-primary/10 hover:border-primary/20 transition-all duration-300">
+      <Card className="h-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-300 hover:shadow-lg">
         <CardContent className="p-4 md:p-6">
-          <h3 className="mb-3 md:mb-4 text-base md:text-lg font-medium">
+          <h3 className="mb-3 md:mb-4 text-base md:text-lg font-semibold text-black dark:text-white">
             {title}
           </h3>
           <div className="flex flex-wrap gap-2">
