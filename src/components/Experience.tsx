@@ -37,7 +37,7 @@ const Experience = () => {
         />
         
         <Tabs defaultValue="professional" className="mx-auto max-w-4xl">
-          <TabsList className="justify-center">
+          <TabsList className="grid w-full grid-cols-2 mx-auto max-w-md">
             <TabsTrigger value="professional" className="flex items-center gap-2 text-black dark:text-white data-[state=active]:text-primary data-[state=active]:bg-primary/10">
               <Briefcase className="h-4 w-4" />
               Work Experience
