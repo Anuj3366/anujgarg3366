@@ -1,4 +1,3 @@
-
 import SkillCategory from "./SkillCategory";
 import { skillCategories } from "../data/skillsData";
 import SectionHeader from "./SectionHeader";
@@ -31,24 +30,17 @@ const Skills = () => {
             ))}
           </div>
           
-          {/* Enhanced specialization section with better visibility */}
-          <div className="mt-12 md:mt-16 mb-16 md:mb-20 text-center relative">
-            {/* Background with stronger visual presence */}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-primary/15 to-primary/10 rounded-xl blur-sm"></div>
-            
-            <div className="relative bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-xl p-8 md:p-12 border-2 border-primary/30 shadow-lg">
-              <div className="max-w-4xl mx-auto">
-                <h4 className="text-xl md:text-2xl font-bold text-black dark:text-white mb-4 md:mb-6">
-                  Technical Specialization
-                </h4>
-                <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/60 rounded-full mx-auto mb-6"></div>
-                <p className="text-black/90 dark:text-white/90 text-base md:text-lg leading-relaxed">
-                  <span className="font-bold text-primary text-lg">Core Focus:</span> iOS Development with Swift & SwiftUI, 
-                  Full-Stack Web Development with modern frameworks, and competitive programming across multiple platforms 
-                  including LeetCode, CodeChef, and Codeforces.
-                </p>
-              </div>
-            </div>
+          {/* Technical Specialization section without background */}
+          <div className="mt-12 md:mt-16 mb-16 md:mb-20 text-center">
+            <h4 className="text-xl md:text-2xl font-bold text-black dark:text-white mb-4 md:mb-6">
+              Technical Specialization
+            </h4>
+            <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/60 rounded-full mx-auto mb-6"></div>
+            <p className="text-black/90 dark:text-white/90 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+              <span className="font-bold text-primary text-lg">Core Focus:</span> iOS Development with Swift &amp; SwiftUI, 
+              Full-Stack Web Development with modern frameworks, and competitive programming across multiple platforms 
+              including LeetCode, CodeChef, and Codeforces.
+            </p>
           </div>
           
           {/* Additional safety spacing */}
