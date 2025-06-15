@@ -24,7 +24,7 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       toast.success("Message sent successfully! I'll get back to you soon.");
@@ -36,25 +36,44 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-20"
+      className="
+        py-16 sm:py-20 md:py-24 relative
+        bg-gradient-to-tr from-background/95 via-background/85 to-card/90
+        shadow-none
+      "
     >
+      {/* Layer for background gradient for optimal visibility */}
+      <div className="absolute inset-0 pointer-events-none select-none bg-gradient-to-br from-white/90 via-background/70 to-card/70 blur-none z-0" aria-hidden="true"></div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
+        className="relative z-10"
       >
-        <h2 className="mb-6 text-center text-3xl font-bold sm:text-4xl">
+        <h2
+          className="
+            text-center text-2xl sm:text-3xl md:text-4xl font-extrabold
+            mb-8 sm:mb-10
+            text-foreground drop-shadow-sm
+            bg-white/85 dark:bg-background/90 px-2 py-2 mx-auto
+            rounded-xl w-fit 
+            shadow
+            "
+          style={{ letterSpacing: "0.02em" }}
+        >
           Get In Touch
         </h2>
-        
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-10 lg:grid-cols-5">
+
+        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <Card className="h-full bg-card/50 backdrop-blur-sm">
+            <Card className="h-full bg-card/90 border border-border/50 shadow-md">
               <CardContent className="flex h-full flex-col justify-between p-6">
                 <div>
-                  <h3 className="mb-6 text-xl font-medium">Contact Information</h3>
-                  
+                  <h3 className="mb-6 text-lg sm:text-xl font-semibold text-foreground/90">
+                    Contact Information
+                  </h3>
+
                   <div className="space-y-6">
                     <div className="flex items-start">
                       <Mail className="mr-4 h-5 w-5 text-primary" />
@@ -68,7 +87,7 @@ const Contact = () => {
                         </a>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-start">
                       <Phone className="mr-4 h-5 w-5 text-primary" />
                       <div>
@@ -81,7 +100,7 @@ const Contact = () => {
                         </a>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-start">
                       <MapPin className="mr-4 h-5 w-5 text-primary" />
                       <div>
@@ -91,7 +110,7 @@ const Contact = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="mt-10">
                   <p className="text-foreground/80">
                     Looking forward to hearing from you! Feel free to reach out for collaborations, opportunities, or just to say hello.
@@ -100,13 +119,13 @@ const Contact = () => {
               </CardContent>
             </Card>
           </div>
-          
+
           <div className="lg:col-span-3">
-            <Card className="bg-card/50 backdrop-blur-sm">
+            <Card className="bg-white/95 dark:bg-card/90 border border-border/50 shadow-lg">
               <CardContent className="p-6">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="mb-2 block text-sm font-medium">
+                    <label htmlFor="name" className="mb-2 block text-sm font-medium text-foreground">
                       Name
                     </label>
                     <Input
@@ -118,9 +137,9 @@ const Contact = () => {
                       required
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="email" className="mb-2 block text-sm font-medium">
+                    <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground">
                       Email
                     </label>
                     <Input
@@ -133,9 +152,9 @@ const Contact = () => {
                       required
                     />
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="message" className="mb-2 block text-sm font-medium">
+                    <label htmlFor="message" className="mb-2 block text-sm font-medium text-foreground">
                       Message
                     </label>
                     <Textarea
@@ -148,10 +167,10 @@ const Contact = () => {
                       required
                     />
                   </div>
-                  
+
                   <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full text-base font-medium"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
