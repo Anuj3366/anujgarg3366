@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -40,7 +39,7 @@ const Achievements = () => {
         />
         
         <Tabs defaultValue="gate" className="mx-auto max-w-6xl">
-          <TabsList className="mx-auto mb-8 w-full max-w-2xl justify-center bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 p-1">
+          <TabsList className="flex justify-center w-full overflow-x-auto scrollbar-none mb-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 p-1">
             <TabsTrigger 
               value="gate" 
               className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black/80 dark:text-white/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
@@ -345,4 +344,3 @@ const Achievements = () => {
 };
 
 export default Achievements;
-
