@@ -7,6 +7,7 @@ interface ErrorReport {
   timestamp: number;
   userAgent: string;
   userId?: string;
+  additionalInfo?: any; // Added to support React ErrorInfo and other additional context
 }
 
 class ErrorTracker {
