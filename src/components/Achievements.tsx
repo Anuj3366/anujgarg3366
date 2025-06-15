@@ -28,8 +28,8 @@ const Achievements = () => {
       >
         <SectionHeader
           badge={
-            <div className="flex justify-center">
-              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/20 border border-accent/40 mb-4 sm:mb-6">
+            <div className="w-full flex justify-center items-center overflow-x-auto">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-accent/20 border border-accent/40 mb-4 max-w-full overflow-hidden">
                 <Trophy className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                 <span className="text-xs sm:text-sm font-bold text-primary">My Achievements</span>
               </div>
