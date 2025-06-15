@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -13,48 +16,67 @@ const Contact = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const {
-      name,
-      value
-    } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      console.log("Submitting contact form with data:", formData);
+      
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        }
+      });
+
+      if (error) {
+        console.error("Supabase function error:", error);
+        throw new Error(error.message || "Failed to send message");
+      }
+
+      console.log("Email sent successfully:", data);
       toast.success("Message sent successfully! I'll get back to you soon.");
+      
+      // Clear form
       setFormData({
         name: "",
         email: "",
         message: ""
       });
+    } catch (error: any) {
+      console.error("Error sending contact form:", error);
+      toast.error("Failed to send message. Please try again or contact me directly.");
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
-  return <section id="contact" className="">
+
+  return (
+    <section id="contact" className="">
       {/* Layer for background gradient for optimal visibility */}
       <div className="absolute inset-0 pointer-events-none select-none bg-gradient-to-br from-white/90 via-background/70 to-card/70 blur-none z-0" aria-hidden="true"></div>
-      <motion.div initial={{
-      opacity: 0,
-      y: 20
-    }} whileInView={{
-      opacity: 1,
-      y: 0
-    }} transition={{
-      duration: 0.5
-    }} viewport={{
-      once: true
-    }} className="relative z-10">
-        <h2 style={{
-        letterSpacing: "0.02em"
-      }} className="text-center text-2xl sm:text-3xl font-extrabold\\\\nmb-8 sm:mb-10\\\\ntext-foreground\\\\n mx-0 my-[20px] md:text-4xl">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="relative z-10"
+      >
+        <h2
+          style={{ letterSpacing: "0.02em" }}
+          className="text-center text-2xl sm:text-3xl font-extrabold mb-8 sm:mb-10 text-foreground mx-0 my-[20px] md:text-4xl"
+        >
           Get In Touch
         </h2>
 
@@ -72,7 +94,10 @@ const Contact = () => {
                       <Mail className="mr-4 h-5 w-5 text-primary" />
                       <div>
                         <p className="font-medium">Email</p>
-                        <a href="mailto:anujgarg3366@gmail.com" className="text-foreground/80 hover:text-primary">
+                        <a
+                          href="mailto:anujgarg3366@gmail.com"
+                          className="text-foreground/80 hover:text-primary"
+                        >
                           anujgarg3366@gmail.com
                         </a>
                       </div>
@@ -82,7 +107,10 @@ const Contact = () => {
                       <Phone className="mr-4 h-5 w-5 text-primary" />
                       <div>
                         <p className="font-medium">Phone</p>
-                        <a href="tel:+919899854206" className="text-foreground/80 hover:text-primary">
+                        <a
+                          href="tel:+919899854206"
+                          className="text-foreground/80 hover:text-primary"
+                        >
                           +91 9899854206
                         </a>
                       </div>
@@ -115,34 +143,81 @@ const Contact = () => {
                     <label htmlFor="name" className="mb-2 block text-sm font-medium text-foreground">
                       Name
                     </label>
-                    <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" required />
+                    <Input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your Name"
+                      required
+                    />
                   </div>
 
                   <div>
                     <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground">
                       Email
                     </label>
-                    <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="your.email@example.com" required />
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="your.email@example.com"
+                      required
+                    />
                   </div>
 
                   <div>
                     <label htmlFor="message" className="mb-2 block text-sm font-medium text-foreground">
                       Message
                     </label>
-                    <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Your message here..." rows={6} required />
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Your message here..."
+                      rows={6}
+                      required
+                    />
                   </div>
 
-                  <Button type="submit" className="w-full text-base font-medium" disabled={isSubmitting}>
-                    {isSubmitting ? <span className="flex items-center">
-                        <svg className="mr-2 h-4 w-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <Button
+                    type="submit"
+                    className="w-full text-base font-medium"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center">
+                        <svg
+                          className="mr-2 h-4 w-4 animate-spin"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
                         </svg>
                         Sending...
-                      </span> : <span className="flex items-center">
+                      </span>
+                    ) : (
+                      <span className="flex items-center">
                         Send Message
                         <Send className="ml-2 h-4 w-4" />
-                      </span>}
+                      </span>
+                    )}
                   </Button>
                 </form>
               </CardContent>
@@ -150,6 +225,8 @@ const Contact = () => {
           </div>
         </div>
       </motion.div>
-    </section>;
+    </section>
+  );
 };
+
 export default Contact;
