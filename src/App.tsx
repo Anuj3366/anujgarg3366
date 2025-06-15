@@ -150,7 +150,7 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => (
-  <Enhance​dErrorBoundary
+  <EnhancedErrorBoundary
     onError={(error, errorInfo) => {
       // Enhanced error reporting
       errorTracker.reportError({
