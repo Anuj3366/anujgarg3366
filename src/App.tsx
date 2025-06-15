@@ -1,5 +1,5 @@
 
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,7 +7,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EnhancedErrorBoundary from "@/components/EnhancedErrorBoundary";
 import SEOHead from "@/components/SEOHead";
+import SecurityHeaders from "@/components/SecurityHeaders";
 import { usePerformanceOptimization } from "@/hooks/usePerformanceOptimization";
+import { reportWebVitals } from "@/utils/webVitals";
+import { errorTracker } from "@/utils/errorTracking";
+import { runAccessibilityAudit } from "@/utils/accessibilityChecker";
 
 // Lazy load pages for better performance
 const Index = React.lazy(() => import("./pages/Index"));
@@ -56,6 +60,51 @@ const AppContent: React.FC = () => {
     enableMemoryOptimization: true,
   });
 
+  // Initialize monitoring and auditing
+  useEffect(() => {
+    // Report web vitals
+    reportWebVitals((metric) => {
+      // In production, you might want to send this to analytics
+      console.log(`Web Vital - ${metric.name}: ${metric.value}ms (${metric.rating})`);
+    });
+
+    // Run accessibility audit in development
+    if (process.env.NODE_ENV === 'development') {
+      setTimeout(() => {
+        runAccessibilityAudit();
+      }, 2000);
+    }
+
+    // Setup performance monitoring
+    const observer = new PerformanceObserver((list) => {
+      list.getEntries().forEach((entry) => {
+        // Log long tasks
+        if (entry.entryType === 'longtask') {
+          console.warn('Long task detected:', entry.duration);
+        }
+        
+        // Log large layout shifts
+        if (entry.entryType === 'layout-shift' && (entry as any).value > 0.1) {
+          console.warn('Large layout shift detected:', (entry as any).value);
+        }
+      });
+    });
+
+    // Start observing if supported
+    if ('PerformanceObserver' in window) {
+      try {
+        observer.observe({ entryTypes: ['longtask', 'layout-shift'] });
+      } catch (e) {
+        // Some browsers might not support all entry types
+        console.warn('Performance observer setup failed:', e);
+      }
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <Suspense fallback={<AppSuspenseLoading />}>
       <Routes>
@@ -67,7 +116,19 @@ const AppContent: React.FC = () => {
 };
 
 const App: React.FC = () => (
-  <EnhancedErrorBoundary>
+  <EnhancedErrorBoundary
+    onError={(error, errorInfo) => {
+      // Custom error reporting
+      errorTracker.reportError({
+        message: error.message,
+        stack: error.stack,
+        url: window.location.href,
+        timestamp: Date.now(),
+        userAgent: navigator.userAgent
+      });
+    }}
+  >
+    <SecurityHeaders />
     <QueryClientProvider client={queryClient}>
       <TooltipProvider delayDuration={300}>
         <SEOHead />

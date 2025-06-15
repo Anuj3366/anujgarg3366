@@ -1,5 +1,5 @@
 
-import React, { lazy } from "react";
+import React, { lazy, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -11,6 +11,7 @@ import SectionDivider from "@/components/SectionDivider";
 import AnimatedSection from "@/components/AnimatedSection";
 import { usePerformanceMonitoring } from "@/hooks/usePerformanceMonitoring";
 import { usePortfolioLoading } from "@/hooks/usePortfolioLoading";
+import { runHealthCheck } from "@/utils/healthChecker";
 
 // Lazy load components for better performance
 const About = lazy(() => import("@/components/About"));
@@ -24,6 +25,20 @@ const Footer = lazy(() => import("@/components/Footer"));
 const Index: React.FC = () => {
   const { isLoading, loadingProgress } = usePortfolioLoading();
   usePerformanceMonitoring();
+
+  // Run health check in development mode
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      // Run health check after page has loaded
+      const timer = setTimeout(() => {
+        runHealthCheck().then(results => {
+          console.log('Health check completed:', results);
+        });
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   if (isLoading) {
     return <LoadingScreen loadingProgress={loadingProgress} />;
