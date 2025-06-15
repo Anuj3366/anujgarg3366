@@ -22,7 +22,7 @@ const SectionHeader = ({ badge, title, description }: SectionHeaderProps) => {
       </motion.div>
       
       <motion.h2 
-        className="text-responsive-3xl font-bold text-foreground mb-4 sm:mb-6 tracking-tight"
+        className="text-responsive-3xl font-bold text-black dark:text-white mb-4 sm:mb-6 tracking-tight"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -32,7 +32,7 @@ const SectionHeader = ({ badge, title, description }: SectionHeaderProps) => {
       </motion.h2>
       
       <motion.p 
-        className="text-responsive-base text-foreground/90 max-w-2xl mx-auto leading-relaxed"
+        className="text-responsive-base text-black/80 dark:text-white/80 max-w-2xl mx-auto leading-relaxed"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
