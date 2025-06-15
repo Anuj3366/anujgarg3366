@@ -39,31 +39,68 @@ const Achievements = () => {
         />
         
         <Tabs defaultValue="gate" className="mx-auto max-w-6xl">
-          <TabsList className="flex justify-center w-full overflow-x-auto scrollbar-none mb-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 p-1">
-            <TabsTrigger 
-              value="gate" 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black/80 dark:text-white/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
+          <TabsList
+            className="
+              grid grid-cols-2 gap-2
+              sm:flex sm:grid-cols-0 sm:gap-x-2
+              justify-center w-full mb-8
+              bg-white/90 dark:bg-gray-900/90
+              backdrop-blur-sm border-2 border-border/60 p-1
+              max-w-md mx-auto
+            "
+          >
+            <TabsTrigger
+              value="gate"
+              className="
+                flex items-center justify-center gap-2 px-4 py-3
+                text-sm font-medium text-black/80 dark:text-white/80
+                data-[state=active]:text-primary data-[state=active]:bg-primary/10
+                data-[state=active]:border data-[state=active]:border-primary/20
+                rounded-md transition-all duration-200
+                w-full
+              "
             >
               <Award className="h-4 w-4" />
               GATE 2025
             </TabsTrigger>
-            <TabsTrigger 
-              value="gfg" 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black/80 dark:text-white/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
+            <TabsTrigger
+              value="gfg"
+              className="
+                flex items-center justify-center gap-2 px-4 py-3
+                text-sm font-medium text-black/80 dark:text-white/80
+                data-[state=active]:text-primary data-[state=active]:bg-primary/10
+                data-[state=active]:border data-[state=active]:border-primary/20
+                rounded-md transition-all duration-200
+                w-full
+              "
             >
               <Star className="h-4 w-4" />
               GeeksforGeeks
             </TabsTrigger>
-            <TabsTrigger 
-              value="leetcode" 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black/80 dark:text-white/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
+            <TabsTrigger
+              value="leetcode"
+              className="
+                flex items-center justify-center gap-2 px-4 py-3
+                text-sm font-medium text-black/80 dark:text-white/80
+                data-[state=active]:text-primary data-[state=active]:bg-primary/10
+                data-[state=active]:border data-[state=active]:border-primary/20
+                rounded-md transition-all duration-200
+                w-full
+              "
             >
               <Trophy className="h-4 w-4" />
               LeetCode
             </TabsTrigger>
-            <TabsTrigger 
-              value="certificates" 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black/80 dark:text-white/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
+            <TabsTrigger
+              value="certificates"
+              className="
+                flex items-center justify-center gap-2 px-4 py-3
+                text-sm font-medium text-black/80 dark:text-white/80
+                data-[state=active]:text-primary data-[state=active]:bg-primary/10
+                data-[state=active]:border data-[state=active]:border-primary/20
+                rounded-md transition-all duration-200
+                w-full
+              "
             >
               <FileText className="h-4 w-4" />
               Certifications
