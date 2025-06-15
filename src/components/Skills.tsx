@@ -6,7 +6,7 @@ import { Code } from "lucide-react";
 
 const Skills = () => {
   return (
-    <section id="skills" className="section-spacing pb-16 md:pb-20 lg:pb-24">
+    <section id="skills" className="section-spacing pb-24 md:pb-32 lg:pb-40 relative z-10">
       <div className="container mx-auto container-spacing">
         <SectionHeader
           badge={
@@ -20,7 +20,7 @@ const Skills = () => {
         />
         
         <div className="mx-auto max-w-4xl">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-8 md:mb-12">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-12 md:mb-16">
             {skillCategories.map((category, index) => (
               <SkillCategory
                 key={`${category.title}-${index}`}
@@ -31,18 +31,28 @@ const Skills = () => {
             ))}
           </div>
           
-          <div className="mt-8 md:mt-12 pb-8 md:pb-12 text-center bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-lg p-6 md:p-8 border border-primary/20">
-            <div className="max-w-3xl mx-auto">
-              <h4 className="text-lg md:text-xl font-semibold text-black dark:text-white mb-3 md:mb-4">
-                Technical Specialization
-              </h4>
-              <p className="text-black/80 dark:text-white/80 text-sm md:text-base leading-relaxed">
-                <span className="font-semibold text-primary">Core Focus:</span> iOS Development with Swift & SwiftUI, 
-                Full-Stack Web Development with modern frameworks, and competitive programming across multiple platforms 
-                including LeetCode, CodeChef, and Codeforces.
-              </p>
+          {/* Enhanced specialization section with better visibility */}
+          <div className="mt-12 md:mt-16 mb-16 md:mb-20 text-center relative">
+            {/* Background with stronger visual presence */}
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-primary/15 to-primary/10 rounded-xl blur-sm"></div>
+            
+            <div className="relative bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-xl p-8 md:p-12 border-2 border-primary/30 shadow-lg">
+              <div className="max-w-4xl mx-auto">
+                <h4 className="text-xl md:text-2xl font-bold text-black dark:text-white mb-4 md:mb-6">
+                  Technical Specialization
+                </h4>
+                <div className="h-1 w-24 bg-gradient-to-r from-primary to-primary/60 rounded-full mx-auto mb-6"></div>
+                <p className="text-black/90 dark:text-white/90 text-base md:text-lg leading-relaxed">
+                  <span className="font-bold text-primary text-lg">Core Focus:</span> iOS Development with Swift & SwiftUI, 
+                  Full-Stack Web Development with modern frameworks, and competitive programming across multiple platforms 
+                  including LeetCode, CodeChef, and Codeforces.
+                </p>
+              </div>
             </div>
           </div>
+          
+          {/* Additional safety spacing */}
+          <div className="h-8 md:h-12"></div>
         </div>
       </div>
     </section>
