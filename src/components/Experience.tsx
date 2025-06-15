@@ -1,47 +1,33 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Briefcase, GraduationCap } from "lucide-react";
 import SectionHeader from "./SectionHeader";
-
 const Experience = () => {
-  return (
-    <section
-      id="experience"
-      className="section-spacing"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        viewport={{ once: true }}
-        className="container mx-auto container-spacing"
-      >
-        <SectionHeader
-          badge={
-            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/20 border border-primary/40 mb-4 sm:mb-6">
+  return <section id="experience" className="section-spacing">
+      <motion.div initial={{
+      opacity: 0,
+      y: 20
+    }} whileInView={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      duration: 0.5
+    }} viewport={{
+      once: true
+    }} className="container mx-auto container-spacing">
+        <SectionHeader badge={<div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/20 border border-primary/40 mb-4 sm:mb-6">
               <Briefcase className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
               <span className="text-xs sm:text-sm font-bold text-primary">Professional Journey</span>
-            </div>
-          }
-          title="Experience"
-          description="My professional journey and educational background in computer science and software development"
-        />
+            </div>} title="Experience" description="My professional journey and educational background in computer science and software development" />
         
         <Tabs defaultValue="professional" className="mx-auto max-w-4xl">
-          <TabsList className="mx-auto mb-8 w-full justify-center bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60">
-            <TabsTrigger 
-              value="professional"
-              className="flex items-center gap-2 text-black dark:text-white data-[state=active]:text-primary data-[state=active]:bg-primary/10"
-            >
+          <TabsList className="">
+            <TabsTrigger value="professional" className="flex items-center gap-2 text-black dark:text-white data-[state=active]:text-primary data-[state=active]:bg-primary/10">
               <Briefcase className="h-4 w-4" />
               Work Experience
             </TabsTrigger>
-            <TabsTrigger 
-              value="education"
-              className="flex items-center gap-2 text-black dark:text-white data-[state=active]:text-primary data-[state=active]:bg-primary/10"
-            >
+            <TabsTrigger value="education" className="flex items-center gap-2 text-black dark:text-white data-[state=active]:text-primary data-[state=active]:bg-primary/10">
               <GraduationCap className="h-4 w-4" />
               Education
             </TabsTrigger>
@@ -135,8 +121,6 @@ const Experience = () => {
           </TabsContent>
         </Tabs>
       </motion.div>
-    </section>
-  );
+    </section>;
 };
-
 export default Experience;
