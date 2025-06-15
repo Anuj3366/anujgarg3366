@@ -16,6 +16,23 @@ const Contact = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lastSubmissionTime, setLastSubmissionTime] = useState<number>(0);
+
+  // Client-side validation functions
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email) && email.length <= 254;
+  };
+
+  const validateName = (name: string): boolean => {
+    const trimmed = name.trim();
+    return trimmed.length >= 2 && trimmed.length <= 100 && /^[a-zA-Z\s\-']+$/.test(trimmed);
+  };
+
+  const validateMessage = (message: string): boolean => {
+    const trimmed = message.trim();
+    return trimmed.length >= 10 && trimmed.length <= 2000;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -27,26 +44,72 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Prevent rapid consecutive submissions (client-side rate limiting)
+    const now = Date.now();
+    const timeSinceLastSubmission = now - lastSubmissionTime;
+    const minInterval = 30000; // 30 seconds between submissions
+    
+    if (timeSinceLastSubmission < minInterval) {
+      const remainingTime = Math.ceil((minInterval - timeSinceLastSubmission) / 1000);
+      toast.error(`Please wait ${remainingTime} seconds before sending another message.`);
+      return;
+    }
+
+    // Client-side validation
+    if (!validateName(formData.name)) {
+      toast.error("Please enter a valid name (2-100 characters, letters only).");
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+
+    if (!validateMessage(formData.message)) {
+      toast.error("Message must be between 10 and 2000 characters.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      console.log("Submitting contact form with data:", formData);
+      console.log("Submitting contact form with data:", {
+        name: formData.name.substring(0, 20),
+        email: formData.email.substring(0, 30),
+        message: formData.message.substring(0, 50) + "..."
+      });
       
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message
+          name: formData.name.trim(),
+          email: formData.email.trim().toLowerCase(),
+          message: formData.message.trim()
         }
       });
 
       if (error) {
         console.error("Supabase function error:", error);
-        throw new Error(error.message || "Failed to send message");
+        
+        // Handle specific error types
+        if (error.message?.includes("Too many requests")) {
+          toast.error("You've sent too many messages recently. Please wait before sending another one.");
+        } else if (error.message?.includes("Invalid")) {
+          toast.error("Please check your input and try again.");
+        } else if (error.message?.includes("prohibited content")) {
+          toast.error("Your message contains prohibited content. Please revise and try again.");
+        } else {
+          toast.error("Failed to send message. Please try again later.");
+        }
+        return;
       }
 
       console.log("Email sent successfully:", data);
       toast.success("Message sent successfully! I'll get back to you soon.");
+      
+      // Update last submission time
+      setLastSubmissionTime(now);
       
       // Clear form
       setFormData({
@@ -56,7 +119,7 @@ const Contact = () => {
       });
     } catch (error: any) {
       console.error("Error sending contact form:", error);
-      toast.error("Failed to send message. Please try again or contact me directly.");
+      toast.error("Failed to send message. Please try again later.");
     } finally {
       setIsSubmitting(false);
     }
@@ -141,7 +204,7 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="mb-2 block text-sm font-medium text-foreground">
-                      Name
+                      Name *
                     </label>
                     <Input
                       id="name"
@@ -149,13 +212,14 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Your Name"
+                      maxLength={100}
                       required
                     />
                   </div>
 
                   <div>
                     <label htmlFor="email" className="mb-2 block text-sm font-medium text-foreground">
-                      Email
+                      Email *
                     </label>
                     <Input
                       id="email"
@@ -164,23 +228,28 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="your.email@example.com"
+                      maxLength={254}
                       required
                     />
                   </div>
 
                   <div>
                     <label htmlFor="message" className="mb-2 block text-sm font-medium text-foreground">
-                      Message
+                      Message *
                     </label>
                     <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Your message here..."
+                      placeholder="Your message here... (minimum 10 characters)"
                       rows={6}
+                      maxLength={2000}
                       required
                     />
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {formData.message.length}/2000 characters
+                    </p>
                   </div>
 
                   <Button
