@@ -96,7 +96,7 @@ if ('performance' in window) {
         console.log(`  Request: ${navigation.responseStart - navigation.requestStart}ms`);
         console.log(`  Response: ${navigation.responseEnd - navigation.responseStart}ms`);
         console.log(`  DOM Processing: ${navigation.domContentLoadedEventStart - navigation.responseEnd}ms`);
-        console.log(`  Total: ${navigation.loadEventEnd - navigation.navigationStart}ms`);
+        console.log(`  Total: ${navigation.loadEventEnd - navigation.fetchStart}ms`);
       }
     }, 1000);
   });

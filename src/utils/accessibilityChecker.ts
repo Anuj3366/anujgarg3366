@@ -75,7 +75,8 @@ export const checkAccessibility = (): AccessibilityIssue[] => {
 
   // Check color contrast (basic check)
   const checkColorContrast = (element: Element) => {
-    const styles = window.getComputedStyle(element);
+    const htmlElement = element as HTMLElement;
+    const styles = window.getComputedStyle(htmlElement);
     const color = styles.color;
     const backgroundColor = styles.backgroundColor;
     
@@ -115,14 +116,15 @@ export const checkAccessibility = (): AccessibilityIssue[] => {
   );
   
   focusableElements.forEach((element, index) => {
-    const styles = window.getComputedStyle(element, ':focus');
+    const htmlElement = element as HTMLElement;
+    const styles = window.getComputedStyle(htmlElement, ':focus');
     const outline = styles.outline;
     const outlineWidth = styles.outlineWidth;
     
     if (outline === 'none' || outlineWidth === '0px') {
       // Check if there's a custom focus style
       const hasCustomFocus = styles.boxShadow !== 'none' || 
-                            styles.border !== element.style.border;
+                            styles.border !== htmlElement.style.border;
       
       if (!hasCustomFocus) {
         issues.push({

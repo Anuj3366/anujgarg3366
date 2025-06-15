@@ -13,7 +13,7 @@ export const performHealthCheck = async (): Promise<HealthCheckResult[]> => {
   const performanceCheck = () => {
     const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
     if (navigation) {
-      const loadTime = navigation.loadEventEnd - navigation.navigationStart;
+      const loadTime = navigation.loadEventEnd - navigation.fetchStart;
       results.push({
         category: 'Performance',
         status: loadTime < 3000 ? 'pass' : loadTime < 5000 ? 'warning' : 'fail',
@@ -124,7 +124,7 @@ export const performHealthCheck = async (): Promise<HealthCheckResult[]> => {
       results.push({
         category: 'Network',
         status: 'pass',
-        details: '连接信息不可用',
+        details: 'Connection info not available',
         recommendations: undefined
       });
     }
