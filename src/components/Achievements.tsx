@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -37,31 +38,31 @@ const Achievements = () => {
         />
         
         <Tabs defaultValue="gate" className="mx-auto max-w-6xl">
-          <TabsList className="mx-auto mb-8 w-full max-w-2xl justify-center bg-card/50 backdrop-blur-sm border border-border/40 p-1">
+          <TabsList className="mx-auto mb-8 w-full max-w-2xl justify-center bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 p-1">
             <TabsTrigger 
               value="gate" 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black/80 dark:text-white/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
             >
               <Award className="h-4 w-4" />
               GATE 2025
             </TabsTrigger>
             <TabsTrigger 
               value="gfg" 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black/80 dark:text-white/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
             >
               <Star className="h-4 w-4" />
               GeeksforGeeks
             </TabsTrigger>
             <TabsTrigger 
               value="leetcode" 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black/80 dark:text-white/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
             >
               <Trophy className="h-4 w-4" />
               LeetCode
             </TabsTrigger>
             <TabsTrigger 
               value="certificates" 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-black/80 dark:text-white/80 data-[state=active]:text-primary data-[state=active]:bg-primary/10 data-[state=active]:border data-[state=active]:border-primary/20 rounded-md transition-all duration-200"
             >
               <FileText className="h-4 w-4" />
               Certifications
@@ -76,9 +77,9 @@ const Achievements = () => {
               transition={{ duration: 0.5 }}
               className="grid grid-cols-1 gap-6"
             >
-              <Card className="bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
+              <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
                 <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5 pb-4 border-b border-border/30">
-                  <CardTitle className="text-center text-2xl sm:text-3xl text-foreground">
+                  <CardTitle className="text-center text-2xl sm:text-3xl text-black dark:text-white">
                     GATE 2025 (Computer Science & IT)
                   </CardTitle>
                 </CardHeader>
@@ -86,7 +87,7 @@ const Achievements = () => {
                   <div className="text-center">
                     <div className="mb-6">
                       <h3 className="text-4xl sm:text-5xl font-bold text-primary mb-2">397/1000</h3>
-                      <p className="text-lg text-foreground/70">GATE Score 2025</p>
+                      <p className="text-lg text-black/70 dark:text-white/70">GATE Score 2025</p>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
@@ -111,7 +112,7 @@ const Achievements = () => {
                         <Award className="h-5 w-5" />
                         Achievement Highlights
                       </h4>
-                      <ul className="text-left text-foreground/80 space-y-2 max-w-2xl mx-auto">
+                      <ul className="text-left text-black/80 dark:text-white/80 space-y-2 max-w-2xl mx-auto">
                         <li className="flex items-start gap-2">
                           <span className="text-primary mt-1">•</span>
                           Successfully qualified GATE 2025 in Computer Science & Information Technology
@@ -144,9 +145,9 @@ const Achievements = () => {
               className="grid grid-cols-1 gap-6 lg:grid-cols-3"
             >
               <div className="lg:col-span-1">
-                <Card className="bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl h-full">
+                <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl h-full">
                   <CardHeader className="pb-4">
-                    <CardTitle className="text-center text-xl text-foreground">
+                    <CardTitle className="text-center text-xl text-black dark:text-white">
                       GFG Profile
                     </CardTitle>
                   </CardHeader>
@@ -170,9 +171,9 @@ const Achievements = () => {
               </div>
               
               <div className="lg:col-span-2">
-                <Card className="h-full bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl">
+                <Card className="h-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl">
                   <CardHeader className="pb-4">
-                    <CardTitle className="text-xl text-foreground">
+                    <CardTitle className="text-xl text-black dark:text-white">
                       GFG Achievements
                     </CardTitle>
                   </CardHeader>
@@ -181,7 +182,7 @@ const Achievements = () => {
                     <div className="space-y-6">
                       <div>
                         <div className="mb-2 flex items-center justify-between">
-                          <span className="text-sm font-medium text-foreground/80">Coding Score</span>
+                          <span className="text-sm font-medium text-black/80 dark:text-white/80">Coding Score</span>
                           <span className="text-sm font-bold text-primary">2049</span>
                         </div>
                         <Progress value={82} className="h-2" />
@@ -189,7 +190,7 @@ const Achievements = () => {
                       
                       <div>
                         <div className="mb-2 flex items-center justify-between">
-                          <span className="text-sm font-medium text-foreground/80">Problems Solved</span>
+                          <span className="text-sm font-medium text-black/80 dark:text-white/80">Problems Solved</span>
                           <span className="text-sm font-bold text-primary">903</span>
                         </div>
                         <Progress value={90} className="h-2" />
@@ -197,7 +198,7 @@ const Achievements = () => {
                       
                       <div>
                         <div className="mb-2 flex items-center justify-between">
-                          <span className="text-sm font-medium text-foreground/80">Contest Rating</span>
+                          <span className="text-sm font-medium text-black/80 dark:text-white/80">Contest Rating</span>
                           <span className="text-sm font-bold text-primary">1793</span>
                         </div>
                         <Progress value={72} className="h-2" />
@@ -205,17 +206,17 @@ const Achievements = () => {
                       
                       <div className="grid grid-cols-2 gap-4">
                         <div className="rounded-lg bg-primary/5 border border-primary/20 p-4">
-                          <p className="text-sm text-foreground/70 font-medium">Global Rank</p>
+                          <p className="text-sm text-black/70 dark:text-white/70 font-medium">Global Rank</p>
                           <p className="text-2xl font-bold text-primary">2,791</p>
                         </div>
                         
                         <div className="rounded-lg bg-primary/5 border border-primary/20 p-4">
-                          <p className="text-sm text-foreground/70 font-medium">Institute Rank</p>
+                          <p className="text-sm text-black/70 dark:text-white/70 font-medium">Institute Rank</p>
                           <p className="text-2xl font-bold text-primary">33</p>
                         </div>
                         
                         <div className="col-span-2 rounded-lg bg-accent/5 border border-accent/20 p-4">
-                          <p className="text-sm text-foreground/70 font-medium">Current Streak</p>
+                          <p className="text-sm text-black/70 dark:text-white/70 font-medium">Current Streak</p>
                           <p className="text-2xl font-bold text-accent">219 days</p>
                         </div>
                       </div>
@@ -232,9 +233,9 @@ const Achievements = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <Card className="bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
+              <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-center text-xl text-foreground">
+                  <CardTitle className="text-center text-xl text-black dark:text-white">
                     LeetCode Journey
                   </CardTitle>
                 </CardHeader>
@@ -271,7 +272,7 @@ const Achievements = () => {
                     )}
                   </div>
                   
-                  <p className="mt-6 text-center text-foreground/80 max-w-xl">
+                  <p className="mt-6 text-center text-black/80 dark:text-white/80 max-w-xl">
                     Consistent problem-solving journey on LeetCode by <strong className="text-primary">Anuj Garg</strong>, focusing on mastering Data Structures & Algorithms
                   </p>
                 </CardContent>
@@ -286,51 +287,51 @@ const Achievements = () => {
               transition={{ duration: 0.5 }}
               className="grid grid-cols-1 gap-6 sm:grid-cols-2"
             >
-              <Card className="bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
+              <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
                 <CardHeader>
-                  <CardTitle className="text-foreground flex items-center gap-2">
+                  <CardTitle className="text-black dark:text-white flex items-center gap-2">
                     <Award className="h-5 w-5 text-primary" />
                     GATE 2025 Qualification
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground/80 leading-relaxed">Qualified GATE 2025 with a score of 397/1000 in Computer Science & Information Technology, demonstrating strong fundamentals and competitive problem-solving skills.</p>
+                  <p className="text-black/80 dark:text-white/80 leading-relaxed">Qualified GATE 2025 with a score of 397/1000 in Computer Science & Information Technology, demonstrating strong fundamentals and competitive problem-solving skills.</p>
                 </CardContent>
               </Card>
               
-              <Card className="bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl">
+              <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl">
                 <CardHeader>
-                  <CardTitle className="text-foreground flex items-center gap-2">
+                  <CardTitle className="text-black dark:text-white flex items-center gap-2">
                     <FileText className="h-5 w-5 text-accent" />
                     AWS Academy Graduate
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground/80 leading-relaxed">AWS Academy Cloud Foundations certification, covering essential AWS services, cloud computing concepts, and modern cloud architecture patterns.</p>
+                  <p className="text-black/80 dark:text-white/80 leading-relaxed">AWS Academy Cloud Foundations certification, covering essential AWS services, cloud computing concepts, and modern cloud architecture patterns.</p>
                 </CardContent>
               </Card>
               
-              <Card className="bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
+              <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-primary/40 transition-all duration-500 hover:shadow-xl">
                 <CardHeader>
-                  <CardTitle className="text-foreground flex items-center gap-2">
+                  <CardTitle className="text-black dark:text-white flex items-center gap-2">
                     <Star className="h-5 w-5 text-primary" />
                     DSA Specialization
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground/80 leading-relaxed">Comprehensive specialization in Data Structures and Algorithms, covering advanced algorithmic design, complexity analysis, and competitive programming techniques.</p>
+                  <p className="text-black/80 dark:text-white/80 leading-relaxed">Comprehensive specialization in Data Structures and Algorithms, covering advanced algorithmic design, complexity analysis, and competitive programming techniques.</p>
                 </CardContent>
               </Card>
               
-              <Card className="bg-gradient-to-br from-card/90 to-card/60 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl">
+              <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-border/60 hover:border-accent/40 transition-all duration-500 hover:shadow-xl">
                 <CardHeader>
-                  <CardTitle className="text-foreground flex items-center gap-2">
+                  <CardTitle className="text-black dark:text-white flex items-center gap-2">
                     <Trophy className="h-5 w-5 text-accent" />
                     Software Engineering
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-foreground/80 leading-relaxed">Software engineering specialization covering modern development practices, testing methodologies, agile project management, and scalable system design.</p>
+                  <p className="text-black/80 dark:text-white/80 leading-relaxed">Software engineering specialization covering modern development practices, testing methodologies, agile project management, and scalable system design.</p>
                 </CardContent>
               </Card>
             </motion.div>
