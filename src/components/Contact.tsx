@@ -52,16 +52,9 @@ const Contact = () => {
     }} viewport={{
       once: true
     }} className="relative z-10">
-        <h2 className="
-            text-center text-2xl sm:text-3xl md:text-4xl font-extrabold
-            mb-8 sm:mb-10
-            text-foreground drop-shadow-sm
-            bg-white/85 dark:bg-background/90 px-2 py-2 mx-auto
-            rounded-xl w-fit 
-            shadow
-            " style={{
+        <h2 style={{
         letterSpacing: "0.02em"
-      }}>
+      }} className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold\nmb-8 sm:mb-10\ntext-foreground\n            ">
           Get In Touch
         </h2>
 
