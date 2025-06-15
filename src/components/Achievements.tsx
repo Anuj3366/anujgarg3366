@@ -43,7 +43,7 @@ const Achievements = () => {
             className="
               grid grid-cols-2 gap-2
               sm:flex sm:grid-cols-0 sm:gap-x-2
-              justify-center w-full mb-8
+              justify-center w-full mb-12 sm:mb-8
               bg-white/90 dark:bg-gray-900/90
               backdrop-blur-sm border-2 border-border/60 p-1
               max-w-md mx-auto
