@@ -54,7 +54,7 @@ const Contact = () => {
     }} className="relative z-10">
         <h2 style={{
         letterSpacing: "0.02em"
-      }} className="text-center text-2xl sm:text-3xl font-extrabold\\nmb-8 sm:mb-10\\ntext-foreground\\n md:text-4xl">
+      }} className="text-center text-2xl sm:text-3xl font-extrabold\\\\nmb-8 sm:mb-10\\\\ntext-foreground\\\\n mx-0 my-[20px] md:text-4xl">
           Get In Touch
         </h2>
 
