@@ -9,7 +9,7 @@ const Experience = () => {
   return (
     <section
       id="experience"
-      className="section-spacing bg-background/95 backdrop-blur-sm"
+      className="section-spacing"
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
