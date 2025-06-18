@@ -86,61 +86,89 @@ const AnimatedWaves: React.FC = () => {
 const HeroBackground: React.FC = () => {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
-      {/* Enhanced Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background/90 to-primary/10" />
+      {/* Enhanced gradient background with CSS custom properties for dark mode */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(circle at 20% 20%, hsl(var(--primary)/0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, hsl(var(--accent)/0.10) 0%, transparent 50%),
+            radial-gradient(circle at 40% 60%, hsl(var(--primary)/0.08) 0%, transparent 60%),
+            linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--background)/0.95) 50%, hsl(var(--background)/0.9) 100%)
+          `
+        }}
+      />
       
-      {/* More Dynamic Animated Background Pattern */}
-      <div className="absolute inset-0 opacity-40">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.15),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_70%,rgba(168,85,247,0.1),transparent_50%)]" />
+      {/* Enhanced animated background pattern with CSS custom properties */}
+      <div className="absolute inset-0 opacity-30">
         <div 
-          className="absolute inset-0 bg-[linear-gradient(45deg,transparent_48%,rgba(59,130,246,0.05)_50%,transparent_52%)]"
+          className="absolute inset-0"
           style={{
+            background: `radial-gradient(circle at 30% 30%, hsl(var(--primary)/0.12), transparent 50%)`
+          }}
+        />
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: `radial-gradient(circle at 70% 70%, hsl(var(--accent)/0.08), transparent 50%)`
+          }}
+        />
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(45deg, transparent 48%, hsl(var(--primary)/0.04) 50%, transparent 52%)`,
             backgroundSize: '15px 15px',
             animation: 'float 8s ease-in-out infinite',
           }}
         />
         <div 
-          className="absolute inset-0 bg-[linear-gradient(-45deg,transparent_48%,rgba(168,85,247,0.03)_50%,transparent_52%)]"
+          className="absolute inset-0"
           style={{
+            background: `linear-gradient(-45deg, transparent 48%, hsl(var(--accent)/0.03) 50%, transparent 52%)`,
             backgroundSize: '20px 20px',
             animation: 'float 12s ease-in-out infinite reverse',
           }}
         />
       </div>
 
-      {/* Enhanced 3D Canvas with Faster Animations */}
-      <div className="absolute inset-0 opacity-70">
-        <Canvas camera={{ position: [0, 0, 8], fov: 75 }}>
+      {/* Enhanced 3D Canvas with better performance */}
+      <div className="absolute inset-0 opacity-60">
+        <Canvas 
+          camera={{ position: [0, 0, 8], fov: 75 }}
+          performance={{ min: 0.5 }}
+        >
           <ambientLight intensity={0.3} />
           <pointLight position={[10, 10, 10]} intensity={0.5} />
           <pointLight position={[-10, -10, -10]} intensity={0.3} color="#8b5cf6" />
           <Stars 
             radius={150} 
             depth={80} 
-            count={2000} 
+            count={1500} 
             factor={6} 
             saturation={0} 
             fade 
-            speed={2}
+            speed={1.5}
           />
-          <FloatingParticles count={80} />
+          <FloatingParticles count={60} />
           <AnimatedWaves />
         </Canvas>
       </div>
 
-      {/* Faster Floating Elements */}
+      {/* Optimized floating elements with CSS custom properties */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(8)].map((_, i) => (
+        {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-96 h-96 rounded-full border border-primary/20 bg-gradient-to-r from-primary/8 to-accent/8"
+            className="absolute w-80 h-80 rounded-full border opacity-30"
             style={{
+              borderColor: `hsl(var(--primary)/0.15)`,
+              background: `linear-gradient(135deg, hsl(var(--primary)/0.06) 0%, hsl(var(--accent)/0.04) 100%)`,
               left: `${Math.random() * 120 - 10}%`,
               top: `${Math.random() * 120 - 10}%`,
               animation: `float ${4 + i}s ease-in-out infinite`,
               animationDelay: `${i * 0.8}s`,
-              transform: `scale(${0.4 + Math.random() * 0.8})`,
+              transform: `scale(${0.4 + Math.random() * 0.6})`,
+              willChange: 'transform',
             }}
           />
         ))}
