@@ -103,8 +103,8 @@ const renderApp = () => {
               fontWeight: '600',
               transition: 'transform 0.2s',
             }}
-            onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-            onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+            onMouseOver={(e) => (e.target as HTMLButtonElement).style.transform = 'scale(1.05)'}
+            onMouseOut={(e) => (e.target as HTMLButtonElement).style.transform = 'scale(1)'}
           >
             Reload Application
           </button>
