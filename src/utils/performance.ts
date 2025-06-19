@@ -1,25 +1,4 @@
 
-export const preloadImage = (src: string): Promise<void> => {
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve();
-    img.onerror = () => resolve(); // Don't fail on error
-    img.src = src;
-    
-    // Timeout to prevent hanging
-    setTimeout(resolve, 5000);
-  });
-};
-
-export const preloadImages = async (srcs: string[]): Promise<void> => {
-  try {
-    await Promise.allSettled(srcs.map(preloadImage));
-    console.log('Images preloaded');
-  } catch (error) {
-    console.warn('Image preload failed:', error);
-  }
-};
-
 export const debounce = <T extends (...args: any[]) => any>(
   func: T,
   wait: number

@@ -7,24 +7,17 @@ interface UseOptimizedImageProps {
 }
 
 export const useOptimizedImage = ({ src, placeholder }: UseOptimizedImageProps) => {
-  const [imageSrc, setImageSrc] = useState(placeholder || '');
+  const [imageSrc, setImageSrc] = useState(src);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    if (!src) return;
+    
     const img = new Image();
-    
-    img.onload = () => {
-      setImageSrc(src);
-      setIsLoaded(true);
-    };
-    
-    img.onerror = () => {
-      setHasError(true);
-    };
-    
+    img.onload = () => setIsLoaded(true);
     img.src = src;
+    setImageSrc(src);
   }, [src]);
 
-  return { imageSrc, isLoaded, hasError };
+  return { imageSrc, isLoaded, hasError: false };
 };

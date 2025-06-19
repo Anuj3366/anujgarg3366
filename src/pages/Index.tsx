@@ -6,10 +6,8 @@ import ScrollToTop from "@/components/ScrollToTop";
 import EnhancedErrorBoundary from "@/components/EnhancedErrorBoundary";
 import SEOHead from "@/components/SEOHead";
 import HeroBackground from "@/components/HeroBackground";
-import SimpleLoadingScreen from "@/components/SimpleLoadingScreen";
 import SectionDivider from "@/components/SectionDivider";
 import AnimatedSection from "@/components/AnimatedSection";
-import { useSimpleLoading } from "@/hooks/useSimpleLoading";
 
 // Lazy load components
 const About = lazy(() => import("@/components/About"));
@@ -21,12 +19,6 @@ const Contact = lazy(() => import("@/components/Contact"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 const Index: React.FC = () => {
-  const { isLoading, progress } = useSimpleLoading();
-
-  if (isLoading) {
-    return <SimpleLoadingScreen progress={progress} />;
-  }
-
   return (
     <EnhancedErrorBoundary>
       <SEOHead />
