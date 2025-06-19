@@ -1,41 +1,34 @@
 
 export const preloadImage = (src: string): Promise<void> => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const img = new Image();
     img.onload = () => resolve();
-    img.onerror = reject;
+    img.onerror = () => resolve(); // Don't fail on error
     img.src = src;
+    
+    // Timeout to prevent hanging
+    setTimeout(resolve, 5000);
   });
 };
 
 export const preloadImages = async (srcs: string[]): Promise<void> => {
   try {
-    await Promise.all(srcs.map(preloadImage));
-    console.log('All images preloaded successfully');
+    await Promise.allSettled(srcs.map(preloadImage));
+    console.log('Images preloaded');
   } catch (error) {
-    console.warn('Some images failed to preload:', error);
+    console.warn('Image preload failed:', error);
   }
 };
 
 export const debounce = <T extends (...args: any[]) => any>(
   func: T,
-  wait: number,
-  immediate?: boolean
+  wait: number
 ): ((...args: Parameters<T>) => void) => {
   let timeout: NodeJS.Timeout | null = null;
   
   return (...args: Parameters<T>) => {
-    const later = () => {
-      timeout = null;
-      if (!immediate) func(...args);
-    };
-    
-    const callNow = immediate && !timeout;
-    
     if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    
-    if (callNow) func(...args);
+    timeout = setTimeout(() => func(...args), wait);
   };
 };
 
@@ -52,11 +45,4 @@ export const throttle = <T extends (...args: any[]) => any>(
       setTimeout(() => inThrottle = false, limit);
     }
   };
-};
-
-export const measurePerformance = (name: string, fn: () => void): void => {
-  const start = performance.now();
-  fn();
-  const end = performance.now();
-  console.log(`${name} took ${(end - start).toFixed(2)} milliseconds`);
 };

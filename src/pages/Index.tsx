@@ -1,19 +1,17 @@
 
-import React, { lazy, useEffect } from "react";
+import React, { lazy } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ScrollToTop from "@/components/ScrollToTop";
 import EnhancedErrorBoundary from "@/components/EnhancedErrorBoundary";
 import SEOHead from "@/components/SEOHead";
 import HeroBackground from "@/components/HeroBackground";
-import LoadingScreen from "@/components/LoadingScreen";
+import SimpleLoadingScreen from "@/components/SimpleLoadingScreen";
 import SectionDivider from "@/components/SectionDivider";
 import AnimatedSection from "@/components/AnimatedSection";
-import { usePerformanceMonitoring } from "@/hooks/usePerformanceMonitoring";
-import { usePortfolioLoading } from "@/hooks/usePortfolioLoading";
-import { runHealthCheck } from "@/utils/healthChecker";
+import { useSimpleLoading } from "@/hooks/useSimpleLoading";
 
-// Lazy load components for better performance
+// Lazy load components
 const About = lazy(() => import("@/components/About"));
 const Experience = lazy(() => import("@/components/Experience"));
 const Skills = lazy(() => import("@/components/Skills"));
@@ -23,25 +21,10 @@ const Contact = lazy(() => import("@/components/Contact"));
 const Footer = lazy(() => import("@/components/Footer"));
 
 const Index: React.FC = () => {
-  const { isLoading, loadingProgress } = usePortfolioLoading();
-  usePerformanceMonitoring();
-
-  // Run health check in development mode
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      // Run health check after page has loaded
-      const timer = setTimeout(() => {
-        runHealthCheck().then(results => {
-          console.log('Health check completed:', results);
-        });
-      }, 5000);
-
-      return () => clearTimeout(timer);
-    }
-  }, []);
+  const { isLoading, progress } = useSimpleLoading();
 
   if (isLoading) {
-    return <LoadingScreen loadingProgress={loadingProgress} />;
+    return <SimpleLoadingScreen progress={progress} />;
   }
 
   return (
