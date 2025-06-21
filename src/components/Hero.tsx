@@ -68,7 +68,7 @@ const Hero = memo(() => {
           height={size}
           loading="eager"
           decoding="sync"
-          fetchpriority="high"
+          fetchPriority="high"
         />
       </div>
     );
