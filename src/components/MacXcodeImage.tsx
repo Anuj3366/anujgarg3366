@@ -22,8 +22,6 @@ const MacXcodeImage = memo<MacXcodeImageProps>(({ className = "", size = 120 }) 
     filter: 'blur(20px)',
   }), [size]);
 
-  const aspectRatio = useMemo(() => 1, []); // Square aspect ratio
-
   return (
     <div className={`flex justify-center items-center relative ${className}`}>
       {/* Optimized glow effect with reduced opacity for better performance */}
@@ -51,10 +49,6 @@ const MacXcodeImage = memo<MacXcodeImageProps>(({ className = "", size = 120 }) 
         className="rounded-full shadow-2xl border-4 border-primary/30 dark:border-primary/40 bg-card object-cover relative z-10 ring-2 ring-accent/20 dark:ring-accent/30"
         width={size}
         height={size}
-        aspectRatio={aspectRatio}
-        priority={true}
-        sizes={`${size}px`}
-        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
       />
     </div>
   );
