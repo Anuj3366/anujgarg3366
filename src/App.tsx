@@ -7,10 +7,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import EnhancedErrorBoundary from "@/components/EnhancedErrorBoundary";
 import SEOHead from "@/components/SEOHead";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
 
-// Simplified QueryClient
+// Lazy load pages for better performance
+const Index = React.lazy(() => import("./pages/Index"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+
+// Optimized QueryClient configuration
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -18,6 +20,7 @@ const queryClient = new QueryClient({
       gcTime: 10 * 60 * 1000,
       retry: 1,
       refetchOnWindowFocus: false,
+      networkMode: 'offlineFirst',
     },
   },
 });
@@ -28,10 +31,18 @@ const App: React.FC = () => (
       <TooltipProvider delayDuration={300}>
         <SEOHead />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <React.Suspense 
+            fallback={
+              <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/90 to-background/80">
+                <div className="w-32 h-32 rounded-full bg-gradient-to-r from-primary/30 to-accent/30 animate-pulse"></div>
+              </div>
+            }
+          >
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </React.Suspense>
         </BrowserRouter>
         <Toaster />
         <Sonner position="bottom-right" />

@@ -39,43 +39,94 @@
     <link rel="alternate icon" type="image/png" sizes="16x16" href="/icons/custom-favicon.svg">
     <link rel="mask-icon" href="/icons/custom-favicon.svg" color="#2563eb">
     
-    <!-- Preload critical resources -->
+    <!-- Critical resource preloading and hints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
     
-    <!-- Prevent flash of unstyled content -->
+    <!-- Preload critical hero image -->
+    <link rel="preload" href="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80" as="image" type="image/jpeg" crossorigin>
+    
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- Critical CSS - prevent FOUC with faster loading -->
     <style>
+      /* Critical above-the-fold styles */
       html { 
         visibility: hidden; 
         opacity: 0; 
         scroll-behavior: smooth;
+        font-family: system-ui, -apple-system, sans-serif;
       }
       html.loaded { 
         visibility: visible; 
         opacity: 1; 
-        transition: opacity 0.3s ease-in-out; 
+        transition: opacity 0.2s ease-in-out; 
       }
       
-      /* Prevent horizontal scroll on mobile */
       body {
         overflow-x: hidden;
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 98%) 100%);
+      }
+      
+      /* Critical hero section skeleton */
+      #root {
+        min-height: 100vh;
+      }
+      
+      /* Prevent layout shift for hero section */
+      .hero-skeleton {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+      }
+      
+      /* Dark mode support */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: linear-gradient(135deg, hsl(222.2 84% 4.9%) 0%, hsl(217.2 32.6% 17.5%) 100%);
+          color: hsl(210 40% 98%);
+        }
       }
     </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Hero skeleton to prevent layout shift -->
+      <div class="hero-skeleton">
+        <div style="width: 200px; height: 200px; border-radius: 50%; background: linear-gradient(45deg, #f3f4f6, #e5e7eb); animation: pulse 2s infinite;"></div>
+      </div>
+    </div>
+    
+    <!-- Load main script with high priority -->
     <script type="module" src="/src/main.tsx"></script>
+    
     <script>
-      // Enhanced FOUC prevention
-      document.addEventListener('DOMContentLoaded', function() {
+      // Enhanced FOUC prevention with faster execution
+      const showContent = () => {
         document.documentElement.classList.add('loaded');
-      });
+        // Remove skeleton once React takes over
+        setTimeout(() => {
+          const skeleton = document.querySelector('.hero-skeleton');
+          if (skeleton) skeleton.style.display = 'none';
+        }, 100);
+      };
       
-      // Fallback for slow loading
-      setTimeout(function() {
-        document.documentElement.classList.add('loaded');
-      }, 1000);
+      // Show content as soon as DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', showContent);
+      } else {
+        showContent();
+      }
+      
+      // Failsafe fallback
+      setTimeout(showContent, 500);
     </script>
   </body>
 </html>

@@ -1,8 +1,12 @@
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+
+// Preload critical components
+const App = React.lazy(() => import('./App.tsx'));
+
+// Import CSS asynchronously to prevent blocking
+import('./index.css');
 
 const container = document.getElementById("root");
 if (!container) {
@@ -11,24 +15,31 @@ if (!container) {
 
 const root = createRoot(container);
 
-// Simple, fast render
+// Optimized render with Suspense for better performance
 root.render(
   <React.StrictMode>
-    <App />
+    <React.Suspense 
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/90 to-background/80">
+          <div className="w-48 h-48 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 animate-pulse"></div>
+        </div>
+      }
+    >
+      <App />
+    </React.Suspense>
   </React.StrictMode>
 );
 
-// Register service worker asynchronously after render
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', async () => {
-    try {
-      const registration = await navigator.serviceWorker.register('/service-worker.js', {
-        scope: '/',
-        updateViaCache: 'none'
-      });
+// Register service worker with lower priority to not block initial render
+requestIdleCallback(() => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js', {
+      scope: '/',
+      updateViaCache: 'none'
+    }).then(() => {
       console.log('✅ ServiceWorker registered');
-    } catch (error) {
+    }).catch((error) => {
       console.warn('⚠️ ServiceWorker registration failed:', error);
-    }
-  });
-}
+    });
+  }
+});
