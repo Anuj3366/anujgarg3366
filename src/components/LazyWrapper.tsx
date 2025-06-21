@@ -6,9 +6,9 @@ interface LazyWrapperProps {
   minHeight?: string;
 }
 
-const LazyWrapper = memo<LazyWrapperProps>(({ children, minHeight = "300px" }) => {
+const LazyWrapper = memo<LazyWrapperProps>(({ children, minHeight }) => {
   return (
-    <div style={{ minHeight }} className="w-full">
+    <div style={minHeight ? { minHeight } : undefined} className="w-full">
       {children}
     </div>
   );

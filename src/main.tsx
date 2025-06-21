@@ -4,7 +4,6 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// Simplified initialization - remove complex preloading that's blocking render
 const container = document.getElementById("root");
 if (!container) {
   throw new Error("Root element not found");
@@ -12,7 +11,7 @@ if (!container) {
 
 const root = createRoot(container);
 
-// Simple, fast render without blocking operations
+// Simple, fast render
 root.render(
   <React.StrictMode>
     <App />
@@ -27,23 +26,9 @@ if ('serviceWorker' in navigator) {
         scope: '/',
         updateViaCache: 'none'
       });
-      console.log('✅ ServiceWorker registered:', registration.scope);
+      console.log('✅ ServiceWorker registered');
     } catch (error) {
       console.warn('⚠️ ServiceWorker registration failed:', error);
     }
-  });
-}
-
-// Basic performance monitoring - non-blocking
-if ('performance' in window) {
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-      if (navigation) {
-        const ttfb = navigation.responseStart - navigation.requestStart;
-        const loadTime = navigation.loadEventEnd - navigation.fetchStart;
-        console.log(`📊 TTFB: ${ttfb.toFixed(2)}ms, Load: ${loadTime.toFixed(2)}ms`);
-      }
-    }, 1000);
   });
 }

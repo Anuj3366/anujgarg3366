@@ -1,5 +1,5 @@
 
-import { memo, useState, useCallback } from 'react';
+import { memo, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 interface OptimizedImageLazyProps {
@@ -8,10 +8,6 @@ interface OptimizedImageLazyProps {
   className?: string;
   width?: number;
   height?: number;
-  aspectRatio?: number;
-  priority?: boolean;
-  sizes?: string;
-  blurDataURL?: string;
   onLoad?: () => void;
   onError?: () => void;
 }
@@ -23,22 +19,9 @@ const OptimizedImageLazy = memo<OptimizedImageLazyProps>(({
   width,
   height,
   onLoad,
-  onError,
-  blurDataURL,
-  ...rest
+  onError
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
-
-  const handleLoad = useCallback(() => {
-    setIsLoaded(true);
-    onLoad?.();
-  }, [onLoad]);
-
-  const handleError = useCallback(() => {
-    setHasError(true);
-    onError?.();
-  }, [onError]);
 
   if (hasError) {
     return (
@@ -55,14 +38,12 @@ const OptimizedImageLazy = memo<OptimizedImageLazyProps>(({
       width={width}
       height={height}
       loading="lazy"
-      onLoad={handleLoad}
-      onError={handleError}
-      className={cn(
-        "transition-opacity duration-200",
-        isLoaded ? "opacity-100" : "opacity-50",
-        className
-      )}
-      {...rest}
+      onLoad={onLoad}
+      onError={() => {
+        setHasError(true);
+        onError?.();
+      }}
+      className={className}
     />
   );
 });
