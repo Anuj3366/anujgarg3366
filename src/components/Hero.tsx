@@ -1,9 +1,11 @@
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { memo, useMemo } from "react";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
+import OptimizedAvatar from "./hero/OptimizedAvatar";
+import StatusBadges from "./hero/StatusBadges";
+import SocialLinks from "./hero/SocialLinks";
+import CTAButtons from "./hero/CTAButtons";
 
 // Critical hero image - preload with high priority
 const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80";
@@ -31,17 +33,6 @@ const Hero = memo(() => {
     },
   }), []);
 
-  const floatVariants = useMemo(() => ({
-    animate: {
-      y: [0, -8, 0],
-      transition: {
-        duration: 2.5,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  }), []);
-
   // Optimized background styles
   const backgroundStyle = useMemo(() => ({
     background: "linear-gradient(135deg, hsl(var(--card)/0.95) 0%, hsl(var(--card)/0.85) 100%)",
@@ -50,44 +41,6 @@ const Hero = memo(() => {
     boxShadow: "0 20px 50px -12px hsl(var(--foreground)/0.08), 0 0 0 1px hsl(var(--border)/0.4)",
     border: "1px solid hsl(var(--border)/0.4)",
   }), []);
-
-  // Optimized avatar component with critical loading
-  const OptimizedAvatar = memo(({ size }: { size: number }) => {
-    const glowStyle = useMemo(() => ({
-      background: "radial-gradient(circle, hsl(var(--primary)/0.25) 0%, hsl(var(--accent)/0.15) 40%, transparent 70%)",
-      width: size * 1.15,
-      height: size * 1.15,
-      filter: 'blur(16px)',
-    }), [size]);
-
-    return (
-      <div className="flex justify-center items-center relative">
-        <div
-          className="absolute inset-0 rounded-full opacity-30 pointer-events-none"
-          style={glowStyle}
-        />
-        {imageLoading ? (
-          <div 
-            className="rounded-full shadow-2xl border-4 border-primary/30 dark:border-primary/40 bg-card relative z-10 ring-2 ring-accent/20 dark:ring-accent/30 animate-pulse bg-gradient-to-r from-primary/20 to-accent/20"
-            style={{ width: size, height: size }}
-          />
-        ) : (
-          <img
-            src={HERO_IMAGE_URL}
-            alt="MacBook showing Xcode with code"
-            className="rounded-full shadow-2xl border-4 border-primary/30 dark:border-primary/40 bg-card object-cover relative z-10 ring-2 ring-accent/20 dark:ring-accent/30"
-            width={size}
-            height={size}
-            loading="eager"
-            decoding="sync"
-            fetchPriority="high"
-          />
-        )}
-      </div>
-    );
-  });
-
-  OptimizedAvatar.displayName = "OptimizedAvatar";
 
   return (
     <section
@@ -108,27 +61,21 @@ const Hero = memo(() => {
           variants={textVariants}
           animate="animate"
         >
-          <motion.div 
-            className="relative z-10"
-            variants={floatVariants}
-            animate="animate"
-          >
-            <div className="sm:hidden">
-              <OptimizedAvatar size={120} />
-            </div>
-            <div className="hidden sm:block md:hidden">
-              <OptimizedAvatar size={140} />
-            </div>
-            <div className="hidden md:block lg:hidden">
-              <OptimizedAvatar size={160} />
-            </div>
-            <div className="hidden lg:block xl:hidden">
-              <OptimizedAvatar size={180} />
-            </div>
-            <div className="hidden xl:block">
-              <OptimizedAvatar size={200} />
-            </div>
-          </motion.div>
+          <div className="sm:hidden">
+            <OptimizedAvatar imageUrl={HERO_IMAGE_URL} isLoading={imageLoading} size={120} />
+          </div>
+          <div className="hidden sm:block md:hidden">
+            <OptimizedAvatar imageUrl={HERO_IMAGE_URL} isLoading={imageLoading} size={140} />
+          </div>
+          <div className="hidden md:block lg:hidden">
+            <OptimizedAvatar imageUrl={HERO_IMAGE_URL} isLoading={imageLoading} size={160} />
+          </div>
+          <div className="hidden lg:block xl:hidden">
+            <OptimizedAvatar imageUrl={HERO_IMAGE_URL} isLoading={imageLoading} size={180} />
+          </div>
+          <div className="hidden xl:block">
+            <OptimizedAvatar imageUrl={HERO_IMAGE_URL} isLoading={imageLoading} size={200} />
+          </div>
         </motion.div>
 
         {/* Main Heading */}
@@ -152,94 +99,13 @@ const Hero = memo(() => {
         </motion.div>
 
         {/* Status Badges */}
-        <motion.div
-          className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6 lg:mb-8 w-full max-w-2xl"
-          variants={textVariants}
-        >
-          <div className="group relative overflow-hidden rounded-full bg-gradient-to-r from-emerald-500/10 to-blue-500/10 border border-emerald-500/20 dark:border-emerald-400/30 px-3 py-2 sm:px-4 sm:py-2 backdrop-blur-sm hover:scale-105 transition-all duration-300">
-            <span className="relative text-xs sm:text-sm font-bold text-emerald-700 dark:text-emerald-300 text-center block">
-              🎓 B.E. CSE @ Chitkara Univ. (9.38 CGPA)
-            </span>
-          </div>
-          <div className="group relative overflow-hidden rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 dark:border-purple-400/30 px-3 py-2 sm:px-4 sm:py-2 backdrop-blur-sm hover:scale-105 transition-all duration-300">
-            <span className="relative text-xs sm:text-sm font-bold text-purple-700 dark:text-purple-300 text-center block">
-              💼 Tech Intern @ OLX
-            </span>
-          </div>
-        </motion.div>
+        <StatusBadges variants={textVariants} />
 
         {/* Social Links */}
-        <motion.div
-          className="flex items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6 lg:mb-8"
-          variants={textVariants}
-        >
-          <Button
-            asChild
-            variant="ghost"
-            size="icon"
-            className="h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 rounded-full bg-card/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 shadow-lg hover:shadow-xl transition-all duration-300 group hover:scale-110"
-          >
-            <a
-              href="https://github.com/Anuj3366"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-            >
-              <Github className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-foreground/70 group-hover:text-primary transition-colors" />
-            </a>
-          </Button>
-          <Button
-            asChild
-            variant="ghost"
-            size="icon"
-            className="h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 rounded-full bg-card/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 shadow-lg hover:shadow-xl transition-all duration-300 group hover:scale-110"
-          >
-            <a
-              href="https://www.linkedin.com/in/anujgarg3366/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6 text-foreground/70 group-hover:text-primary transition-colors" />
-            </a>
-          </Button>
-        </motion.div>
+        <SocialLinks variants={textVariants} />
 
         {/* CTA Buttons */}
-        <motion.div
-          className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full max-w-md px-2"
-          variants={textVariants}
-        >
-          <Button
-            asChild
-            className="w-full sm:flex-1 px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base font-bold rounded-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
-          >
-            <a href="#contact" className="flex items-center justify-center gap-2">
-              Contact Me
-              <span className="inline-block transform transition-transform group-hover:translate-x-1">
-                &rarr;
-              </span>
-            </a>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            className="w-full sm:flex-1 px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base font-bold rounded-full bg-card/50 backdrop-blur-sm border-2 border-border/50 hover:border-primary/70 hover:bg-card/70 hover:scale-105 transition-all duration-300"
-          >
-            <a
-              href="https://drive.google.com/file/d/1HUYtjfjhODx6nY5aCk99P0xdFW9myDSv/view"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2"
-            >
-              <Download className="h-3 w-3 sm:h-4 sm:w-4 lg:h-5 lg:w-5" />
-              Resume
-              <span className="inline-block transform transition-transform group-hover:translate-x-1">
-                &rarr;
-              </span>
-            </a>
-          </Button>
-        </motion.div>
+        <CTAButtons variants={textVariants} />
       </motion.div>
     </section>
   );
