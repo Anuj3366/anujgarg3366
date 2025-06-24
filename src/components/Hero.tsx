@@ -3,11 +3,17 @@ import { motion } from "framer-motion";
 import { Github, Linkedin, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { memo, useMemo } from "react";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
 
-// Preload critical hero image URL
+// Critical hero image - preload with high priority
 const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80";
 
 const Hero = memo(() => {
+  // Preload critical hero image
+  const { isLoading: imageLoading } = useImagePreloader([
+    { src: HERO_IMAGE_URL, priority: 'high', crossorigin: 'anonymous' }
+  ]);
+
   const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
@@ -45,7 +51,7 @@ const Hero = memo(() => {
     border: "1px solid hsl(var(--border)/0.4)",
   }), []);
 
-  // Optimized avatar component with eager loading
+  // Optimized avatar component with critical loading
   const OptimizedAvatar = memo(({ size }: { size: number }) => {
     const glowStyle = useMemo(() => ({
       background: "radial-gradient(circle, hsl(var(--primary)/0.25) 0%, hsl(var(--accent)/0.15) 40%, transparent 70%)",
@@ -60,16 +66,23 @@ const Hero = memo(() => {
           className="absolute inset-0 rounded-full opacity-30 pointer-events-none"
           style={glowStyle}
         />
-        <img
-          src={HERO_IMAGE_URL}
-          alt="MacBook showing Xcode with code"
-          className="rounded-full shadow-2xl border-4 border-primary/30 dark:border-primary/40 bg-card object-cover relative z-10 ring-2 ring-accent/20 dark:ring-accent/30"
-          width={size}
-          height={size}
-          loading="eager"
-          decoding="sync"
-          fetchPriority="high"
-        />
+        {imageLoading ? (
+          <div 
+            className="rounded-full shadow-2xl border-4 border-primary/30 dark:border-primary/40 bg-card relative z-10 ring-2 ring-accent/20 dark:ring-accent/30 animate-pulse bg-gradient-to-r from-primary/20 to-accent/20"
+            style={{ width: size, height: size }}
+          />
+        ) : (
+          <img
+            src={HERO_IMAGE_URL}
+            alt="MacBook showing Xcode with code"
+            className="rounded-full shadow-2xl border-4 border-primary/30 dark:border-primary/40 bg-card object-cover relative z-10 ring-2 ring-accent/20 dark:ring-accent/30"
+            width={size}
+            height={size}
+            loading="eager"
+            decoding="sync"
+            fetchPriority="high"
+          />
+        )}
       </div>
     );
   });
