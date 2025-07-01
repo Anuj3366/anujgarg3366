@@ -15,29 +15,37 @@ const OptimizedBackground = memo(() => {
   const backgroundStyle = useMemo(() => {
     const isDark = resolvedTheme === 'dark';
     
-    return {
-      background: isDark ? `
-        radial-gradient(circle at 15% 15%, hsl(190 95% 65% / 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 85% 85%, hsl(170 85% 58% / 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 50% 20%, hsl(230 25% 4% / 0.8) 0%, transparent 60%),
-        linear-gradient(135deg, 
-          hsl(230 25% 4%) 0%, 
-          hsl(230 25% 5% / 0.98) 25%,
-          hsl(230 25% 6% / 0.95) 50%, 
-          hsl(230 25% 4% / 0.9) 100%
-        )
-      ` : `
-        radial-gradient(circle at 15% 15%, hsl(200 85% 58% / 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 85% 85%, hsl(160 75% 88% / 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 50% 20%, hsl(220 30% 97% / 0.2) 0%, transparent 60%),
-        linear-gradient(135deg, 
-          hsl(220 30% 97%) 0%, 
-          hsl(220 30% 97% / 0.98) 25%,
-          hsl(220 30% 97% / 0.95) 50%, 
-          hsl(220 30% 97% / 0.9) 100%
-        )
-      `
-    };
+    if (isDark) {
+      // Dark mode: Deep space blues and dark backgrounds
+      return {
+        background: `
+          radial-gradient(circle at 15% 15%, hsl(190 95% 65% / 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 85% 85%, hsl(170 85% 58% / 0.12) 0%, transparent 50%),
+          radial-gradient(circle at 50% 20%, hsl(230 25% 4% / 0.8) 0%, transparent 60%),
+          linear-gradient(135deg, 
+            hsl(230 25% 4%) 0%, 
+            hsl(230 25% 5% / 0.98) 25%,
+            hsl(230 25% 6% / 0.95) 50%, 
+            hsl(230 25% 4% / 0.9) 100%
+          )
+        `
+      };
+    } else {
+      // Light mode: Bright, clean backgrounds with subtle colors
+      return {
+        background: `
+          radial-gradient(circle at 15% 15%, hsl(200 85% 88% / 0.15) 0%, transparent 50%),
+          radial-gradient(circle at 85% 85%, hsl(160 75% 92% / 0.12) 0%, transparent 50%),
+          radial-gradient(circle at 50% 20%, hsl(220 30% 98% / 0.8) 0%, transparent 60%),
+          linear-gradient(135deg, 
+            hsl(220 30% 98%) 0%, 
+            hsl(220 30% 99% / 0.98) 25%,
+            hsl(220 30% 97% / 0.95) 50%, 
+            hsl(220 30% 96% / 0.9) 100%
+          )
+        `
+      };
+    }
   }, [resolvedTheme]);
 
   const floatingElements = useMemo(() => 
@@ -51,7 +59,20 @@ const OptimizedBackground = memo(() => {
     }))
   , []);
 
-  if (!isVisible) return null;
+  const floatingElementClasses = useMemo(() => {
+    const isDark = resolvedTheme === 'dark';
+    
+    if (isDark) {
+      return 'border-primary/20 bg-gradient-to-r from-primary/8 to-accent/6';
+    } else {
+      return 'border-primary/15 bg-gradient-to-r from-primary/6 to-accent/4';
+    }
+  }, [resolvedTheme]);
+
+  // Don't render until visible to prevent flash
+  if (!isVisible) {
+    return <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }} />;
+  }
 
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 0 }}>
@@ -65,11 +86,7 @@ const OptimizedBackground = memo(() => {
         {floatingElements.map((element) => (
           <div
             key={element.id}
-            className={`absolute rounded-full border transition-colors duration-1000 ${
-              resolvedTheme === 'dark' 
-                ? 'border-primary/20 bg-gradient-to-r from-primary/8 to-accent/6' 
-                : 'border-primary/15 bg-gradient-to-r from-primary/6 to-accent/4'
-            }`}
+            className={`absolute rounded-full border transition-colors duration-1000 ${floatingElementClasses}`}
             style={{
               width: `${element.size}px`,
               height: `${element.size}px`,
