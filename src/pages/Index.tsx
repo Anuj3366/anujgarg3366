@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 import ScrollToTop from "@/components/ScrollToTop";
 import EnhancedErrorBoundary from "@/components/EnhancedErrorBoundary";
 import SEOHead from "@/components/SEOHead";
-import OptimizedBackground from "@/components/hero/OptimizedBackground";
+import LightweightBackground from "@/components/hero/LightweightBackground";
 import SectionDivider from "@/components/SectionDivider";
 import AnimatedSection from "@/components/AnimatedSection";
 
@@ -20,7 +20,7 @@ const Footer = React.lazy(() => import("@/components/Footer"));
 
 const ComponentSkeleton = ({ height = "400px" }: { height?: string }) => (
   <div className="flex items-center justify-center" style={{ minHeight: height }}>
-    <div className="w-16 h-16 rounded-full border-2 border-primary/30 border-t-primary animate-spin"></div>
+    <div className="w-32 h-32 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 animate-pulse"></div>
   </div>
 );
 
@@ -28,7 +28,7 @@ const Index: React.FC = () => {
   return (
     <EnhancedErrorBoundary>
       <SEOHead />
-      <OptimizedBackground />
+      <LightweightBackground />
       <main className="flex min-h-screen flex-col bg-gradient-to-br from-background via-background/90 to-background/80">
         <Navbar />
         <div className="container mx-auto max-w-7xl">
