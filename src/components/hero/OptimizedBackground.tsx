@@ -19,12 +19,12 @@ const OptimizedBackground = memo(() => {
       background: isDark ? `
         radial-gradient(circle at 15% 15%, hsl(190 95% 65% / 0.15) 0%, transparent 50%),
         radial-gradient(circle at 85% 85%, hsl(170 85% 58% / 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 50% 20%, hsl(230 25% 6% / 0.3) 0%, transparent 60%),
+        radial-gradient(circle at 50% 20%, hsl(230 25% 4% / 0.8) 0%, transparent 60%),
         linear-gradient(135deg, 
-          hsl(230 25% 6%) 0%, 
-          hsl(230 25% 6% / 0.98) 25%,
+          hsl(230 25% 4%) 0%, 
+          hsl(230 25% 5% / 0.98) 25%,
           hsl(230 25% 6% / 0.95) 50%, 
-          hsl(230 25% 6% / 0.9) 100%
+          hsl(230 25% 4% / 0.9) 100%
         )
       ` : `
         radial-gradient(circle at 15% 15%, hsl(200 85% 58% / 0.15) 0%, transparent 50%),

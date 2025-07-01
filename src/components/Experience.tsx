@@ -103,7 +103,7 @@ const Experience = () => {
                 <CardContent className="pt-6">
                   <div className="mb-4">
                     <h3 className="font-medium text-black dark:text-white">Bachelor of Engineering - BE, Computer Science</h3>
-                    <p className="text-sm font-medium text-primary">CGPA: 9.39</p>
+                    <p className="text-sm font-medium text-primary">CGPA: 9.43</p>
                   </div>
                   <ul className="ml-4 list-disc space-y-2 text-black/80 dark:text-white/80">
                     <li>Computer Science curriculum focused on algorithms, data structures, and software engineering.</li>
