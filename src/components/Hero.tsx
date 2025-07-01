@@ -1,20 +1,20 @@
 
 import { motion } from "framer-motion";
 import { memo, useMemo } from "react";
-import { useImagePreloader } from "@/hooks/useImagePreloader";
-import OptimizedAvatar from "./hero/OptimizedAvatar";
+import { useOptimizedImageLoader } from "@/hooks/useOptimizedImageLoader";
+import PerformanceOptimizedAvatar from "./hero/PerformanceOptimizedAvatar";
 import StatusBadges from "./hero/StatusBadges";
 import SocialLinks from "./hero/SocialLinks";
 import CTAButtons from "./hero/CTAButtons";
 
-// Critical hero image - preload with high priority
 const HERO_IMAGE_URL = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80";
 
 const Hero = memo(() => {
-  // Preload critical hero image
-  const { isLoading: imageLoading } = useImagePreloader([
-    { src: HERO_IMAGE_URL, priority: 'high', crossorigin: 'anonymous' }
-  ]);
+  const { isLoading: imageLoading } = useOptimizedImageLoader({ 
+    src: HERO_IMAGE_URL, 
+    priority: true,
+    timeout: 5000 
+  });
 
   const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
@@ -33,7 +33,6 @@ const Hero = memo(() => {
     },
   }), []);
 
-  // Optimized background styles
   const backgroundStyle = useMemo(() => ({
     background: "linear-gradient(135deg, hsl(var(--card)/0.95) 0%, hsl(var(--card)/0.85) 100%)",
     backdropFilter: "blur(16px)",
@@ -59,22 +58,21 @@ const Hero = memo(() => {
         <motion.div
           className="relative mb-4 sm:mb-6 lg:mb-8 flex flex-col items-center"
           variants={textVariants}
-          animate="animate"
         >
           <div className="sm:hidden">
-            <OptimizedAvatar imageUrl={HERO_IMAGE_URL} isLoading={imageLoading} size={120} />
+            <PerformanceOptimizedAvatar imageUrl={HERO_IMAGE_URL} size={120} />
           </div>
           <div className="hidden sm:block md:hidden">
-            <OptimizedAvatar imageUrl={HERO_IMAGE_URL} isLoading={imageLoading} size={140} />
+            <PerformanceOptimizedAvatar imageUrl={HERO_IMAGE_URL} size={140} />
           </div>
           <div className="hidden md:block lg:hidden">
-            <OptimizedAvatar imageUrl={HERO_IMAGE_URL} isLoading={imageLoading} size={160} />
+            <PerformanceOptimizedAvatar imageUrl={HERO_IMAGE_URL} size={160} />
           </div>
           <div className="hidden lg:block xl:hidden">
-            <OptimizedAvatar imageUrl={HERO_IMAGE_URL} isLoading={imageLoading} size={180} />
+            <PerformanceOptimizedAvatar imageUrl={HERO_IMAGE_URL} size={180} />
           </div>
           <div className="hidden xl:block">
-            <OptimizedAvatar imageUrl={HERO_IMAGE_URL} isLoading={imageLoading} size={200} />
+            <PerformanceOptimizedAvatar imageUrl={HERO_IMAGE_URL} size={200} />
           </div>
         </motion.div>
 
