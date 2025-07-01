@@ -51,8 +51,8 @@ export class PerformanceMonitor {
       ttfb: navigation.responseStart - navigation.requestStart,
       download: navigation.responseEnd - navigation.responseStart,
       domProcessing: navigation.domContentLoadedEventStart - navigation.responseEnd,
-      domComplete: navigation.loadEventStart - navigation.navigationStart,
-      loadComplete: navigation.loadEventEnd - navigation.navigationStart,
+      domComplete: navigation.loadEventStart - navigation.fetchStart,
+      loadComplete: navigation.loadEventEnd - navigation.fetchStart,
     };
   }
   
