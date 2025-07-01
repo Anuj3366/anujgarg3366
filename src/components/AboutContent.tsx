@@ -3,7 +3,7 @@ const AboutContent = () => {
   return (
     <div className="space-y-4">
       <p className="text-black/80 dark:text-white/80">
-        I'm <strong className="text-black dark:text-white">Anuj Garg</strong>, a passionate fourth-year B.E. Computer Science student at Chitkara University with a stellar 9.38 CGPA. As an <strong className="text-black dark:text-white">iOS Developer</strong> and <strong className="text-black dark:text-white">Full-Stack Developer</strong>, I specialize in building scalable mobile applications and web platforms using Swift, React, and Node.js.
+        I'm <strong className="text-black dark:text-white">Anuj Garg</strong>, a passionate fourth-year B.E. Computer Science student at Chitkara University with a stellar 9.39 CGPA. As an <strong className="text-black dark:text-white">iOS Developer</strong> and <strong className="text-black dark:text-white">Full-Stack Developer</strong>, I specialize in building scalable mobile applications and web platforms using Swift, React, and Node.js.
       </p>
       <p className="text-black/80 dark:text-white/80">
         <strong className="text-black dark:text-white">Anuj</strong> is on a mission to evolve beyond feature racing—towards creating maintainable, high-performance iOS and web applications. With hands-on experience in full-stack development and a proven track record of solving 900+ problems on coding platforms like LeetCode and GeeksforGeeks, I thrive on collaboration and creative problem-solving.

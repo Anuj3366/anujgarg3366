@@ -6,15 +6,18 @@ import { performanceMonitor } from './utils/performanceMonitor'
 // Start performance monitoring
 performanceMonitor.startTiming('app-initialization');
 
-// Critical CSS import - non-blocking
-const loadCSS = () => import('./index.css');
-
 // Preload critical components immediately
 const App = React.lazy(() => import('./App.tsx'));
 
 const container = document.getElementById("root");
 if (!container) {
   throw new Error("Root element not found");
+}
+
+// Prevent double root creation
+if (container.hasChildNodes()) {
+  console.warn('Root container already has children, clearing...');
+  container.innerHTML = '';
 }
 
 const root = createRoot(container);
@@ -28,7 +31,7 @@ const renderApp = () => {
       <React.Suspense 
         fallback={
           <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/90 to-background/80">
-            <div className="w-32 h-32 rounded-full bg-gradient-to-r from-primary/30 to-accent/30 animate-pulse"></div>
+            <div className="w-16 h-16 rounded-full border-2 border-primary/30 border-t-primary animate-spin"></div>
           </div>
         }
       >
@@ -41,14 +44,19 @@ const renderApp = () => {
 };
 
 // Load CSS and render immediately
-loadCSS().then(() => {
-  renderApp();
-  performanceMonitor.endTiming('app-initialization');
-}).catch(() => {
-  // Fallback - render anyway if CSS fails to load
-  renderApp();
-  performanceMonitor.endTiming('app-initialization');
-});
+const loadCSS = async () => {
+  try {
+    await import('./index.css');
+    renderApp();
+  } catch (error) {
+    console.warn('CSS loading failed, rendering anyway:', error);
+    renderApp();
+  } finally {
+    performanceMonitor.endTiming('app-initialization');
+  }
+};
+
+loadCSS();
 
 // Defer service worker registration to not block initial render
 if ('serviceWorker' in navigator) {
