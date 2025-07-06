@@ -64,14 +64,14 @@ const Hero = memo(() => {
   return (
     <section
       id="home"
-      className="relative flex flex-col items-center justify-center min-h-screen text-center overflow-hidden pt-16 sm:pt-20 lg:pt-24"
+      className="relative flex flex-col items-center justify-center min-h-screen text-center overflow-hidden pt-20 sm:pt-20 lg:pt-24 px-4"
       style={{ zIndex: 1 }}
     >
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-30 max-w-4xl w-full mx-auto px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12 flex flex-col items-center rounded-2xl sm:rounded-3xl"
+        className="relative z-30 max-w-4xl w-full mx-auto px-3 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12 flex flex-col items-center rounded-2xl sm:rounded-3xl"
         style={backgroundStyle}
       >
         {/* Optimized Profile Avatar with responsive sizing */}
@@ -79,17 +79,17 @@ const Hero = memo(() => {
           className="relative mb-4 sm:mb-6 lg:mb-8 flex flex-col items-center"
           variants={itemVariants}
         >
-          <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 lg:w-48 lg:h-48 xl:w-52 xl:h-52">
+          <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 xl:w-48 xl:h-48">
             <PerformanceOptimizedAvatar 
               imageUrl={HERO_IMAGE_URL} 
-              size={208} // Max size for XL screens
+              size={192} // Max size for XL screens
             />
           </div>
         </motion.div>
 
-        {/* Optimized heading with better typography */}
+        {/* Fixed heading with better mobile typography */}
         <motion.h1
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 lg:mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent font-mono leading-tight"
+          className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 lg:mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent font-mono leading-tight px-2"
           variants={itemVariants}
         >
           Anuj Garg
@@ -97,7 +97,7 @@ const Hero = memo(() => {
 
         {/* Enhanced subtitle with better responsive text */}
         <motion.div
-          className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold mb-4 sm:mb-6 lg:mb-8 leading-relaxed px-2 max-w-3xl"
+          className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold mb-4 sm:mb-6 lg:mb-8 leading-relaxed px-2 max-w-3xl"
           variants={itemVariants}
         >
           <span className="text-foreground/95">iOS Developer • </span>
