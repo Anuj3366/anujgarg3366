@@ -1,6 +1,8 @@
 
 import { motion } from "framer-motion";
-import { memo, useMemo, useState, useCallback } from "react";
+import { memo, useMemo } from "react";
+import OptimizedImage from "@/components/common/OptimizedImage";
+import { useImageLoader } from "@/hooks/useImageLoader";
 
 interface PerformanceOptimizedAvatarProps {
   imageUrl: string;
@@ -8,17 +10,10 @@ interface PerformanceOptimizedAvatarProps {
 }
 
 const PerformanceOptimizedAvatar = memo<PerformanceOptimizedAvatarProps>(({ imageUrl, size }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [hasError, setHasError] = useState(false);
-
-  const handleLoad = useCallback(() => {
-    setIsLoaded(true);
-  }, []);
-
-  const handleError = useCallback(() => {
-    setHasError(true);
-    setIsLoaded(true); // Stop loading state
-  }, []);
+  const { isLoading, hasError } = useImageLoader({ 
+    src: imageUrl, 
+    priority: true 
+  });
 
   const glowStyle = useMemo(() => ({
     background: "radial-gradient(circle, hsl(var(--primary)/0.2) 0%, transparent 70%)",
@@ -57,24 +52,21 @@ const PerformanceOptimizedAvatar = memo<PerformanceOptimizedAvatarProps>(({ imag
           ease: "easeInOut"
         }}
       >
-        {!isLoaded && (
+        {isLoading && (
           <div 
             className="rounded-full shadow-2xl border-4 border-primary/30 bg-card/50 animate-pulse"
             style={{ width: size, height: size }}
           />
         )}
-        <img
+        <OptimizedImage
           src={imageUrl}
           alt="Profile Avatar"
           className={`rounded-full shadow-2xl border-4 border-primary/30 bg-card object-cover ring-2 ring-accent/20 transition-opacity duration-300 ${
-            isLoaded ? 'opacity-100' : 'opacity-0 absolute inset-0'
+            !isLoading ? 'opacity-100' : 'opacity-0 absolute inset-0'
           }`}
           width={size}
           height={size}
-          loading="eager"
-          decoding="async"
-          onLoad={handleLoad}
-          onError={handleError}
+          priority={true}
           style={{ width: size, height: size }}
         />
       </motion.div>

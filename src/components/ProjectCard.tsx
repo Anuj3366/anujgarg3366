@@ -4,7 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink, Sparkles } from "lucide-react";
-import OptimizedImage from "@/components/OptimizedImage";
+import OptimizedImage from "@/components/common/OptimizedImage";
 import { Project } from "@/data/projectsData";
 
 interface ProjectCardProps {

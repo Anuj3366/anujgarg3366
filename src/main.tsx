@@ -2,10 +2,11 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { PerformanceOptimizer } from './utils/performanceOptimizer'
+import { Logger } from './utils/logger'
 
 // Start critical performance monitoring
 PerformanceOptimizer.measurePerformance('app-initialization', () => {
-  console.log('🚀 Starting app initialization');
+  Logger.info('Starting app initialization');
 });
 
 // Preload critical resources
@@ -13,16 +14,23 @@ const preloadCriticalResources = async () => {
   const promises = [
     // Preload critical CSS
     import('./index.css'),
-    // Preload critical hero image
+    // Preload critical hero image - with error handling
     fetch('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80', {
       headers: { accept: 'image/*' }
-    }).catch(() => null)
+    }).catch(() => {
+      Logger.warn('Hero image preload failed');
+      return null;
+    })
   ];
 
   try {
-    await Promise.allSettled(promises);
+    const results = await Promise.allSettled(promises);
+    const failedPromises = results.filter(result => result.status === 'rejected');
+    if (failedPromises.length > 0) {
+      Logger.warn(`${failedPromises.length} critical resources failed to preload`);
+    }
   } catch (error) {
-    console.warn('Some critical resources failed to preload:', error);
+    Logger.error('Critical resource preload error:', error);
   }
 };
 
@@ -57,38 +65,40 @@ const renderApp = () => {
 
 // Initialize app with optimized loading sequence
 const initializeApp = async () => {
-  // Load critical resources in parallel
-  await preloadCriticalResources();
-  
-  // Render app
-  renderApp();
-  
-  console.log('✅ App initialized successfully');
-  
-  // Report performance metrics
-  setTimeout(() => {
-    const metrics = PerformanceOptimizer.getMetrics();
-    console.log('📊 Performance Metrics:', metrics);
-  }, 1000);
+  try {
+    // Load critical resources in parallel
+    await preloadCriticalResources();
+    
+    // Render app
+    renderApp();
+    
+    Logger.info('App initialized successfully');
+    
+    // Report performance metrics after a delay
+    setTimeout(() => {
+      const metrics = PerformanceOptimizer.getMetrics();
+      Logger.info('Performance Metrics:', metrics);
+    }, 1000);
+  } catch (error) {
+    Logger.error('App initialization failed:', error);
+    // Render anyway as fallback
+    renderApp();
+  }
 };
 
 // Start app initialization
-initializeApp().catch((error) => {
-  console.error('❌ App initialization failed:', error);
-  // Render anyway as fallback
-  renderApp();
-});
+initializeApp();
 
 // Optimized service worker registration
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js', {
       scope: '/',
       updateViaCache: 'none'
     }).then(() => {
-      console.log('✅ ServiceWorker registered');
+      Logger.info('ServiceWorker registered successfully');
     }).catch((error) => {
-      console.warn('⚠️ ServiceWorker registration failed:', error);
+      Logger.warn('ServiceWorker registration failed:', error);
     });
   });
 }

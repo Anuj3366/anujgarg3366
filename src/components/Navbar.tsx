@@ -8,6 +8,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import Logo from "@/components/Logo";
 import NavLink from "@/components/NavLink";
 import MobileMenu from "@/components/MobileMenu";
+import { Logger } from "@/utils/logger";
 
 const Navbar = () => {
   const isMobile = useIsMobile();
@@ -48,10 +49,15 @@ const Navbar = () => {
       const navbarHeight = 80;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - navbarHeight;
+      
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth'
       });
+      
+      Logger.info('Navigation scroll triggered', href);
+    } else {
+      Logger.warn('Navigation target not found', href);
     }
   }, []);
 

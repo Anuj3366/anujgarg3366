@@ -1,6 +1,7 @@
 
 import { useEffect, useRef, useCallback } from 'react';
 import { PerformanceOptimizer } from '@/utils/performanceOptimizer';
+import { Logger } from '@/utils/logger';
 
 interface ScrollOptions {
   throttleMs?: number;
@@ -17,20 +18,33 @@ export function useOptimizedScroll(
   const ticking = useRef(false);
 
   const handleScroll = useCallback(() => {
-    const currentScrollY = window.scrollY;
-    const diff = Math.abs(currentScrollY - lastScrollY.current);
+    if (ticking.current) return;
     
-    // Only trigger if scroll difference exceeds threshold
-    if (diff < threshold) return;
-    
-    const direction = currentScrollY > lastScrollY.current ? 'down' : 'up';
-    lastScrollY.current = currentScrollY;
-    
-    callback(currentScrollY, direction);
+    ticking.current = true;
+    requestAnimationFrame(() => {
+      const currentScrollY = window.scrollY;
+      const diff = Math.abs(currentScrollY - lastScrollY.current);
+      
+      if (diff < threshold) {
+        ticking.current = false;
+        return;
+      }
+      
+      const direction = currentScrollY > lastScrollY.current ? 'down' : 'up';
+      lastScrollY.current = currentScrollY;
+      
+      try {
+        callback(currentScrollY, direction);
+      } catch (error) {
+        Logger.error('Scroll callback error', error);
+      }
+      
+      ticking.current = false;
+    });
   }, [callback, threshold]);
 
   const throttledScroll = useCallback(
-    PerformanceOptimizer.throttle(handleScroll, throttleMs, true),
+    PerformanceOptimizer.throttle(handleScroll, throttleMs, false),
     [handleScroll, throttleMs]
   );
 
@@ -42,7 +56,11 @@ export function useOptimizedScroll(
       { passive }
     );
 
-    return cleanup;
+    Logger.info('Optimized scroll listener attached');
+    return () => {
+      cleanup();
+      Logger.info('Optimized scroll listener cleaned up');
+    };
   }, [throttledScroll, passive]);
 }
 
@@ -58,7 +76,13 @@ export function useOptimizedIntersection(
     if (!element) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => callback(entry.isIntersecting),
+      ([entry]) => {
+        try {
+          callback(entry.isIntersecting);
+        } catch (error) {
+          Logger.error('Intersection callback error', error);
+        }
+      },
       {
         threshold: 0.1,
         rootMargin: '50px',
@@ -67,7 +91,12 @@ export function useOptimizedIntersection(
     );
 
     observer.observe(element);
-    return () => observer.disconnect();
+    Logger.info('Intersection observer attached');
+    
+    return () => {
+      observer.disconnect();
+      Logger.info('Intersection observer cleaned up');
+    };
   }, [callback, options]);
 
   return elementRef;
