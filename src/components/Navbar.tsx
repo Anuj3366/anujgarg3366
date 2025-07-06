@@ -2,7 +2,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useOptimizedScroll } from "@/hooks/usePerformanceOptimization";
+import { useOptimizedScroll } from "@/hooks/useOptimizedScroll";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 import ThemeToggle from "@/components/ThemeToggle";
 import Logo from "@/components/Logo";
@@ -12,8 +12,16 @@ import MobileMenu from "@/components/MobileMenu";
 const Navbar = () => {
   const isMobile = useIsMobile();
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up');
 
-  useOptimizedScroll(setScrollPosition);
+  // Use optimized scroll hook
+  useOptimizedScroll(
+    useCallback((scrollY: number, direction: 'up' | 'down') => {
+      setScrollPosition(scrollY);
+      setScrollDirection(direction);
+    }, []),
+    { throttleMs: 16, threshold: 5 }
+  );
 
   // Memoized navigation links
   const navLinks = useMemo(() => [
@@ -31,6 +39,7 @@ const Navbar = () => {
   const activeSection = useScrollSpy(sectionIds);
 
   const isScrolled = scrollPosition > 50;
+  const shouldHide = scrollDirection === 'down' && scrollPosition > 200;
 
   // Optimized smooth scroll function
   const handleNavClick = useCallback((href: string) => {
@@ -55,7 +64,8 @@ const Navbar = () => {
         "shadow-sm dark:shadow-lg",
         isScrolled 
           ? "py-2 shadow-lg dark:shadow-xl bg-white/98 dark:bg-background/98" 
-          : "py-3 lg:py-4"
+          : "py-3 lg:py-4",
+        shouldHide && !isMobile ? "-translate-y-full" : "translate-y-0"
       )}
       style={{
         backdropFilter: 'blur(20px)',
