@@ -1,6 +1,6 @@
 
 import React, { memo, useMemo } from "react";
-import OptimizedImageLazy from "./OptimizedImageLazy";
+import OptimizedImage from "./common/OptimizedImage";
 
 const MACBOOK_IMAGE = "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80";
 
@@ -43,7 +43,7 @@ const MacXcodeImage = memo<MacXcodeImageProps>(({ className = "", size = 120 }) 
       />
       
       {/* Main avatar image with enhanced styling */}
-      <OptimizedImageLazy
+      <OptimizedImage
         src={MACBOOK_IMAGE}
         alt="MacBook showing Xcode with code"
         className="rounded-full shadow-2xl border-4 border-primary/30 dark:border-primary/40 bg-card object-cover relative z-10 ring-2 ring-accent/20 dark:ring-accent/30"

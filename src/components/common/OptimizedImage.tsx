@@ -10,6 +10,7 @@ interface OptimizedImageProps {
   width?: number;
   height?: number;
   priority?: boolean;
+  style?: React.CSSProperties;
   onLoad?: () => void;
   onError?: () => void;
 }
@@ -21,6 +22,7 @@ const OptimizedImage = memo<OptimizedImageProps>(({
   width,
   height,
   priority = false,
+  style,
   onLoad,
   onError
 }) => {
@@ -41,7 +43,7 @@ const OptimizedImage = memo<OptimizedImageProps>(({
 
   if (hasError) {
     return (
-      <div className={cn("bg-muted flex items-center justify-center", className)}>
+      <div className={cn("bg-muted flex items-center justify-center", className)} style={style}>
         <span className="text-muted-foreground text-sm">Image unavailable</span>
       </div>
     );
@@ -57,6 +59,7 @@ const OptimizedImage = memo<OptimizedImageProps>(({
       fetchPriority={priority ? "high" : "low"}
       onLoad={handleLoad}
       onError={handleError}
+      style={style}
       className={cn(
         "transition-opacity duration-300",
         isLoaded ? "opacity-100" : "opacity-0",
