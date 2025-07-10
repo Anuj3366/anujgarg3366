@@ -5,9 +5,11 @@ import Hero from "@/components/Hero";
 import ScrollToTop from "@/components/ScrollToTop";
 import EnhancedErrorBoundary from "@/components/EnhancedErrorBoundary";
 import SEOHead from "@/components/SEOHead";
-import LightweightBackground from "@/components/hero/LightweightBackground";
+import OptimizedBackground from "@/components/hero/OptimizedBackground";
 import SectionDivider from "@/components/SectionDivider";
 import AnimatedSection from "@/components/AnimatedSection";
+import InstallPrompt from "@/components/InstallPrompt";
+import AccessibilityEnhancements from "@/components/AccessibilityEnhancements";
 
 // Lazy load non-critical components for better performance
 const About = React.lazy(() => import("@/components/About"));
@@ -28,8 +30,9 @@ const Index: React.FC = () => {
   return (
     <EnhancedErrorBoundary>
       <SEOHead />
-      <LightweightBackground />
-      <main className="flex min-h-screen flex-col bg-gradient-to-br from-background via-background/90 to-background/80">
+      <AccessibilityEnhancements />
+      <OptimizedBackground />
+      <main id="main-content" className="flex min-h-screen flex-col bg-gradient-to-br from-background via-background/90 to-background/80">
         <Navbar />
         <div className="container mx-auto max-w-7xl">
           <Hero />
@@ -90,6 +93,7 @@ const Index: React.FC = () => {
         </AnimatedSection>
         
         <ScrollToTop />
+        <InstallPrompt />
       </main>
     </EnhancedErrorBoundary>
   );
