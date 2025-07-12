@@ -1,13 +1,10 @@
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { PerformanceOptimizer } from './utils/performanceOptimizer'
 import { Logger } from './utils/logger'
 
 // Start critical performance monitoring
-PerformanceOptimizer.measurePerformance('app-initialization', () => {
-  Logger.info('Starting app initialization');
-});
+Logger.info('Starting app initialization');
 
 // Preload critical resources
 const preloadCriticalResources = async () => {
@@ -46,21 +43,19 @@ const root = createRoot(container);
 
 // Optimized render function
 const renderApp = () => {
-  PerformanceOptimizer.measurePerformance('app-render', () => {
-    root.render(
-      <React.StrictMode>
-        <React.Suspense 
-          fallback={
-            <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/90 to-background/80">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary/30 to-accent/30 animate-pulse"></div>
-            </div>
-          }
-        >
-          <App />
-        </React.Suspense>
-      </React.StrictMode>
-    );
-  });
+  root.render(
+    <React.StrictMode>
+      <React.Suspense 
+        fallback={
+          <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/90 to-background/80">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary/30 to-accent/30 animate-pulse"></div>
+          </div>
+        }
+      >
+        <App />
+      </React.Suspense>
+    </React.StrictMode>
+  );
 };
 
 // Initialize app with optimized loading sequence
@@ -73,12 +68,6 @@ const initializeApp = async () => {
     renderApp();
     
     Logger.info('App initialized successfully');
-    
-    // Report performance metrics after a delay
-    setTimeout(() => {
-      const metrics = PerformanceOptimizer.getMetrics();
-      Logger.info('Performance Metrics:', metrics);
-    }, 1000);
   } catch (error) {
     Logger.error('App initialization failed:', error);
     // Render anyway as fallback

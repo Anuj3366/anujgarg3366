@@ -1,6 +1,5 @@
 
 import { motion } from "framer-motion";
-import LazyWrapper from "@/components/LazyWrapper";
 import { memo, useMemo } from "react";
 
 interface AnimatedSectionProps {
@@ -15,13 +14,12 @@ const AnimatedSection = memo(({ children, minHeight = "300px", delay = 0 }: Anim
     whileInView: { opacity: 1, y: 0 },
     transition: { duration: 0.6, ease: "easeOut", delay },
     viewport: { once: true, amount: 0.1, margin: "50px" },
-  }), [delay]);
+    style: { minHeight }
+  }), [delay, minHeight]);
 
   return (
     <motion.div {...sectionAnimationProps}>
-      <LazyWrapper minHeight={minHeight}>
-        {children}
-      </LazyWrapper>
+      {children}
     </motion.div>
   );
 });

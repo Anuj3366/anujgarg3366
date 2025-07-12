@@ -320,53 +320,7 @@
   100% { background-position: calc(200px + 100%) 0; }
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 1.5em;
-}
-
-@media (min-width: 768px) {
-  .card {
-    padding: 2em;
-  }
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* Responsive fixes */
-@media (max-width: 640px) {
-  h1 {
-    font-size: 1.75rem !important;
-  }
-  
-  h2 {
-    font-size: 1.5rem !important;
-  }
-  
-  h3 {
-    font-size: 1.25rem !important;
-  }
-  
-  section {
-    padding: 2rem 0 !important;
-  }
-}
 
 /* Enhanced smooth transitions */
 button, a, .interactive {

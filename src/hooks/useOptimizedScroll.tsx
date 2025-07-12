@@ -1,6 +1,5 @@
 
 import { useEffect, useRef, useCallback } from 'react';
-import { PerformanceOptimizer } from '@/utils/performanceOptimizer';
 import { Logger } from '@/utils/logger';
 
 interface ScrollOptions {
@@ -43,22 +42,21 @@ export function useOptimizedScroll(
     });
   }, [callback, threshold]);
 
-  const throttledScroll = useCallback(
-    PerformanceOptimizer.throttle(handleScroll, throttleMs, false),
-    [handleScroll, throttleMs]
-  );
+  // Simple throttle implementation
+  const throttledScroll = useCallback(() => {
+    let timeoutId: NodeJS.Timeout;
+    return () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(handleScroll, throttleMs);
+    };
+  }, [handleScroll, throttleMs])();
 
   useEffect(() => {
-    const cleanup = PerformanceOptimizer.addOptimizedListener(
-      window,
-      'scroll',
-      throttledScroll,
-      { passive }
-    );
+    window.addEventListener('scroll', throttledScroll, { passive });
 
     Logger.info('Optimized scroll listener attached');
     return () => {
-      cleanup();
+      window.removeEventListener('scroll', throttledScroll);
       Logger.info('Optimized scroll listener cleaned up');
     };
   }, [throttledScroll, passive]);

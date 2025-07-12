@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { User, Target } from "lucide-react";
-import OptimizedImage from "@/components/OptimizedImage";
+import { OptimizedImage } from "@/components/common";
 import AboutContent from "./AboutContent";
 import AboutFacts from "./AboutFacts";
 import MissionObjectives from "./MissionObjectives";
