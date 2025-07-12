@@ -10,6 +10,7 @@ import SectionDivider from "@/components/SectionDivider";
 import AnimatedSection from "@/components/AnimatedSection";
 import InstallPrompt from "@/components/InstallPrompt";
 import AccessibilityEnhancements from "@/components/AccessibilityEnhancements";
+import PerformanceMetrics from "@/components/PerformanceMetrics";
 
 // Lazy load non-critical components for better performance
 const About = React.lazy(() => import("@/components/About"));
@@ -94,6 +95,7 @@ const Index: React.FC = () => {
         
         <ScrollToTop />
         <InstallPrompt />
+        <PerformanceMetrics />
       </main>
     </EnhancedErrorBoundary>
   );

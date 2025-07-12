@@ -74,15 +74,17 @@ const Hero = memo(() => {
         className="relative z-30 max-w-4xl w-full mx-auto px-3 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12 flex flex-col items-center rounded-2xl sm:rounded-3xl"
         style={backgroundStyle}
       >
-        {/* Optimized Profile Avatar with responsive sizing */}
+        {/* Enhanced Profile Avatar with responsive sizing */}
         <motion.div
           className="relative mb-4 sm:mb-6 lg:mb-8 flex flex-col items-center"
           variants={itemVariants}
         >
-          <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 xl:w-48 xl:h-48">
+          <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 xl:w-48 xl:h-48 2xl:w-52 2xl:h-52">
             <PerformanceOptimizedAvatar 
               imageUrl={HERO_IMAGE_URL} 
-              size={192} // Max size for XL screens
+              size={208} // Responsive size that adapts
+              priority={true}
+              enableAnimations={true}
             />
           </div>
         </motion.div>
