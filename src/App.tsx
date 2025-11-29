@@ -12,6 +12,8 @@ import { OptimizedThemeProvider } from "@/components/providers/OptimizedThemePro
 // Lazy load pages with better chunking
 const Index = React.lazy(() => import("./pages/Index"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
+const AdminAuth = React.lazy(() => import("./pages/AdminAuth"));
+const AdminDashboard = React.lazy(() => import("./pages/AdminDashboard"));
 
 // Optimized QueryClient with better defaults
 const queryClient = new QueryClient({
@@ -52,6 +54,8 @@ const App: React.FC = () => (
             <Suspense fallback={<LoadingFallback />}>
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/admin" element={<AdminAuth />} />
+                <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
