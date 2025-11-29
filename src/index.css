@@ -4,67 +4,79 @@
 
 @layer base {
   :root {
-    /* Enhanced Nature-Futuristic Light Theme */
-    --background: 220 30% 97%; /* Even lighter, more pristine */
-    --foreground: 220 25% 12%; /* Darker for better contrast */
+    /* Creative Cyberpunk-Nature Fusion Light Theme */
+    --background: 220 30% 98%; 
+    --foreground: 220 30% 8%; 
 
-    --card: 220 20% 100%; /* Pure white for cards */
-    --card-foreground: 220 25% 12%;
+    --card: 220 25% 99%; 
+    --card-foreground: 220 30% 8%;
 
-    --popover: 220 20% 100%;
-    --popover-foreground: 220 25% 12%;
+    --popover: 220 25% 99%;
+    --popover-foreground: 220 30% 8%;
 
-    --primary: 200 85% 58%; /* More vibrant blue */
-    --primary-foreground: 210 40% 98%;
+    --primary: 280 85% 58%; /* Vibrant purple */
+    --primary-foreground: 280 10% 98%;
 
-    --secondary: 180 30% 94%; /* Softer teal */
-    --secondary-foreground: 180 25% 20%;
+    --secondary: 340 75% 55%; /* Hot pink accent */
+    --secondary-foreground: 340 10% 98%;
 
-    --muted: 220 20% 92%; 
-    --muted-foreground: 220 15% 50%;
+    --muted: 220 18% 93%; 
+    --muted-foreground: 220 15% 45%;
 
-    --accent: 160 75% 88%; /* Brighter bioluminescent green */
-    --accent-foreground: 160 50% 20%;
+    --accent: 160 90% 45%; /* Electric green */
+    --accent-foreground: 160 10% 98%;
 
     --destructive: 0 75% 58%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 20% 88%;
     --input: 220 20% 90%;
-    --ring: 200 85% 65%;
+    --ring: 280 85% 65%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+    
+    /* Custom gradient variables */
+    --gradient-primary: linear-gradient(135deg, hsl(280 85% 58%), hsl(340 75% 55%), hsl(160 90% 45%));
+    --gradient-card: linear-gradient(135deg, hsl(220 25% 99%), hsl(280 20% 97%));
+    --glow-primary: 0 0 20px hsl(280 85% 58% / 0.3);
+    --glow-accent: 0 0 20px hsl(160 90% 45% / 0.3);
   }
 
   .dark {
-    /* Enhanced Nature-Futuristic Dark Theme */
-    --background: 230 25% 6%; /* Deeper space blue */
-    --foreground: 210 50% 95%; /* Brighter, more luminous */
+    /* Creative Cyberpunk-Nature Fusion Dark Theme */
+    --background: 260 40% 5%; 
+    --foreground: 280 10% 98%; 
 
-    --card: 230 20% 10%; /* Darker cards */
-    --card-foreground: 210 50% 95%;
+    --card: 260 35% 8%; 
+    --card-foreground: 280 10% 98%;
 
-    --popover: 230 20% 10%;
-    --popover-foreground: 210 50% 95%;
+    --popover: 260 35% 8%;
+    --popover-foreground: 280 10% 98%;
 
-    --primary: 190 95% 65%; /* More electric blue */
-    --primary-foreground: 230 20% 8%; 
+    --primary: 280 90% 65%; /* Brighter purple */
+    --primary-foreground: 260 40% 5%; 
 
-    --secondary: 210 20% 15%; /* Deeper cool gray */
-    --secondary-foreground: 200 40% 88%;
+    --secondary: 340 80% 60%; /* Brighter pink */
+    --secondary-foreground: 260 40% 5%;
 
-    --muted: 230 15% 12%;
-    --muted-foreground: 220 20% 65%;
+    --muted: 260 25% 12%;
+    --muted-foreground: 280 10% 70%;
 
-    --accent: 170 85% 58%; /* Brighter bioluminescent accent */
-    --accent-foreground: 170 30% 98%;
+    --accent: 160 95% 50%; /* Electric neon green */
+    --accent-foreground: 260 40% 5%;
 
-    --destructive: 0 70% 55%;
+    --destructive: 0 75% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 22%;
-    --ring: 190 95% 70%;
+    --border: 260 20% 18%;
+    --input: 260 20% 15%;
+    --ring: 280 90% 70%;
+    
+    /* Custom gradient variables for dark mode */
+    --gradient-primary: linear-gradient(135deg, hsl(280 90% 65%), hsl(340 80% 60%), hsl(160 95% 50%));
+    --gradient-card: linear-gradient(135deg, hsl(260 35% 8%), hsl(280 30% 10%));
+    --glow-primary: 0 0 30px hsl(280 90% 65% / 0.5);
+    --glow-accent: 0 0 30px hsl(160 95% 50% / 0.5);
   }
 }
 
@@ -84,10 +96,11 @@
 
   body {
     @apply bg-background text-foreground antialiased font-sans;
-    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    line-height: 1.6;
+    font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    line-height: 1.7;
     overflow-x: hidden;
     text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   }
 
   /* Enhanced responsive container improvements */
@@ -151,6 +164,31 @@
     @apply p-4;
   }
 
+  /* Cyberpunk-inspired gradients */
+  .gradient-glow {
+    background: var(--gradient-primary);
+    box-shadow: var(--glow-primary), var(--glow-accent);
+  }
+
+  .card-glow {
+    background: var(--gradient-card);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-glow:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15), var(--glow-primary);
+  }
+
+  /* Neon border effect */
+  .neon-border {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--gradient-card), var(--gradient-card)) padding-box,
+                var(--gradient-primary) border-box;
+  }
+
   /* Enhanced responsive text utilities */
   .text-responsive-xs {
     @apply text-xs sm:text-sm;
@@ -183,28 +221,48 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .backdrop-blur-glass {
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Cyberpunk glow effects */
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+
+  .glow-hover {
+    transition: all 0.3s ease;
+  }
+
+  .glow-hover:hover {
+    box-shadow: var(--glow-primary), var(--glow-accent);
   }
 
   /* Enhanced responsive spacing utilities */
   .section-spacing {
-    @apply py-8 sm:py-12 md:py-16 lg:py-20;
+    @apply py-12 sm:py-16 md:py-20 lg:py-24;
   }
 
   .container-spacing {
-    @apply px-3 sm:px-4 md:px-6 lg:px-8;
+    @apply px-4 sm:px-6 md:px-8 lg:px-12;
   }
 
   /* Mobile-first responsive grid */
   .responsive-grid {
-    @apply grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:gap-8 xl:grid-cols-3;
+    @apply grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10 xl:grid-cols-3;
   }
 }
 
@@ -260,7 +318,7 @@
 @keyframes slideInRight {
   from { 
     opacity: 0; 
-    transform: translateX(20px); 
+    transform: translateX(30px); 
   }
   to { 
     opacity: 1; 
@@ -271,7 +329,7 @@
 @keyframes slideInUp {
   from { 
     opacity: 0; 
-    transform: translateY(20px); 
+    transform: translateY(30px); 
   }
   to { 
     opacity: 1; 
@@ -282,7 +340,7 @@
 @keyframes scaleIn {
   from { 
     opacity: 0; 
-    transform: scale(0.95); 
+    transform: scale(0.9); 
   }
   to { 
     opacity: 1; 
@@ -291,48 +349,59 @@
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(2deg); }
 }
 
 @keyframes glow {
-  from { 
-    box-shadow: 0 0 5px hsl(var(--primary)), 0 0 10px hsl(var(--primary)), 0 0 15px hsl(var(--primary)); 
+  0%, 100% { 
+    filter: drop-shadow(0 0 5px hsl(var(--primary))) 
+            drop-shadow(0 0 15px hsl(var(--accent))); 
   }
-  to { 
-    box-shadow: 0 0 10px hsl(var(--primary)), 0 0 20px hsl(var(--primary)), 0 0 30px hsl(var(--primary)); 
+  50% { 
+    filter: drop-shadow(0 0 20px hsl(var(--primary))) 
+            drop-shadow(0 0 35px hsl(var(--accent))); 
   }
 }
 
 @keyframes pulse-glow {
   0%, 100% { 
-    opacity: 0.6; 
+    opacity: 0.7; 
     transform: scale(1); 
   }
   50% { 
     opacity: 1; 
-    transform: scale(1.05); 
+    transform: scale(1.08); 
   }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200px 0; }
-  100% { background-position: calc(200px + 100%) 0; }
+  0% { background-position: -400px 0; }
+  100% { background-position: calc(400px + 100%) 0; }
 }
 
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  75% { opacity: 0.95; }
+}
 
+@keyframes rotate-gradient {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 /* Enhanced smooth transitions */
 button, a, .interactive {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
-button:hover, a:hover {
-  transform: translateY(-1px);
+button:hover, a:hover, .interactive:hover {
+  transform: translateY(-2px);
 }
 
-button:active, a:active {
+button:active, a:active, .interactive:active {
   transform: translateY(0);
 }
 
